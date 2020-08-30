@@ -5,7 +5,10 @@
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
-	$address = "";
+	$street = "";
+	$city = "";
+	$zip = "";
+	$state = "";
 
 	$conn = new mysqli("localhost", "DomUserDB", "1209huis@.M", "UserDB");
 	if ($conn->connect_error) 
@@ -21,16 +24,19 @@
 			$row = $result->fetch_assoc();
 			$id = $row["UserID"];
 			
-			$sql = "SELECT FirstName, LastName, Address FROM UserData where UserID='" . $id . "'";
+			$sql = "SELECT FirstName, LastName, Street, City, Zip, State FROM UserData where UserID='" . $id . "'";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0)
 			{
 			    $row = $result->fetch_assoc();
 			    $firstName = $row["FirstName"];
 			    $lastName = $row["LastName"];
-			    $address = $row["Address"];
+				$street = $row["Street"];
+				$city = $row["City"];
+				$zip = $row["Zip"];
+				$state = $row["State"];
 			
-				returnWithInfo($firstName, $lastName, $id, $address );
+				returnWithInfo($id, $firstName, $lastName, $street, $city, $zip, $state );
 			}
 			else
 			{
@@ -61,9 +67,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $firstName, $lastName, $id, $address )
+	function returnWithInfo( $id, $firstName, $lastName, $street, $city, $zip, $state )
 	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","street":"' . $street . '","city":"' . $city . '","zip":"' . $zip . '","state":"' . $state . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

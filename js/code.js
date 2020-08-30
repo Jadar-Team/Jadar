@@ -4,6 +4,10 @@ var extension = 'php';
 var userId = 0;
 var firstName = "";
 var lastName = "";
+var street = "";
+var city = "";
+var zip = "";
+var state = "";
 
 function doLogin()
 {
@@ -40,7 +44,11 @@ function doLogin()
 		
 		firstName = jsonObject.firstName;
 		lastName = jsonObject.lastName;
-		address = jsonObject.Address;
+		street = jsonObject.street;
+		city = jsonObject.city;
+		zip = jsonObject.zip;
+		state = jsonObject.state;
+		
 
 		saveCookie();
 	
@@ -58,7 +66,7 @@ function saveCookie()
 	var minutes = 20;
 	var date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ",street=" + street + ",city=" + city + ",zip=" + zip + ",state=" + state + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
@@ -78,6 +86,22 @@ function readCookie()
 		{
 			lastName = tokens[1];
 		}
+		else if( tokens[0] == "street" )
+		{
+			street = tokens[1];
+		}
+		else if( tokens[0] == "city" )
+		{
+			city = tokens[1];
+		}
+		else if( tokens[0] == "zip" )
+		{
+			zip = tokens[1];
+		}
+		else if( tokens[0] == "state" )
+		{
+			state = tokens[1];
+		}
 		else if( tokens[0] == "userId" )
 		{
 			userId = parseInt( tokens[1].trim() );
@@ -90,7 +114,11 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Name: " + firstName + " " + lastName;
+		document.getElementById("street").innerHTML = "street: " + street;
+		document.getElementById("city").innerHTML = "city: " + city;
+		document.getElementById("zip").innerHTML = "zip: " + zip;
+		document.getElementById("state").innerHTML = "state: " + state;
 	}
 }
 

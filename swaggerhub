@@ -1,0 +1,47 @@
+swagger: '2.0'
+info:
+  description: |
+    cop4331-29
+  version: 1.0.0
+  title: cop4331-29
+
+definitions:
+  Login:
+    type: object
+    required:
+    - login
+    - password
+    properties:
+      login:
+        type: string
+        example: "dom"
+      password:
+        type: string
+        example: "111"
+    
+ 
+paths:
+  /Login.php:
+    post:
+      tags:
+      - Users
+      summary: Logs in to the app
+      operationId: doLogin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: loginItem
+        description: Login
+        schema:
+          $ref: '#/definitions/Login'
+      responses:
+        405:
+          description: Invalid input
+          
+host: cop4331-29.com
+basePath: /LAMPAPI
+schemes:
+- http

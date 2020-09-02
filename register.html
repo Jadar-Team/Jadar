@@ -1,25 +1,43 @@
 <html>
-<head>
-	<title>COP 4331 Group 29 framework</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-</head>
-<body>
+	<head>
+		<title>COP 4331 Group 29 framework</title>
+		<script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="js/code.js"></script>
+		<link href="css/styles.css" rel="stylesheet">	
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	</head>
+	<body>
 
-<h1 id="title">COP 4331 Group 29 framework</h1>
+	<h1 id="title">COP 4331 Group 29 framework</h1>
 
-<div id="loginDiv">
-	<span id="inner-title">PLEASE REGISTER</span>
-	<input type="text" id="userEmail" placeholder="User email" /><br />
-	<input type="text" id="userName" placeholder="User name" /><br />
-	<input type="text" id="password" placeholder="Password" /><br />
-	<input type="text" id="firstName" placeholder="First name" /><br />
-	<input type="text" id="lastName" placeholder="Last name" /><br />	
-	<button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Register </button>
-	<span id="registerResult"></span>
-</div>
+	<div id="loginDiv">
+		<span id="inner-title">PLEASE REGISTER</span>
+		<input type="text" id="userEmail" placeholder="User email" /><br />
+		<input type="text" id="userName" placeholder="User name" /><br />
+		<input type="text" id="password" placeholder="Password" /><br />
+		<input type="text" id="firstName" placeholder="First name" /><br />
+		<input type="text" id="lastName" placeholder="Last name" /><br />	
+		<button type="button" id="registerButton" class="buttons" onclick="blankEntry();"> Register </button>
+		<span id="registerResult"></span>
+		
+	</div>
 
-</body>
+	</body>
+	<script>
+	function blankEntry()
+	{
+		var useEmail = document.getElementById("userEmail").value;
+		var useName = document.getElementById("userName").value;
+		var pw = document.getElementById("password").value;
+		var fn = document.getElementById("firstName").value;
+		var ln = document.getElementById("lastName").value;
+		if (useEmail === ''||useName === ''||pw === '' || fn === '' || ln =='') {//makes sure user doesn't leave anything blank
+			alert("Please fill in all blanks!");
+		}
+		else
+		{
+			doRegister();
+		}
+	}
+	</script>
 </html>

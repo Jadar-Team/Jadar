@@ -22,11 +22,11 @@ definitions:
   Register:
     type: object
     required:
-    - first name
-    - last name
+    - firstName
+    - lastName
     - password
-    - email
-    - username
+    - userEmail
+    - userName
     properties:
       firstName:
         type: string
@@ -40,6 +40,15 @@ definitions:
       userEmail:
         type: string
         example: "new@email.com"
+      userName:
+        type: string
+        example: "newUser"
+        
+  Delete:
+    type: object
+    required:
+    - userName
+    properties:
       userName:
         type: string
         example: "newUser"
@@ -85,6 +94,26 @@ paths:
         description: Register
         schema:
           $ref: '#/definitions/Register'
+      responses:
+        405:
+          description: Invalid input
+          
+  /Delete.php:
+    delete:
+      tags:
+      - Users
+      summary: Removes an account
+      operationId: doDelete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: registerDeletion
+        description: Delete
+        schema:
+          $ref: '#/definitions/Delete'
       responses:
         405:
           description: Invalid input

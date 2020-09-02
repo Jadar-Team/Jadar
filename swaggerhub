@@ -14,7 +14,7 @@ definitions:
     properties:
       login:
         type: string
-        example: "dom"
+        example: "val"
       password:
         type: string
         example: "698d51a19d8a121ce581499d7b701668"

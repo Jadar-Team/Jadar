@@ -18,6 +18,32 @@ definitions:
       password:
         type: string
         example: "111"
+  
+  Register:
+    type: object
+    required:
+    - first name
+    - last name
+    - password
+    - email
+    - username
+    properties:
+      firstName:
+        type: string
+        example: "newfirst"
+      lastName:
+        type: string
+        example: "newlast"
+      password:
+        type: string
+        example: "newPass"
+      userEmail:
+        type: string
+        example: "new@email.com"
+      userName:
+        type: string
+        example: "newUser"
+      
     
  
 paths:
@@ -37,6 +63,28 @@ paths:
         description: Login
         schema:
           $ref: '#/definitions/Login'
+      responses:
+        405:
+          description: Invalid input
+        404:
+          description: User not found
+          
+  /Register.php:
+    post:
+      tags:
+      - Users
+      summary: Registers a new user
+      operationId: doRegister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: registerItem
+        description: Register
+        schema:
+          $ref: '#/definitions/Register'
       responses:
         405:
           description: Invalid input

@@ -1,2 +1,2 @@
-# group29
+# Jadar
 repo for mini project in group 29

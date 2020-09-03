@@ -81,7 +81,19 @@ definitions:
       phone:
         type: string
         example: "123-4567-9012"
-    
+  
+  ContactDelete:
+    type: object
+    required:
+    - userName
+    properties:
+      userName:
+        type: string
+        example: "val"
+      contactId:
+        type: integer
+        example: 6
+        
   ContactSearch:
     type: object
     required:
@@ -168,7 +180,7 @@ paths:
       tags:
       - Contacts
       summary: Adds a new contact
-      operationId: doAdd
+      operationId: doAddContact
       consumes:
       - application/json
       produces:
@@ -180,6 +192,27 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/ContactAdd'
+      responses:
+        405:
+          description: Invalid input
+          
+  /ContactDelete.php:
+    post:
+      tags:
+      - Contacts
+      summary: Deletes a contact
+      operationId: doDeleteContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactDelete
+        description: Delete Contact
+        required: true
+        schema:
+          $ref: '#/definitions/ContactDelete'
       responses:
         405:
           description: Invalid input

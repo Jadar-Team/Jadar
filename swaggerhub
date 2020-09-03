@@ -44,16 +44,32 @@ definitions:
         type: string
         example: "newUser"
         
-  Delete:
+  ContactsAdd:
     type: object
     required:
-    - userName
+    - firstName
+    - lastName
+    - contactEmail
+    - address
+    - phone
     properties:
-      userName:
+      firstName:
         type: string
-        example: "newUser"
-      
-    
+        example: "firstname"
+      lastName:
+        type: string
+        example: "lastname"
+      contactEmail:
+        type: string
+        example: "name@email.com"
+      address:
+        type: string
+        example: "123 Street St"
+      phone:
+        type: string
+        example: "123-4567-9012"
+ 
+ ############################################
  
 paths:
   /Login.php:
@@ -69,7 +85,8 @@ paths:
       parameters:
       - in: body
         name: loginItem
-        description: Login
+        description: User/pass login info
+        required: true
         schema:
           $ref: '#/definitions/Login'
       responses:
@@ -91,7 +108,8 @@ paths:
       parameters:
       - in: body
         name: registerItem
-        description: Register
+        description: User info
+        required: true
         schema:
           $ref: '#/definitions/Register'
       responses:
@@ -110,10 +128,52 @@ paths:
       - application/json
       parameters:
       - in: body
-        name: registerDeletion
-        description: Delete
+        name: deletionItem
+        description: Username to delete
+        required: true
         schema:
-          $ref: '#/definitions/Delete'
+          type: string
+          example: "newUser"
+      responses:
+        405:
+          description: Invalid input
+  
+  /ContactsAdd.php:
+    post:
+      tags:
+      - Contacts
+      summary: Adds a new contact
+      operationId: doAdd
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactItem
+        description: Contact information
+        required: true
+        schema:
+          $ref: '#/definitions/ContactsAdd'
+      responses:
+        405:
+          description: Invalid input
+          
+  /ContactsSearch.php:
+    get:
+      tags:
+      - Contacts
+      summary: Searches contacts
+      operationId: doSearch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchItem
+        type: string
+        description: Search query
       responses:
         405:
           description: Invalid input

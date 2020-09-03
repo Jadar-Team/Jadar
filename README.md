@@ -1,3 +1,4 @@
 <a href="https://imgbb.com/"><p align="center"><img src="https://i.ibb.co/3Y5RjR4/Jadar.png" alt="Jadar" border="0"></p></a>
 
-Jadar, contact manager created for COP4431. 
+# Jadar
+Contact manager created for COP4431. 

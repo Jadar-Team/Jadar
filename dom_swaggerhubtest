@@ -1,0 +1,209 @@
+swagger: '2.0'
+info:
+  description: |
+    cop4331-29
+  version: 1.0.0
+  title: cop4331-29
+
+definitions:
+  Login:
+    type: object
+    required:
+    - login
+    - password
+    properties:
+      login:
+        type: string
+        example: "val"
+      password:
+        type: string
+        example: "698d51a19d8a121ce581499d7b701668"
+    
+  Register:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - password
+    - userEmail
+    - userName
+    properties:
+      firstName:
+        type: string
+        example: "newfirst2"
+      lastName:
+        type: string
+        example: "newlast2"
+      password:
+        type: string
+        example: "newPass2"
+      userEmail:
+        type: string
+        example: "new2@email.com"
+      userName:
+        type: string
+        example: "new2User"
+        
+  Delete:
+    type: object
+    required:
+    - userName
+    properties:
+      userName:
+        type: string
+        example: "new2user"
+        
+  ContactAdd:
+    type: object
+    required:
+    - userName
+    - contactEmail
+    - firstName
+    - lastName
+    - address
+    - phone
+    properties:
+      userName:
+        type: string
+        example: "val"
+      contactEmail:
+        type: string
+        example: "name@email.com"
+      firstName:
+        type: string
+        example: "firstname"
+      lastName:
+        type: string
+        example: "lastname"
+      address:
+        type: string
+        example: "123 Street St"
+      phone:
+        type: string
+        example: "123-4567-9012"
+    
+  ContactSearch:
+    type: object
+    required:
+    - userName
+    - firstName
+    - lastName
+    properties:
+      userName:
+        type: string
+        example: "val"
+      firstName:
+        type: string
+        example: "firstname"
+      lastName:
+        type: string
+        example: "lastname"
+  
+ 
+ ############################################
+ 
+paths:
+  /Login.php:
+    post:
+      tags:
+      - Users
+      summary: Logs in to the app
+      operationId: doLogin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: loginItem
+        description: Login
+        schema:
+          $ref: '#/definitions/Login'
+      responses:
+        405:
+          description: Invalid input
+          
+  /Register.php:
+    post:
+      tags:
+      - Users
+      summary: Registers a new user
+      operationId: doRegister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: registerItem
+        description: Register
+        schema:
+          $ref: '#/definitions/Register'
+      responses:
+        405:
+          description: Invalid input
+          
+  /Delete.php:
+    delete:
+      tags:
+      - Users
+      summary: Removes an account
+      operationId: doDelete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: registerDeletion
+        description: Delete
+        schema:
+          $ref: '#/definitions/Delete'
+      responses:
+        405:
+          description: Invalid input
+          
+  /ContactAdd.php:
+    post:
+      tags:
+      - Contacts
+      summary: Adds a new contact
+      operationId: doAdd
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactItem
+        description: Contact information
+        required: true
+        schema:
+          $ref: '#/definitions/ContactAdd'
+      responses:
+        405:
+          description: Invalid input
+          
+  /ContactSearch.php:
+    get:
+      tags:
+      - Contacts
+      summary: Searches contacts
+      operationId: doSearch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchItem
+        type: string
+        description: Search query
+      responses:
+        405:
+          description: Invalid input
+          
+host: cop4331-29.com
+basePath: /LAMPAPI
+schemes:
+- http

@@ -1,22 +1,32 @@
 <html>
 <head>
-	<title>COP 4331 Group 29 framework</title>
+	<title>Jadar</title>
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Titillium+Web:ital,wght@1,600&family=Yantramanav:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1 id="title">COP 4331 Group 29 framework</h1>
+<h1 id="title">Jadar</h1>
 
+<!-- Login -->
 <div id="loginDiv">
-	<span id="inner-title">PLEASE LOG IN</span>
+	<span id="inner-title">Log In</span>
 	<input type="text" id="loginName" placeholder="Username" /><br />
 	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();">
+		<!-- login icon-->
+		<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+		  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+		</svg>
+	</button>
 	<span id="loginResult"></span>
-	<span id="register-link"><a href="register.html">register</a></span>
+	<span id="register-link">
+		Don't have an account yet?
+		<a href="register.html"><strong>Sign up.</strong></a>
+	</span>
 </div>
 
 </body>

@@ -8,7 +8,7 @@
     $lastName = $inData["lastName"];
     $address = $inData["address"];
     $phone = $inData["phone"];
-    
+    $contactId = -1;
     
     $conn = new mysqli("localhost", "DomUserDB", "1209huis@.M", "UserDB");
     if ($conn->connect_error) 
@@ -21,7 +21,8 @@
         $result = $conn->query($sql);
         if ($result == TRUE)
         {
-            returnWithInfo($firstName, $lastName, " has been added!" );
+            $contactId = $conn->insert_id;
+            returnWithInfo($contactId, $firstName, $lastName, " has been added!" );
         }
         else
         {
@@ -46,9 +47,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $firstName, $lastName, $info )
+	function returnWithInfo($contactId, $firstName, $lastName, $info )
 	{
-		$retValue = '{"firstName":"' . $firstName . '","lastName":"' . $lastName . '","info":"' . $info . '"}';
+		$retValue = '{"contactId":' . $contactId . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","info":"' . $info . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 ?>

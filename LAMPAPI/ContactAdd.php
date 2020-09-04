@@ -17,17 +17,29 @@
     } 
     else
     {
-        $sql = "INSERT INTO ContactTable (UserName,ContactEmail,FirstName, LastName,Address,Phone) VALUES ('" . "$userName" . "','" . "$contactEmail" . "','" . "$firstName" . "','" . "$lastName" . "','" . "$address" . "','" . "$phone" . "')";
+        $sql = "SELECT UserName FROM ContactTable where UserName='" . $inData["userName"] . "' AND FirstName='" . $firstName . "' AND LastName='" . $lastName . "' ";
+        //echo $sql;
         $result = $conn->query($sql);
-        if ($result == TRUE)
+        if ($result->num_rows <= 0)
         {
-            $contactId = $conn->insert_id;
-            returnWithInfo($contactId, $firstName, $lastName, " has been added!" );
+            $sql = "INSERT INTO ContactTable (UserName,ContactEmail,FirstName, LastName,Address,Phone) VALUES ('" . $userName . "','" . $contactEmail . "','" . $firstName . "','" . $lastName . "','" . $address . "','" . $phone . "')";
+            $result = $conn->query($sql);
+            if ($result == TRUE)
+            {
+                $contactId = $conn->insert_id;
+                returnWithInfo($contactId, $firstName, $lastName, " has been added!" );
+            }
+            else
+            {
+                returnWithError( "Insert failed!" );
+            }
         }
         else
         {
-            returnWithError( "Insert failed!" );
+            
+            returnWithError( "Contact already exists." );
         }
+        
         $conn->close();
     }
     function getRequestInfo()

@@ -15,7 +15,7 @@
 	//goes through each result
 	while ($row = mysqli_fetch_array($result))
 	{
-        echo $row['FirstName'] . " " . $row['FastName'];
+	    echo ($row['ContactID'] . " " . $row['FirstName'] . " " . $row['LastName']);
         echo "<br>";
 	}
 	

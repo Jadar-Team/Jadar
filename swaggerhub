@@ -43,6 +43,15 @@ definitions:
       userName:
         type: string
         example: "newUser"
+    
+  Delete:
+    type: object
+    required:
+    - userName
+    properties:
+      userName:
+        type: string
+        example: "newUser"
         
   ContactsAdd:
     type: object
@@ -53,21 +62,69 @@ definitions:
     - address
     - phone
     properties:
+      userName:
+        type: string
+        example: "val"
+      contactEmail:
+        type: string
+        example: "name@email.com"
       firstName:
         type: string
         example: "firstname"
       lastName:
         type: string
         example: "lastname"
-      contactEmail:
-        type: string
-        example: "name@email.com"
       address:
         type: string
         example: "123 Street St"
       phone:
         type: string
         example: "123-4567-9012"
+        
+  ContactDelete:
+    type: object
+    required:
+    - userName
+    properties:
+      userName:
+        type: string
+        example: "val"
+      contactId:
+        type: integer
+        example: 7
+        
+  ContactEdit:
+    type: object
+    required:
+    - contactId
+    - userName
+    - contactEmail
+    - firstName
+    - lastName
+    - address
+    - phone
+    properties:
+      contactId:
+        type: integer
+        example: 13
+      userName:
+        type: string
+        example: "val"
+      contactEmail:
+        type: string
+        example: "name@email.com"
+      firstName:
+        type: string
+        example: "firstname13"
+      lastName:
+        type: string
+        example: "lastname13"
+      address:
+        type: string
+        example: "123 Street Blvd"
+      phone:
+        type: string
+        example: "123-4567-3333"
  
  ############################################
  
@@ -90,6 +147,8 @@ paths:
         schema:
           $ref: '#/definitions/Login'
       responses:
+        200:
+          description: Success
         405:
           description: Invalid input
         404:
@@ -113,6 +172,8 @@ paths:
         schema:
           $ref: '#/definitions/Register'
       responses:
+        200:
+          description: Success
         405:
           description: Invalid input
           
@@ -132,18 +193,21 @@ paths:
         description: Username to delete
         required: true
         schema:
-          type: string
-          example: "newUser"
+          $ref: '#/definitions/Delete'
+          #type: string
+          #example: "newUser"
       responses:
+        200:
+          description: Success
         405:
           description: Invalid input
   
-  /ContactsAdd.php:
+  /ContactAdd.php:
     post:
       tags:
       - Contacts
       summary: Adds a new contact
-      operationId: doAdd
+      operationId: doAddContact
       consumes:
       - application/json
       produces:
@@ -156,15 +220,63 @@ paths:
         schema:
           $ref: '#/definitions/ContactsAdd'
       responses:
+        200:
+          description: Success
         405:
           description: Invalid input
           
-  /ContactsSearch.php:
+  /ContactDelete.php:
+    delete:
+      tags:
+      - Contacts
+      summary: Deletes a contact
+      operationId: doDeleteContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactDelete
+        description: Delete Contact
+        required: true
+        schema:
+          $ref: '#/definitions/ContactDelete'
+      responses:
+        200:
+          description: Success
+        405:
+          description: Invalid input
+          
+  /ContactEdit.php:
+    put:
+      tags:
+      - Contacts
+      summary: Edits a new contact
+      operationId: doEditContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactItemEdit
+        description: Edit Contact information
+        required: true
+        schema:
+          $ref: '#/definitions/ContactEdit'
+      responses:
+        200:
+          description: Success
+        405:
+          description: Invalid input  
+  
+  /ContactSearch.php:
     get:
       tags:
       - Contacts
       summary: Searches contacts
-      operationId: doSearch
+      operationId: doSearchContacts
       consumes:
       - application/json
       produces:
@@ -175,6 +287,8 @@ paths:
         type: string
         description: Search query
       responses:
+        200:
+          description: Success
         405:
           description: Invalid input
           

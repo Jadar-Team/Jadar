@@ -15,6 +15,49 @@ body
     color: #FFFFFF;
 }
 
+#inner-regTitle{
+    display: inline-block;
+    font-size: 1em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Yantramanav', sans-serif;
+    color: #215F81;
+}
+#inner-title{
+    display: inline-block;
+    font-size: 50px;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+	font-family: 'Titillium Web', sans-serif;
+    color: #FFFFFF;
+}
+
+#registerDiv1
+{	
+	width: 30%;
+    border-radius: 25px;
+    font-size: 30px;
+	margin-left: 2%;
+    margin-right: 5%;
+    padding: 25px;
+    background-color: #D4E8F3;
+}
+#registerDiv2
+{
+    border-radius: 25px;
+    font-size: 30px;
+    width: 50%;
+    margin-left: 5%;
+	margin-right: 2%;
+    padding: 25px;
+    background-color: #D4E8F3;
+}
+
+
 #loginDiv
 {
     border-radius: 25px;

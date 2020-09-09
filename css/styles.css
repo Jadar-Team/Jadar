@@ -86,6 +86,13 @@ body
     background-color: #b2b2b2;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .buttons
 {
     font-size: 30px;

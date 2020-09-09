@@ -8,20 +8,33 @@
 	</head>
 	<body>
 
-	<h1 id="title">COP 4331 Group 29 framework</h1>
-
-	<div id="loginDiv">
-		<span id="inner-title">PLEASE REGISTER</span>
-		<input type="text" id="userEmail" placeholder="User email" /><br />
-		<input type="text" id="userName" placeholder="User name" /><br />
-		<input type="text" id="password" placeholder="Password" /><br />
-		<input type="text" id="firstName" placeholder="First name" /><br />
-		<input type="text" id="lastName" placeholder="Last name" /><br />
-		<button type="button" id="registerButton" class="buttons" onclick="blankEntry();"> Register </button>
-		<span id="registerResult"></span>
+	<!--<h1 id="title">COP 4331 Group 29 framework</h1>-->
+	<div class="center">
+		<div id="registerDiv2">
+			<span id="inner-title">Jadar</span>
+			<p style="width 90% ">You new favorite contact manager.</p>
+			<p style="color:white">Create your book today all within one simple screen</p>
+		</div>
+		
+		<div  id="registerDiv1">
+			<span id="inner-regTitle">Sign Up</span>
+			<input type="text" id="userEmail" placeholder="Email" /><br />
+			<input type="text" id="userName" placeholder="Username" /><br />
+			<input type="text" id="password" placeholder="Password" /><br />
+			<input type="text" id="firstName" placeholder="First Name" /><br />
+			<input type="text" id="lastName" placeholder="Last Name" /><br />
+			<button type="button" id="registerButton" class="buttons" onclick="blankEntry();">
+				<!-- login icon-->
+				<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+				  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+				</svg>
+			</button>
+			<span id="registerResult"></span>
+		</div>
+	
 
 	</div>
-
 	</body>
 	<script>
 	function blankEntry()

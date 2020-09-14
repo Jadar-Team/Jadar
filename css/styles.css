@@ -1,7 +1,8 @@
 /*
 CSS Structure
 1. Title & Subtitle
-2. Login Div
+2. Login
+3. Register
 */
 
 body
@@ -24,14 +25,14 @@ body
     color: #FFFFFC;
 }
 
-input[type="text"],input[type="password"]{
+input[type="text"],input[type="password"], input[type="email"]{
     border-radius: 25px;
     border-color: #86BBD8;
     border-width: medium;
     text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
+    width: 100%;
+    margin: 0 20 20 0;
+    padding-bottom: 15px;
     font-family: 'Yantramanav', sans-serif;
 }
 
@@ -41,13 +42,14 @@ input[type="text"],input[type="password"]{
   color: #215F81;
 }
 
-/* 2. Login Div */
+/* 2. Login */
 
 #loginDiv
 {
     border-radius: 40px;
-    margin: 20px auto 20px;
+    margin: 40px auto 60px;
     width: 80%;
+    height: 350px;
     text-align: center;
     padding: 5px;
     background-color: #D4E8F3;
@@ -57,7 +59,7 @@ input[type="text"],input[type="password"]{
     box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
 }
 
-#loginName, #loginPassword
+#loginName, #loginPassword, #signup-label
 {
   color: #215F81;
   font-family: 'Yantramanav', sans-serif;
@@ -76,8 +78,61 @@ input[type="text"],input[type="password"]{
     color: #95060a;
 }
 
+/* 3. Register */
+
+#introDiv
+{
+  text-align: center;
+  background-color: transparent;
+  margin: 90px auto 0px;
+  padding-bottom: 20px;
+  height: 550px;
+  border: none;
+}
+
+#registerDiv
+{
+  border-radius: 40px;
+  margin: 120px auto 120px;
+  height: 550px;
+  text-align: center;
+  background-color: rgba(212, 232, 243, 0.6);
+  -webkit-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+  box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+}
+
+#registerTitle
+{
+  font-size: 150px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Titillium Web', sans-serif;
+  color: #FFFFFC;
+}
+
+#introHeader
+{
+  font-family: 'Yantramanav', sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding-bottom: 10px;
+  /* font-size: 25px; */
+  letter-spacing: 0.1em;
+  color: #215F81;
+}
+
+#introBody
+{
+  margin: 30px 0 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+
+  color: #FFFFFC;
+}
+
 #register-link {
-  margin-top: 80px;
+  margin-bottom: 50px;
 }
 
 #inner-regTitle{
@@ -99,7 +154,7 @@ input[type="text"],input[type="password"]{
     color: #FFFFFF;
 } */
 
-#registerDiv1
+/* #registerDiv1
 {
 	width: 30%;
     border-radius: 25px;
@@ -118,7 +173,7 @@ input[type="text"],input[type="password"]{
 	margin-right: 2%;
     padding: 25px;
     background-color: #D4E8F3;
-}
+} */
 
 
 

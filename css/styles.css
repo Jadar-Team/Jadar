@@ -95,6 +95,7 @@ input[type="text"],input[type="password"], input[type="email"]{
   border-radius: 40px;
   margin: 120px auto 120px;
   height: 550px;
+  line-height: 20px;
   text-align: center;
   background-color: rgba(212, 232, 243, 0.6);
   -webkit-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
@@ -102,9 +103,23 @@ input[type="text"],input[type="password"], input[type="email"]{
   box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
 }
 
+#ignoreDiv
+{
+  border-radius: 40px;
+  margin: 120px auto 120px;
+  height: 550px;
+  line-height: 20px;
+  text-align: center;
+  background-color: rgba(212, 232, 243, 0.6);
+  -webkit-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+  box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+}
+
+
 #registerTitle
 {
-  font-size: 150px;
+  font-size: 12.5vmax;
   width: 100%;
   text-align: center;
   font-family: 'Titillium Web', sans-serif;
@@ -115,7 +130,7 @@ input[type="text"],input[type="password"], input[type="email"]{
 {
   font-family: 'Yantramanav', sans-serif;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 5vmin;
   padding-bottom: 10px;
   /* font-size: 25px; */
   letter-spacing: 0.1em;
@@ -124,7 +139,7 @@ input[type="text"],input[type="password"], input[type="email"]{
 
 #introBody
 {
-  font-size: 50px;
+  font-size: 5vmin;
   margin: 30px 0 10px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 100;

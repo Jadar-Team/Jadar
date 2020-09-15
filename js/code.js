@@ -43,11 +43,12 @@ function doLogin()
 		// Getting the object back from backend
 		var jsonObject = JSON.parse( xhr.responseText );
 		
-		// This part I don't understand
-		// But it has to with error checking from returned object
-		userEmail = jsonObject.userEmail;
+		// Grab the user name from the DB
+		userName = jsonObject.userName;
 		
-		if( userEmail === "")
+		// if there is no username, we didn't get a row back from the db, so the user either doesn't exist
+		// or userName/Pwd combination is not correct
+		if( userName === "")
 		{
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			return;
@@ -56,7 +57,7 @@ function doLogin()
 		// Extracting fields from returned object from backend
 		firstName = jsonObject.firstName;
 		lastName = jsonObject.lastName;
-		userName = jsonObject.userName;
+		userEmail = jsonObject.userEmail;
 
 		saveCookie();
 	

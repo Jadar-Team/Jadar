@@ -138,7 +138,7 @@ input[type="text"],input[type="password"], input[type="email"]{
 {
   font-family: 'Yantramanav', sans-serif;
   font-weight: bold;
-  font-size: 5vmin;
+  font-size: 3vmin;
   padding-bottom: 10px;
   /* font-size: 25px; */
   letter-spacing: 0.1em;
@@ -147,7 +147,7 @@ input[type="text"],input[type="password"], input[type="email"]{
 
 #introBody
 {
-  font-size: 5vmin;
+  font-size: 5.5vmin;
   margin: 30px 0 10px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 100;

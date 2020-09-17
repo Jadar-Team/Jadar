@@ -3,13 +3,21 @@ CSS Structure
 1. Title & Subtitle
 2. Login
 3. Register
+4. Homepage
+  a. Header
+  b. Filtres
+  c. Contact Book
+    - Info view (hover)
+    - edit view (hover)
+  d. Add/Delete sidebar
+5. Hyperlinks
 */
 
 body
 {
     background-color: #86BBD8;
     overflow-x: hidden;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -135,6 +143,31 @@ input[type="text"],input[type="password"], input[type="email"]{
   margin-bottom: 50px;
 }
 
+/* Homepage */
+/* Navbar */
+.homepage
+{
+    background-color: white;
+}
+
+.navbar
+{
+  margin: 0px;
+  padding: 0px;
+  background-color: rgba(212, 232, 243, 0.6);
+  height: 80px;
+}
+
+#navbar-name
+{
+  padding: 0px;
+  top: 0px;
+  font-family: 'Titillium Web', sans-serif;
+  font-style: normal;
+  font-size: 60px;
+  color: #242325;
+}
+
 #inner-regTitle{
     display: inline-block;
     font-size: 1em;
@@ -145,37 +178,6 @@ input[type="text"],input[type="password"], input[type="email"]{
     font-family: 'Yantramanav', sans-serif;
     color: #215F81;
 }
-/* #inner-title{
-    font-size: 200px;
-    width: 90%;
-    text-align: center;
-    padding: 10px;
-	  font-family: 'Titillium Web', sans-serif;
-    color: #FFFFFF;
-} */
-
-/* #registerDiv1
-{
-	width: 30%;
-    border-radius: 25px;
-    font-size: 30px;
-	margin-left: 2%;
-    margin-right: 5%;
-    padding: 25px;
-    background-color: #D4E8F3;
-}
-#registerDiv2
-{
-    border-radius: 25px;
-    font-size: 30px;
-    width: 50%;
-    margin-left: 5%;
-	margin-right: 2%;
-    padding: 25px;
-    background-color: #D4E8F3;
-} */
-
-
 
 #loggedInDiv
 {

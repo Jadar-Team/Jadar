@@ -229,7 +229,7 @@ input[type="search"]
 {
   font-size: 60px;
   padding-top: 100px;
-  padding-left: 20px;
+  padding-left: 25px;
   padding-bottom: 20px;
   color: #215F81;
   font-family: 'Yantramanav', sans-serif;
@@ -244,12 +244,19 @@ input[type="search"]
 /* Homepage */
 /* Add/Delete sidebar */
 
-.add-button
+.add-contact
 {
-  position: absolute;
-  top: 180px;
-  width: 90%;
-  align-items: right;
+  /* position: absolute; */
+  padding-top: 140px;
+  right: 5px;
+  color: #215F81;
+  font-size: 20px;
+  height: 0px;
+}
+
+.modal-footer
+{
+  align-content: center;
 }
 
 #inner-regTitle{
@@ -373,6 +380,12 @@ a {
 }
 a:link {
   color: white;
+}
+
+a:active {
+  text-decoration: none;
+  outline: none;
+  border: none;
 }
 
 a:hover {

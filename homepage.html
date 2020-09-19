@@ -25,11 +25,84 @@
 <body class = "homepage">
   <!-- Navbar -->
   <nav class="navbar fixed-top">
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search by name, number, or email" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <p id = "navbar-name"> Hi, Richard.</p>
+    <div class = "search-bar">
+      <input class="form-control" type="text" placeholder="Search by name, phone, or email." aria-label="Search">
+      <!-- Filters -->
+      <div class = "filters-inline">
+        <div class="btn-group-sm" role="group" aria-label="Filter buttons">
+          <span class = "filters">Filters</span>
+          <button type="button" class="btn btn-link filters-button">Recently added</button>
+          <button type="button" class="btn btn-link filters-button">First/Last Name</button>
+          <button type="button" class="btn btn-link filters-button">Show/Hide All</button>
+        </div>
+      </div>
+    </div>
+    <div class = "navbar-name">
+      <p> Hi, Name.</p>
+    </div>
   </nav>
+
+  <!-- Contact book -->
+  <div class = "row">
+    <div class="col-12 col-md-11">
+      <p class = "contact-table-head"> Your Contact Book </p>
+      <div class = "card contact-table">
+        <div class = "card-body">
+          Dynamically growing card box.
+          Example table is commented out in homepage.html
+          <!-- Contact table -->
+          <!-- <table class="table table-sm table-hover contact-table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>

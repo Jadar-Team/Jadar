@@ -55,3 +55,12 @@ function buildTable(data)
 }
 
 buildTable(myArray);
+
+
+// Adding a contact into the table
+$("#confirm-add").click(function(){
+            var name = $("#add-firstname").val();
+            // var email = $("#email").val();
+            var markup = "<tr><td>" + name + "</td></tr>";
+            $("table tbody").append(markup);
+        });

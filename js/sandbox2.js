@@ -8,7 +8,7 @@ var myArray = [
 ];
 
 // On keyup, we run this function
-$('.form-control').on('keyup',function(){
+$('#search-bar').on('keyup',function(){
     var value = $(this).val();
     console.log('Value:', value);
 

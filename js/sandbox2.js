@@ -16,7 +16,7 @@ $('.form-control').on('keyup',function(){
     buildTable(data);
 })
 
-
+// Function that does search
 function searchTable(value, data )
 {
     var filteredData = [];
@@ -37,34 +37,13 @@ function searchTable(value, data )
 }
 
 
-$('th').on('click',function(){
-    var column = $(this).data('column');
-    var order = $(this).data('order');
-    var text = $(this).html();
-
-    console.log("Column was clicked", column, order);
-
-    if(order == 'asc')
-    {
-        $(this).data('order','asc');
-        myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1);
-
-    }
-    // else
-    // {
-    //     $(this).data('order','desc');
-    //     myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1);
-    // }
-
-    $(this).html(text);
-    buildTable(myArray);
-});
-
 // Function that populates table with json data
 function buildTable(data)
 {
     var table = document.getElementById('myTable');
     table.innerHTML= "";
+
+    data = data.sort((a,b) => a.name > b.name ? 1 : -1);
 
     for(let i = 0; i < data.length; i++)
     {

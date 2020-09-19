@@ -47,16 +47,14 @@ $('th').on('click',function(){
 
     if(order == 'desc')
     {
-        $(this).data('order','asc'); 
+        $(this).data('order','asc');
         myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1);
-        text += '&#9650';
 
     }
     else
     {
         $(this).data('order','desc');
         myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1);
-        text += '&#9660';
     }
 
     $(this).html(text);
@@ -73,8 +71,6 @@ function buildTable(data)
     {
         let row = `<tr>
                         <td>${data[i].name}</td>
-                        <td>${data[i].age}</td>
-                        <td>${data[i].birthdate}</td>    
                     </tr>`
         table.innerHTML += row;
     }

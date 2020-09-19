@@ -44,6 +44,18 @@ $('th').on('click',function(){
 
     console.log("Column was clicked", column, order);
 
+    if(order == 'asc')
+    {
+        $(this).data('order','asc');
+        myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1);
+
+    }
+    // else
+    // {
+    //     $(this).data('order','desc');
+    //     myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1);
+    // }
+
     $(this).html(text);
     buildTable(myArray);
 });

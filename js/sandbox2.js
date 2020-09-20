@@ -74,14 +74,14 @@ $("#confirm-add").click(function()
             // Grabs input from each form field
             $(".modal-body .form-control").each(function(index)
             {
-                tempObject[myKeys[index]] = $(this).val(); 
+                tempObject[keys[index]] = $(this).val(); 
             })
 
             // Will eventually be a server call here
-            myArray.push(tempObject2);
+            myArray.push(tempObject);
 
-            let markup = "<tr><td>" + tempObject2.fname + "</td></tr>";
-            
+            let markup = "<tr><td>" + tempObject.fname + "</td></tr>";
+
             $("table tbody").append(markup);
 });
 

@@ -80,7 +80,7 @@ $("#confirm-add").click(function()
             // Will eventually be a server call here
             myArray.push(tempObject);
 
-            let markup = "<tr><td>" + tempObject.fname + "</td></tr>";
+            let markup = "<tr><td>" + tempObject.fname + " " + tempObject.lname + "</td></tr>";
 
             $("table tbody").append(markup);
 });

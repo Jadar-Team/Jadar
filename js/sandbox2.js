@@ -105,15 +105,32 @@ $("#recentlyAdded").click(function()
 // confirm button - modal button that adds user to database
 $("#confirm-add").click(function()
 {
+
             const keys = ['fname','lname','address','phone','email','date'];
   
             let tempObject = {};
 
+            let flag = true;
+
             // Grabs input from each form field
             $(".modal-body .form-control").each(function(index)
             {
+                // Captures empty fields
+                if(!$(this).val())
+                {
+                    flag = false;
+                    return false;
+                }
+
                 tempObject[keys[index]] = $(this).val(); 
             })
+
+            // Report any errors
+            if(!flag)
+            {
+                console.log("Empty field");
+                return;
+            }
 
             // Add date
             tempObject['date'] = new Date();
@@ -141,8 +158,6 @@ $("#showHide").click(function()
     }
     
 })
-
-
 
 // Am/Pm conversion function
 function displayAmPm(users)
@@ -178,5 +193,4 @@ function displayAmPm(users)
 
         console.log(formattedTime);
     }
-
 }

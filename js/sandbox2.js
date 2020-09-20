@@ -30,9 +30,10 @@ function searchTable(value, data )
     for(var i = 0; i < data.length; i++)
     {
         value = value.toLowerCase();
-        var name = data[i].name.toLowerCase();
+        var fname = data[i].fname.toLowerCase();
+        var lname = data[i].lname.toLowerCase();
 
-        if(name.includes(value))
+        if(fname.includes(value) || lname.includes(value))
         {
             filteredData.push(data[i]);
 

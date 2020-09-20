@@ -252,11 +252,26 @@ input[type="search"]
   color: #215F81;
   font-size: 20px;
   height: 0px;
+
 }
 
-.modal-footer
+.add-contact-modal
+{
+  /* background-color: rgba(212, 232, 243, 0.3); */
+}
+
+.modal-backdrop{
+   backdrop-filter: blur(5px);
+   background-color: #01223770;
+}
+
+.modal-footer, .modal-title
 {
   align-content: center;
+}
+
+.modal-backdrop {
+   background: none;
 }
 
 #inner-regTitle{

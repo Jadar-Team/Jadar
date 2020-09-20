@@ -1,11 +1,18 @@
 
 // Mock JSON data
 var myArray = [
-    {'name':"Michael",'age':30, 'birthdate':'11/10/1989'},
-    {'name':"Mila",'age':32, 'birthdate':'10/1/1989'},
-    {'name':"Paul",'age':29, 'birthdate':'10/14/1940'},
-    {'name':"James Porche", 'age':28, 'birthdate':'6/6/1992'}
+    {'fname':"Michael",'lname':"Gullo",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu'},
+    {'fname':"Mila",'lname':"Gullo",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu'},
+    {'fname':"Paul",'lname':"Gullo",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu'},
+    {'fname':"James",'lname':"Gullo",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu'} 
 ];
+
+const keys = Object.keys(myArray[0]);
+
+for(let i = 0; i< keys.length; i++)
+{
+    console.log(keys[i]);
+}
 
 // On keyup, we run this function
 $('#search-bar').on('keyup',function(){
@@ -48,7 +55,7 @@ function buildTable(data)
     for(let i = 0; i < data.length; i++)
     {
         let row = `<tr>
-                        <td>${data[i].name}</td>
+                        <td>${data[i].fname + " " + data[i].lname}</td>
                     </tr>`
         table.innerHTML += row;
     }
@@ -58,9 +65,37 @@ buildTable(myArray);
 
 
 // Adding a contact into the table
-$("#confirm-add").click(function(){
-            var name = $("#add-firstname").val();
-            // var email = $("#email").val();
-            var markup = "<tr><td>" + name + "</td></tr>";
+$("#confirm-add").click(function()
+{
+            const keys = ['fname','lname','address','phone','email'];
+   
+            let tempObject = {};
+
+            // Grabs input from each form field
+            $(".modal-body .form-control").each(function(index)
+            {
+                tempObject[myKeys[index]] = $(this).val(); 
+            })
+
+            // Will eventually be a server call here
+            myArray.push(tempObject2);
+
+            let markup = "<tr><td>" + tempObject2.fname + "</td></tr>";
+            
             $("table tbody").append(markup);
-        });
+});
+
+
+class User
+{
+    constructor(fname,lname,address,phone,email)
+    {
+        this.fname = fname;
+        this.lname = lname;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    
+}

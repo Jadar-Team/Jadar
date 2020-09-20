@@ -4,7 +4,7 @@ var myArray = [
     {'fname':"Michael",'lname':"Oswald",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date': new Date()},
     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-    {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()} 
+    {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()}
 ];
 
 // Sort JSON data
@@ -92,7 +92,7 @@ $("#addContact").click(function()
 $("#recentlyAdded").click(function()
 {
     console.log("This is firing at least");
-    myArray = myArray.sort((a,b) => { 
+    myArray = myArray.sort((a,b) => {
                                 let dateA = new Date(a.date);
                                 let dateB = new Date(b.date);
                                 return dateB - dateA;
@@ -107,7 +107,7 @@ $("#confirm-add").click(function()
 {
 
             const keys = ['fname','lname','address','phone','email','date'];
-  
+
             let tempObject = {};
 
             let flag = true;
@@ -122,7 +122,7 @@ $("#confirm-add").click(function()
                     return false;
                 }
 
-                tempObject[keys[index]] = $(this).val(); 
+                tempObject[keys[index]] = $(this).val();
             })
 
             // Report any errors
@@ -156,7 +156,7 @@ $("#showHide").click(function()
         $("#myTable").show();
         $(this).data('order','show');
     }
-    
+
 })
 
 // Am/Pm conversion function
@@ -169,7 +169,7 @@ function displayAmPm(users)
         var seconds = users[i].date.getSeconds();
 
         var ap = "AM";
-        
+
         // Hours
         if(hours > 12)
         {
@@ -182,7 +182,7 @@ function displayAmPm(users)
         {
             hours = "0" + hours;
         }
-        
+
         // Seconds
         if(seconds < 10)
         {

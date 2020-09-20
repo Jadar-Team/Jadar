@@ -247,6 +247,13 @@ input[type="search"]
   font-family: 'Open Sans', sans-serif;
 }
 
+.hover-buttons
+{
+  padding: 2px;
+  z-index: 5;
+  float: right;
+}
+
 .table tbody tr:hover td, .table tbody tr:hover th {
     background-color: rgba(212, 232, 243, 0.6);
     box-shadow: 0 8px 6px -6px gray;

@@ -241,6 +241,17 @@ input[type="search"]
   width: 100%;
 }
 
+#myTable
+{
+  font-size: 17px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: rgba(212, 232, 243, 0.6);
+    box-shadow: 0 8px 6px -6px gray;
+}
+
 /* Homepage */
 /* Add/Delete sidebar */
 
@@ -261,7 +272,6 @@ input[type="search"]
 }
 
 .modal-backdrop{
-   backdrop-filter: blur(5px);
    background-color: #01223770;
 }
 

@@ -64,11 +64,20 @@ function buildTable(data)
 buildTable(myArray);
 
 
+$("#addContact").click(function()
+{
+     // Grabs input from each form field
+     $(".modal-body .form-control").each(function(index)
+     {
+         $(this).val('');
+     })
+})
+
 // Adding a contact into the table
 $("#confirm-add").click(function()
 {
             const keys = ['fname','lname','address','phone','email'];
-   
+  
             let tempObject = {};
 
             // Grabs input from each form field

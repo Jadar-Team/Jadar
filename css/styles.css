@@ -244,7 +244,13 @@ input[type="search"]
 #myTable
 {
   font-size: 17px;
+  border-bottom-color: #D4E8F3;
   font-family: 'Open Sans', sans-serif;
+}
+
+#contactName
+{
+  font-size: 20px;
 }
 
 .hover-buttons
@@ -254,7 +260,14 @@ input[type="search"]
   float: right;
 }
 
-.table tbody tr:hover td, .table tbody tr:hover th {
+.info-card
+{
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th .info-card:hover{
     background-color: rgba(212, 232, 243, 0.6);
     box-shadow: 0 8px 6px -6px gray;
 }

@@ -33,7 +33,7 @@ body
     color: #FFFFFC;
 }
 
-input[type="text"],input[type="password"], input[type="email"]{
+input[type="text"],input[type="password"], input[type="email"], input[type="tel"]{
     border-radius: 25px;
     border-color: #86BBD8;
     border-width: medium;
@@ -230,7 +230,7 @@ input[type="search"]
   font-size: 60px;
   padding-top: 100px;
   padding-left: 25px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   color: #215F81;
   font-family: 'Yantramanav', sans-serif;
 }
@@ -286,9 +286,68 @@ input[type="search"]
 
 }
 
-.add-contact-modal
+.form-group {
+  text-align: center;
+}
+
+.address-group {
+  border-radius: 25px;
+  border-color: #86BBD8;
+  border-width: medium;
+  text-align: center;
+  width: 100%;
+  margin: 30px auto;
+  /* width: 450px; */
+  padding-bottom: 30px;
+}
+
+.address-group:focus
 {
-  /* background-color: rgba(212, 232, 243, 0.3); */
+  outline: none;
+}
+
+.form-control {
+  float: left;
+}
+
+#inputStreet {
+  width: 100%;
+}
+
+#inputCity {
+  width: 50%;
+}
+
+#inputState {
+  width: 15%;
+}
+
+#inputZip {
+  width: 28%;
+}
+
+#inputCounty {
+  width: 45%;
+}
+
+#inputCountry {
+  width: 50%;
+}
+
+input[type="street"],input[type="city"],
+input[type="state"],input[type="zip"],
+input[type="country"]
+{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #86BBD8;
+    border-width: medium;
+    text-align: center;
+    width: 100%;
+    margin: 0 20 20 0;
+    padding-bottom: 15px;
+    font-family: 'Yantramanav', sans-serif;
 }
 
 .modal-backdrop{
@@ -421,16 +480,14 @@ select{
 /* Hyperlinks */
 
 a {
-  color: white;
+  outline: none;
 }
 a:link {
   color: white;
 }
 
 a:active {
-  text-decoration: none;
   outline: none;
-  border: none;
 }
 
 a:hover {

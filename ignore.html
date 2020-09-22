@@ -7,92 +7,130 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
   <!-- JS Scripts & CSS Stylesheet -->
-	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
   <link href="css/styles.css" rel="stylesheet">
-		<!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Titillium+Web:ital,wght@1,600&family=Yantramanav:wght@300&display=swap" rel="stylesheet">
+
+	<!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Titillium+Web:wght@600&family=Yantramanav:wght@300&display=swap" rel="stylesheet">
+
+  <!-- <script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function()
+	{
+		readCookie();
+	}, false);
+	</script> -->
 
 		<title>Jadar</title>
 </head>
-<body>
-<!-- Register: right -->
-	<div class = "container mx-auto">
-		<div class = "row">
-			<div class = "col">
-				<div class = "card text-center" id = "introDiv">
-					<div class = "card-body">
-						<h1 id="registerTitle">Jadar</h1>
-						<h5 id = "introHeader">Your new favorite contact manager.</h5>
-						<p id = "introBody">Create your book today, all within one simple screen.</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Register: left -->
-			<div class = "col">
-				<div class = "card text-center" id = "ignoreDiv">
-					
-					<div style="padding-top: 15%;" class = "card-body">
-						<h2 class = "card-title inner-title"> Sign Up </h2>
-						<form role = "form">
-							
-							<!---->
-							<div  class="form-row justify-content-center">
-								<div class="col-auto">
-									<label id="signup-label" for="firstname">first name</label>
-									<input type="text" class="form-control mb-2" id="firstname">
-								</div>
-								<div  class="col-auto">
-									<label id="signup-label" for="lastname">last name</label>
-									<input type="text" class="form-control mb-2" id="lastname">
-								</div>
-							</div>
-							<div  class="form-row justify-content-center">
-								<div class="col-auto">
-									<label id="signup-label" for="username">username</label>
-									<input type="text" class="form-control mb-2" id="username">
-								</div>
-								<div class="col-auto">
-									<label id="signup-label" for="lastname">password</label>
-									<input type="password" class="form-control mb-2" id="lastname">
-								</div>
-							</div>
-							<div  class="form-row justify-content-center">
-								<div class="col-auto">
-									<label id="signup-label" for="email">email</label>
-									<input type="email" class="form-control mb-2" id="email">
-								</div>
-							</div>
-							
-							
-							<!-- Register button -->
-							<!---->
-
-							<div class="form-row justify-content-center">
-								<div class="col-auto">
-									<button type="button" id="registerButton" class="btn btn-link" onclick="blankEntry();">
-										<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="white" xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-											<path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
-										</svg>
-									</button>
-								</div>
-							</div>
-							
-						</form>
-					</div>
-					
-				</div>
-			</div>
-		</div>
+<body class = "homepage">
+  <!-- Navbar -->
+  <nav class="navbar fixed-top">
+    <div class = "search-bar">
+      <input class="form-control" id="search-bar" type="text" placeholder="Search by name, phone, or email." aria-label="Search">
+      <!-- Filters -->
+      <div class = "filters-inline">
+        <div class="btn-group-sm" role="group" aria-label="Filter buttons">
+          <span class = "filters">Sort By</span>
+          <button type="button" id = "recentlyAdded" class="btn btn-link filters-button">Recently added</button>
+          <button type="button" id = "firstLastName" data-order = "first" class="btn btn-link filters-button">First/Last Name</button>
+          <button type="button" id = "showHide" data-order = "show" class="btn btn-link filters-button">Show/Hide All</button>
+        </div>
+      </div>
+    </div>
+	<div id="homePageLogo">
+	 Jadar
 	</div>
-  
-   <!-- Bootstrap -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <div class = "navbar-name">
+      <h1>
+			Hi, Name.
+		</h1>
+	  <p  type="button" id = "logOut" class="btn btn-link filters-button" style ="font-size: .875rem; font-weight: normal; line-height: 0em;" onclick="doLogout()"> Log Out </p>
+    </div>
+  </nav>
 
+  <!-- Contact book -->
+  <div class = "row">
+    <div class="col-12 col-md-11">
 
+      <div class = "row">
+        <div class="col-12 col-md-8">
+          <p class = "contact-table-head"> Your Contact Book </p>
+        </div>
+        <div class = "col-6 col-md-4">
+          <button type="button" id = "addContact" class="btn btn-link btn-sm add-contact" data-toggle="modal" data-target="#staticBackdrop">
+            Add a contact
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg>
+          </button>
+          <!-- Add Contact Modal -->
+          <div class="modal fade add-contact-modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="staticBackdropLabel">Add Contact</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- Add contact informaton -->
+                <form>
+                  <div class="form-group">
+                    <label for="add-firstname" class="col-form-label">First Name</label>
+                    <input type="text" class="form-control" id="add-firstname">
+                  </div>
+                  <div class="form-group">
+                    <label for="add-lastname" class="col-form-label">Last Name</label>
+                      <input type="text" class="form-control" id="add-lastname">
+                  </div>
+                  <div class="form-group">
+                    <label for="add-address" class="col-form-label">Address</label>
+                      <input type="text" class="form-control" id="add-address">
+                  </div>
+                  <div class="form-group">
+                    <label for="add-phone" class="col-form-label">Phone Number</label>
+                      <input type="text" class="form-control" id="add-phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="add-email" class="col-form-label">Email</label>
+                      <input type="email" class="form-control" id="add-email">
+                  </div>
+              </form>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-link" id="confirm-add" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-link" id="confirm-delete" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class = "card contact-table">
+        <div class = "card-body">
+          <table class = "table table-hover">
+            <!-- <thead>
+                <tr style = "background-color: #86BBD8;">
+                    <th data-column="name" data-order = "asc">Name</th>
+                </tr>
+            </thead> -->
+            <tbody id = "myTable">
+              <!-- Hover Buttons -->
+              <!-- Info -->
+            </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src = "js/sandbox2.js"></script>
 </body>
 </html>

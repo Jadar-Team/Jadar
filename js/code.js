@@ -37,7 +37,7 @@ function doLogin()
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
-		// template object that we created is being send to backend
+		// template object that we created is being sent to backend
 		xhr.send(jsonPayload);
 		
 		// Getting the object back from backend
@@ -83,6 +83,7 @@ function doLogout()
 // When user clicks register, we do this.
 function doRegister()
 {
+	// Grabs form fields
 	userEmail = document.getElementById("userEmail").value;
 	userName = document.getElementById("userName").value;
 	firstName = document.getElementById("firstName").value;
@@ -91,11 +92,13 @@ function doRegister()
 	var hash = md5( password );
 	
 	document.getElementById("registerResult").innerHTML = "";
-
+	
+	// Combine form field variables into JSON string
 	var jsonPayload = '{"userEmail" : "' + userEmail + '", "userName":"' + userName + '", "password" : "' + hash + '", "firstName" : "' + firstName +'", "lastName" : "' + lastName + '"}';
 //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
 	var url = urlBase + '/Register.' + extension;
-
+	
+	// Connection
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");

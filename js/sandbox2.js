@@ -146,12 +146,12 @@ $("#firstLastName").click(function()
     if(order == 'first')
     {
         $(this).data('order','last')
-        myArray = myArray.sort((a,b) => a.lname > b.lname ? 1 : -1);
+        myArray = myArray.sort((a,b) => a.lname.toLowerCase > b.lname.toLowerCase ? 1 : -1);
     }
     else
     {
         $(this).data('order','first')
-        myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
+        myArray = myArray.sort((a,b) => a.fname.toLowerCase > b.fname.toLowerCase ? 1 : -1);
     }
 
     buildTable(myArray);

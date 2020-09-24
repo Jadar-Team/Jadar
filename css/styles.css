@@ -270,8 +270,9 @@ input[type="search"]
 #myTable
 {
   font-size: 17px;
-  border-bottom-color: #D4E8F3;
+  /* border-bottom-color: #D4E8F3; */
   font-family: 'Open Sans', sans-serif;
+  border: none;
 }
 
 #contactName
@@ -288,7 +289,6 @@ input[type="search"]
 
 .info-card
 {
-  outline: none;
   border: none;
   background-color: transparent;
 }

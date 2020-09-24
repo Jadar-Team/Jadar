@@ -63,7 +63,7 @@ function buildTable(data)
         let row = `<tr>
                    <td>
                     <div class="accordion">
-                      <div class = "card-transparent">
+                      <div class = "card-transparent border-0">
                           <div class="card-header info-card" id="contactName">
                             ${data[i].fname + " " + data[i].lname}
                           </div>

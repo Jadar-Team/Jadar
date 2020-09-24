@@ -29,7 +29,7 @@ body
     margin: 20px;
     padding: 25px;
     text-align: center;
-    font-family: 'Titillium Web', 'IBM Plex Sans', monospace;
+    font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
     font-style: italic;
     color: #FFFFFC;
 }
@@ -40,7 +40,7 @@ body
     width: 20%;
     margin: 20px;
     text-align: center;
-    font-family: 'Titillium Web', 'IBM Plex Sans', monospace;
+    font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     font-style: italic;
     color: #FFFFFC;
@@ -152,7 +152,7 @@ input[type="text"],input[type="password"], input[type="email"]{
   font-size: 12.5vmax;
   width: 100%;
   text-align: center;
-  font-family: 'Titillium Web', 'IBM Plex Sans', monospace;
+  font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
   color: #FFFFFC;
 }
 
@@ -296,6 +296,18 @@ input[type="search"]
 .table tbody tr:hover td, .table tbody tr:hover th .info-card:hover{
     background-color: rgba(212, 232, 243, 0.6);
     box-shadow: 0 8px 6px -6px gray;
+}
+
+#address-block
+{
+  float:left;
+  line-height: 2;
+}
+
+#phone-email-block
+{
+  float: right;
+  line-height: 2;
 }
 
 /* Homepage */

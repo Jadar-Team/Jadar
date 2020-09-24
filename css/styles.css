@@ -29,7 +29,8 @@ body
     margin: 20px;
     padding: 25px;
     text-align: center;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
+    font-style: italic;
     color: #FFFFFC;
 }
 
@@ -39,9 +40,19 @@ body
     width: 20%;
     margin: 20px;
     text-align: center;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-style: italic;
     color: #FFFFFC;
-	justify-content: center;
+	  justify-content: center;
+
+    /* Inner shadow */
+    text-shadow:
+     3px  3px 0 #86BBD8,
+    -1px -1px 0 #86BBD8,
+     1px -1px 0 #86BBD8,
+    -1px  1px 0 #86BBD8,
+     1px  1px 0 #86BBD8;
 }
 
 input[type="text"],input[type="password"], input[type="email"]{
@@ -141,7 +152,7 @@ input[type="text"],input[type="password"], input[type="email"]{
   font-size: 12.5vmax;
   width: 100%;
   text-align: center;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
   color: #FFFFFC;
 }
 
@@ -209,6 +220,7 @@ input[type="search"]
   font-family: 'Titillium Web', sans-serif;
   font-size:6vmin;
   color: #242325;
+  font-weight: 600;
   padding-right: 3vmin;
   padding-left: 3vmin;
 }
@@ -286,8 +298,26 @@ input[type="search"]
     box-shadow: 0 8px 6px -6px gray;
 }
 
+#address-block
+{
+  float:left;
+  line-height: 2;
+}
+
+#phone-email-block
+{
+  float: right;
+  line-height: 2;
+}
+
 /* Homepage */
 /* Add/Delete sidebar */
+
+#logOut
+{
+  font-family: 'Yantramanav', sans-serif;
+
+}
 
 .add-contact
 {
@@ -298,11 +328,6 @@ input[type="search"]
   font-size: 20px;
   height: 0px;
 
-}
-
-.add-contact-modal
-{
-  /* background-color: rgba(212, 232, 243, 0.3); */
 }
 
 .modal-backdrop{

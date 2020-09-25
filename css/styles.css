@@ -17,7 +17,7 @@ body
 {
     background-color: #86BBD8;
     overflow-x: hidden;
-    
+
     /*overflow-y: hidden;*/
     font-family: 'Open Sans', sans-serif;
 }
@@ -270,7 +270,7 @@ input[type="search"]
 
 #myTable
 {
-  font-size: 17px;
+  font-size: 18px;
   /* border-bottom-color: #D4E8F3; */
   font-family: 'Open Sans', sans-serif;
   border: none;
@@ -308,6 +308,7 @@ input[type="search"]
 #phone-email-block
 {
   float: right;
+  padding-right: 300px;
   line-height: 2;
 }
 

@@ -13,6 +13,10 @@
 //with updated address
 var myArray = [
     {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
+  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
+  {'fname':"Richard",'lname':"Hernandez",'street':"673 Bayport Drive",'city':"Ridgewood",
+  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
+  {'fname':"Michael",'lname':"Scott",'street':"673 Bayport Drive",'city':"Ridgewood",
   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'}
 ];
 
@@ -133,7 +137,8 @@ function buildTable(data)
 
           $(".iconSet svg:nth-child(2)").click(function()
           {
-                row_index = $(this).closest("tr").index();
+                global_row_index = $(this).closest("tr").index();
+
             
                 let myModal = $("#edit-contact");
 
@@ -152,10 +157,6 @@ function buildTable(data)
                 console.log(inputs);
 
                 myModal.modal('show');
-                
-
-                console.log("icon clicked at: " + row_index);
-
 
                 // var mymodal = $("#contact-edit");
                 // mymodal.attr("aria-hidden","false");
@@ -168,6 +169,8 @@ function buildTable(data)
 
 $("#confirm-edit").click(function()
 {
+
+
     let myModal = $("#edit-contact");
 
     let inputs = myModal.find("input");

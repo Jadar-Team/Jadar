@@ -1,28 +1,20 @@
 
 // Mock JSON data
-// var myArray = [
-//     {'fname':"Michael",'lname':"Oswald",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date': new Date()},
-//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
-//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
-//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
-//     {'fname':"Richard",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()}
-//
-// ];
+var myArray = [
+    {'fname':"Michael",'lname':"Oswald",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date': new Date()},
+    {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
+    {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
+    {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
+    {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
+    {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()}
+];
 
 
 // with updated address
-var myArray = [
-    {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
-  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com"}
-];
+// var myArray = [
+//     {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
+//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com"}
+// ];
 
 // Sort JSON data
 myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
@@ -134,8 +126,23 @@ function buildTable(data)
                 $(this).find(".iconSet").css("visibility", "hidden");
             }
           );
+
+
     }
 }
+
+$(".iconSet svg:nth-child(2)").click(function()
+{
+    let row_index = $(this).closest("tr").index();
+    alert(row_index);
+
+    myArray[row_index].fname = "Richard";
+
+    buildTable(myArray);
+
+});
+
+
 
 
 // Toggle between sorting in ascending order first name and last name

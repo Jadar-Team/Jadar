@@ -121,6 +121,59 @@
             </div>
           </div>
         </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade edit-contact-modal" id=" edit-contact" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="edit-contact" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="edit-contact">Edit Contact</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Add contact informaton -->
+              <form>
+                <div class="form-group">
+                  <label for="edit-firstname" class="col-form-label">First Name</label>
+                  <input type="text" class="form-control" id="edit-firstname">
+                </div>
+                <div class="form-group">
+                  <label for="edit-lastname" class="col-form-label">Last Name</label>
+                    <input type="text" class="form-control" id="edit-lastname">
+                </div>
+                <div class="form-group">
+                  <label for="edit-phone" class="col-form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="edit-phone">
+                </div>
+                <div class="form-group">
+                  <label for="edit-email" class="col-form-label">Email</label>
+                    <input type="email" class="form-control" id="edit-email">
+                </div>
+                <div class="form-group address-group address">
+                  <label for="add-address" class="col-form-label">Address</label>
+                  <input type="street" class="form-control" id="autocomplete" placeholder="Street">
+
+                  <input type="city" class="form-control" id="inputCity" placeholder="City">
+
+                  <input type="state" class="form-control" id="inputState" placeholder="State">
+
+                  <input type="zip" class="form-control" id="inputZip" placeholder="Zip">
+
+                  <input type="country" class="form-control" id="inputCountry" placeholder="Country">
+                </div>
+            </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-link" id="confirm-edit" data-dismiss="modal">Confirm</button>
+              <button type="button" class="btn btn-link" id="confirm-delete" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
         </div>
       </div>
 

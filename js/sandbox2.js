@@ -1,20 +1,22 @@
 
 // Mock JSON data
+// var myArray = [
+//     {'fname':"Michael",'lname':"Oswald",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date': new Date()},
+//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
+//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
+//     {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
+//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
+//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()}
+// ];
+
+
+//with updated address
 var myArray = [
-    {'fname':"Michael",'lname':"Oswald",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date': new Date()},
-    {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-    {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-    {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
-    {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-    {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()}
+    {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
+  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'}
 ];
 
-
-// with updated address
-// var myArray = [
-//     {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
-//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com"}
-// ];
+var global_row_index = 0;
 
 // Sort JSON data
 myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
@@ -131,19 +133,32 @@ function buildTable(data)
 
           $(".iconSet svg:nth-child(2)").click(function()
           {
-              let row_index = $(this).closest("tr").index();
-              $("#edit-contact").modal('show');
+                row_index = $(this).closest("tr").index();
+            
+                let myModal = $("#edit-contact");
 
-              console.log("icon clicked at: " + row_index);
+                let inputs = myModal.find("input");
 
-              myArray[row_index].fname = "Richard";
+                inputs[0].value = myArray[global_row_index].fname;
+                inputs[1].value = myArray[global_row_index].lname;
+                inputs[2].value = myArray[global_row_index].phone;
+                inputs[3].value = myArray[global_row_index].email;
+                inputs[4].value = myArray[global_row_index].street;
+                inputs[5].value = myArray[global_row_index].city;
+                inputs[6].value = myArray[global_row_index].state;
+                inputs[7].value = myArray[global_row_index].zip;
+                inputs[8].value = myArray[global_row_index].country;
 
-              // var mymodal = $("#contact-edit");
-              // mymodal.attr("aria-hidden","false");
+                console.log(inputs);
 
-              buildTable(myArray);
+                myModal.modal('show');
+                
+
+                console.log("icon clicked at: " + row_index);
 
 
+                // var mymodal = $("#contact-edit");
+                // mymodal.attr("aria-hidden","false");
 
           });
 
@@ -151,7 +166,25 @@ function buildTable(data)
     }
 }
 
+$("#confirm-edit").click(function()
+{
+    let myModal = $("#edit-contact");
 
+    let inputs = myModal.find("input");
+    
+    myArray[global_row_index].fname = inputs[0].value;
+    myArray[global_row_index].lname = inputs[1].value;
+    myArray[global_row_index].phone = inputs[2].value;
+    myArray[global_row_index].email = inputs[3].value;
+    myArray[global_row_index].street = inputs[4].value;
+    myArray[global_row_index].city = inputs[5].value;
+    myArray[global_row_index].state = inputs[6].value;
+    myArray[global_row_index].zip = inputs[7].value;
+    myArray[global_row_index].country = inputs[8].value;
+
+    buildTable(myArray);
+
+});
 
 
 // Toggle between sorting in ascending order first name and last name
@@ -201,14 +234,14 @@ $("#recentlyAdded").click(function()
 $("#confirm-add").click(function()
 {
 
-            const keys = ['fname','lname','address','phone','email','date'];
+            const keys = ['fname','lname','address','phone','email','date','street','city','country','zip'];
 
             let tempObject = {};
 
             let flag = true;
 
             // Grabs input from each form field
-            $(".modal-body .form-control").each(function(index)
+            $("#staticBackdrop .modal-body .form-control").each(function(index)
             {
                 // Captures empty fields
                 if(!$(this).val())
@@ -232,6 +265,8 @@ $("#confirm-add").click(function()
 
             // Will eventually be a server call here
             myArray.push(tempObject);
+
+            console.log("adding to table");
 
             buildTable(myArray);
 });

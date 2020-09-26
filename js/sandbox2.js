@@ -142,11 +142,11 @@ function buildTable(data)
               {
                     global_row_index = $(this).closest("tr").index();
     
-                
                     let myModal = $("#edit-contact");
     
                     let inputs = myModal.find("input");
-    
+
+                    // Store array element contents into input fields
                     inputs[0].value = myArray[global_row_index].fname;
                     inputs[1].value = myArray[global_row_index].lname;
                     inputs[2].value = myArray[global_row_index].phone;
@@ -195,6 +195,7 @@ $("#confirm-edit").click(function()
 
     let inputs = myModal.find("input");
     
+    // Update array element with input fields
     myArray[global_row_index].fname = inputs[0].value;
     myArray[global_row_index].lname = inputs[1].value;
     myArray[global_row_index].phone = inputs[2].value;

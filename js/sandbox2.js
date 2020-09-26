@@ -129,9 +129,30 @@ function buildTable(data)
             }
           );
 
+          $(".iconSet svg:nth-child(2)").click(function()
+          {
+              let row_index = $(this).closest("tr").index();
+              // alert(row_index);
+              
+              console.log("icon clicked at: " + row_index);
+          
+              myArray[row_index].fname = "Richard";
+
+              var mymodal = $("#contact-edit");
+              mymodal.attr("aria-hidden","false");
+          
+              buildTable(myArray);
+
+             
+          
+          });
+
 
     }
 }
+
+
+
 
 // Toggle between sorting in ascending order first name and last name
 $("#firstLastName").click(function()

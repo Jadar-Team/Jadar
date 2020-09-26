@@ -122,49 +122,69 @@ function buildTable(data)
 
         table.innerHTML += row;
 
-        // Add hover event to each row
-        $( "#myTable tr" ).hover(
-            function()
-            {
-                $(this).find(".iconSet").css("visibility","visible");
-
-            },
-            function()
-            {
-                $(this).find(".iconSet").css("visibility", "hidden");
-            }
-          );
-
-          $(".iconSet svg:nth-child(2)").click(function()
-          {
-                global_row_index = $(this).closest("tr").index();
-
-            
-                let myModal = $("#edit-contact");
-
-                let inputs = myModal.find("input");
-
-                inputs[0].value = myArray[global_row_index].fname;
-                inputs[1].value = myArray[global_row_index].lname;
-                inputs[2].value = myArray[global_row_index].phone;
-                inputs[3].value = myArray[global_row_index].email;
-                inputs[4].value = myArray[global_row_index].street;
-                inputs[5].value = myArray[global_row_index].city;
-                inputs[6].value = myArray[global_row_index].state;
-                inputs[7].value = myArray[global_row_index].zip;
-                inputs[8].value = myArray[global_row_index].country;
-
-                console.log(inputs);
-
-                myModal.modal('show');
-
-                // var mymodal = $("#contact-edit");
-                // mymodal.attr("aria-hidden","false");
-
-          });
-
-
     }
+
+            // Add hover event to each row
+            $( "#myTable tr" ).hover(
+                function()
+                {
+                    $(this).find(".iconSet").css("visibility","visible");
+    
+                },
+                function()
+                {
+                    $(this).find(".iconSet").css("visibility", "hidden");
+                }
+              );
+
+              // Edit icon
+              $(".iconSet svg:nth-child(2)").click(function()
+              {
+                    global_row_index = $(this).closest("tr").index();
+    
+                
+                    let myModal = $("#edit-contact");
+    
+                    let inputs = myModal.find("input");
+    
+                    inputs[0].value = myArray[global_row_index].fname;
+                    inputs[1].value = myArray[global_row_index].lname;
+                    inputs[2].value = myArray[global_row_index].phone;
+                    inputs[3].value = myArray[global_row_index].email;
+                    inputs[4].value = myArray[global_row_index].street;
+                    inputs[5].value = myArray[global_row_index].city;
+                    inputs[6].value = myArray[global_row_index].state;
+                    inputs[7].value = myArray[global_row_index].zip;
+                    inputs[8].value = myArray[global_row_index].country;
+    
+                    console.log(inputs);
+    
+                    myModal.modal('show');
+    
+                    // var mymodal = $("#contact-edit");
+                    // mymodal.attr("aria-hidden","false");
+    
+              });
+
+              // Trash icon
+              $(".iconSet svg:nth-child(1)").click(function()
+              {
+                    // selects the current row
+                    let current_row = $(this).closest("tr");
+
+                    // stores the row index
+                    global_row_index = current_row.index();
+
+                    // remove element from array
+                    myArray.splice(global_row_index,1);
+
+                    // remove row
+                    current_row.remove();  
+              });
+
+
+
+
 }
 
 $("#confirm-edit").click(function()

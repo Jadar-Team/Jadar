@@ -61,7 +61,7 @@ function doLogin()
 
 		saveCookie();
 	
-		window.location.href = "output.html";
+		window.location.href = "homepage.html";
 	}
 	catch(err)
 	{

@@ -37,15 +37,15 @@ body
 
 #homePageLogo
 {
-    font-size: 11vmin;
-    width: 20%;
+    font-size: 15vmin;
+
     margin: 20px;
-    text-align: center;
-    font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
+    /*text-align: center;*/
+	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     font-style: italic;
     color: #FFFFFC;
-	  justify-content: center;
+	  /*justify-content: center;*/
 
     /* Inner shadow */
     text-shadow:
@@ -191,16 +191,20 @@ input[type="text"],input[type="password"], input[type="email"]{
 .navbar
 {
   margin: 0px;
-  padding: 0px;
+  padding-top: 10px;
   background-color: rgba(212, 232, 243, 0.6);
-  height: 80px;
+  height: 30%;
   line-height: .75em;
+  display: flex;
 }
-
+.navbar wrap
+{
+	align-self: flex-end;
+}
 .search-bar
 {
   width: 30%;
-  padding-left: 10px;
+
 
 }
 
@@ -219,11 +223,20 @@ input[type="search"]
 .navbar-name
 {
   font-family: 'Titillium Web', sans-serif;
-  font-size:6vmin;
+  font-size: 4em;
   color: #242325;
   font-weight: 600;
-  padding-right: 3vmin;
-  padding-left: 3vmin;
+  padding-right: 10px;
+  padding-left:10px;
+}
+
+h1 {
+    font-family: 'Titillium Web', sans-serif;
+  font-size: 8vmin;
+  color: #242325;
+  font-weight: 600;
+  padding-right: 10px;
+  padding-left:10px;
 }
 
 .filters
@@ -255,7 +268,7 @@ input[type="search"]
 .contact-table-head
 {
   font-size: 60px;
-  padding-top: 100px;
+  /*padding-top: 100px;*/
   padding-left: 25px;
   padding-bottom: 20px;
   color: #215F81;
@@ -324,7 +337,8 @@ input[type="search"]
 .add-contact
 {
   /* position: absolute; */
-  padding-top: 140px;
+  /*padding-top: 140px;*/
+  padding-top: 35px;
   right: 5px;
   color: #215F81;
   font-size: 20px;

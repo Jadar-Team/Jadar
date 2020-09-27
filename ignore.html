@@ -11,8 +11,7 @@
   <link href="css/styles.css" rel="stylesheet">
 
 	<!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Titillium+Web:wght@600&family=Yantramanav:wght@300&display=swap" rel="stylesheet">
-
+   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,500&family=Open+Sans&family=Titillium+Web:ital,wght@0,600;1,600&family=Yantramanav:wght@300&display=swap" rel="stylesheet">
   <!-- <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function()
 	{
@@ -24,8 +23,8 @@
 </head>
 <body class = "homepage">
   <!-- Navbar -->
-  <nav class="navbar fixed-top">
-    <div class = "search-bar">
+  <nav class="navbar wrap">
+    <div class = "">
       <input class="form-control" id="search-bar" type="text" placeholder="Search by name, phone, or email." aria-label="Search">
       <!-- Filters -->
       <div class = "filters-inline">
@@ -33,23 +32,31 @@
           <span class = "filters">Sort By</span>
           <button type="button" id = "recentlyAdded" class="btn btn-link filters-button">Recently added</button>
           <button type="button" id = "firstLastName" data-order = "first" class="btn btn-link filters-button">First/Last Name</button>
-          <button type="button" id = "showHide" data-order = "show" class="btn btn-link filters-button">Show/Hide All</button>
+          <button type="button" id = "showHide" data-order = "hide" class="btn btn-link filters-button">Show/Hide All</button>
         </div>
       </div>
     </div>
-	<div id="homePageLogo">
+	<div class="" id="homePageLogo">
 	 Jadar
 	</div>
-    <div class = "navbar-name">
-      <h1>
+    <div style = "" class = "">
+		<h1 style="font-size: 2em;">
 			Hi, Name.
 		</h1>
-	  <p  type="button" id = "logOut" class="btn btn-link filters-button" style ="font-size: .875rem; font-weight: normal; line-height: 0em;" onclick="doLogout()"> Log Out </p>
+	  <p  type="button" id = "logOut" class="btn btn-link filters-button" style ="font-size: .875rem; font-weight: normal; line-height: 0em;" onclick="doLogout()">
+      <strong>
+      Log Out
+    </strong>
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+      </svg>
+    </p>
     </div>
   </nav>
 
   <!-- Contact book -->
-  <div class = "row">
+  <div style= "" class = "row">
     <div class="col-12 col-md-11">
 
       <div class = "row">
@@ -85,16 +92,24 @@
                       <input type="text" class="form-control" id="add-lastname">
                   </div>
                   <div class="form-group">
-                    <label for="add-address" class="col-form-label">Address</label>
-                      <input type="text" class="form-control" id="add-address">
-                  </div>
-                  <div class="form-group">
                     <label for="add-phone" class="col-form-label">Phone Number</label>
-                      <input type="text" class="form-control" id="add-phone">
+                      <input type="tel" class="form-control" id="add-phone">
                   </div>
                   <div class="form-group">
                     <label for="add-email" class="col-form-label">Email</label>
                       <input type="email" class="form-control" id="add-email">
+                  </div>
+                  <div class="form-group address-group address">
+                    <label for="add-address" class="col-form-label">Address</label>
+                    <input type="street" class="form-control" id="autocomplete" placeholder="Street">
+
+                    <input type="city" class="form-control" id="inputCity" placeholder="City">
+
+                    <input type="state" class="form-control" id="inputState" placeholder="State">
+
+                    <input type="zip" class="form-control" id="inputZip" placeholder="Zip">
+
+                    <input type="country" class="form-control" id="inputCountry" placeholder="Country">
                   </div>
               </form>
               </div>
@@ -106,10 +121,63 @@
             </div>
           </div>
         </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade edit-contact-modal" id="edit-contact" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="edit-contact" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="edit-contact">Edit Contact</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Add contact informaton -->
+              <form>
+                <div class="form-group">
+                  <label for="edit-firstname" class="col-form-label">First Name</label>
+                  <input type="text" class="form-control" id="edit-firstname">
+                </div>
+                <div class="form-group">
+                  <label for="edit-lastname" class="col-form-label">Last Name</label>
+                    <input type="text" class="form-control" id="edit-lastname">
+                </div>
+                <div class="form-group">
+                  <label for="edit-phone" class="col-form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="edit-phone">
+                </div>
+                <div class="form-group">
+                  <label for="edit-email" class="col-form-label">Email</label>
+                    <input type="email" class="form-control" id="edit-email">
+                </div>
+                <div class="form-group address-group address">
+                  <label for="add-address" class="col-form-label">Address</label>
+                  <input type="street" class="form-control" id="autocomplete" placeholder="Street">
+
+                  <input type="city" class="form-control" id="inputCity" placeholder="City">
+
+                  <input type="state" class="form-control" id="inputState" placeholder="State">
+
+                  <input type="zip" class="form-control" id="inputZip" placeholder="Zip">
+
+                  <input type="country" class="form-control" id="inputCountry" placeholder="Country">
+                </div>
+            </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-link" id="confirm-edit" data-dismiss="modal">Confirm</button>
+              <button type="button" class="btn btn-link" id="confirm-delete" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class = "card contact-table">
+        </div>
+      </div>
+
+      <div class = "card-transparent contact-table">
         <div class = "card-body">
           <table class = "table table-hover">
             <!-- <thead>

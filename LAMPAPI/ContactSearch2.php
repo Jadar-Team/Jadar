@@ -4,7 +4,7 @@
 	//$name = $_GET['searchItem'];
 	$inData = getRequestInfo();
 	$userName = $inData["userName"]; 
-    $firstName = $inData["firstName"];
+        $firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
 	
 	//$conn is used to connect to database
@@ -21,31 +21,42 @@
 	
 	$searchCount = $result->num_rows;
 	
-	$retValue = '{"userName":"' . $userName . '","contacts":';
-	$retValue .= '[';
-	while ($searchCount > 0)
+	if ($searchCount > 0 )
 	{
-		$row = mysqli_fetch_array($result);
-		//echo ($row['ContactID'] . " " . $row['FirstName'] . " " . $row['LastName']);
-        	//echo "<br>";
-		$retValue .= '{"contactId":' . $row['ContactID'] . ',"contactEmail":"' . $row['ContactEmail'] . '","firstName":"' . $row['FirstName'] . '","lastName":"' . $row['LastName'] . '","address":"' . $row['Address'] . '","phone":"' . $row['Phone'] . '"';
-		if ($searchCount != 1)
-		{
-			$retValue .= ' },';
-			//$searchResults .= ",";
-		}
-		else
-		{
-			$retValue .= ' }';
-		}
-		$searchCount--;
+    	    $retValue = '{"userName":"' . $userName . '","contacts":';
+    	    $retValue .= '[';
+    	    while ($searchCount > 0)
+    	    {
+    		$row = mysqli_fetch_array($result);
+    		//echo ($row['ContactID'] . " " . $row['FirstName'] . " " . $row['LastName']);
+            	//echo "<br>";
+    		$retValue .= '{"contactId":' . $row['ContactID'] . ',"contactEmail":"' . $row['ContactEmail'] . '","firstName":"' . $row['FirstName'] . '","lastName":"' . $row['LastName'] . '","address":"' . $row['Address'] . '","phone":"' . $row['Phone'] . '"';
+    		if ($searchCount != 1)
+    		{
+    			$retValue .= ' },';
+    			//$searchResults .= ",";
+    		}
+    		else
+    		{
+    			$retValue .= ' }';
+    		}
+    		$searchCount--;
+    	    }
+    	    $retValue .= ']';
+    	    $retValue .= '}';
+    	
+    	    $result->free_result();
+    	    mysqli_close($conn);
+    	    sendResultInfoAsJson( $retValue );
 	}
-	$result->free_result();
-    	mysqli_close($conn);
+	else
+	{
+	    $result->free_result();
+    	    mysqli_close($conn);
+	    returnWithError( "No contacts found!" );
+	}
+	
     
-	$retValue .= ']';
-	$retValue .= '}';
-	sendResultInfoAsJson( $retValue );
 
 	function returnWithError( $err )
 	{

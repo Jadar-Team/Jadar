@@ -16,12 +16,12 @@ function doLogin()
 	userEmail = "";
 	firstName = "";
 	lastName = "";
-	
+
 	// Gets values from form fields(username, password, etc)
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
 	var hash = md5( password );
-	
+
 	// Reset feedback/error field to empty string
 	// We will write to this field if the user needs to know something.
 	document.getElementById("loginResult").innerHTML = "";
@@ -39,13 +39,13 @@ function doLogin()
 	{
 		// template object that we created is being sent to backend
 		xhr.send(jsonPayload);
-		
+
 		// Getting the object back from backend
 		var jsonObject = JSON.parse( xhr.responseText );
-		
+
 		// Grab the user name from the DB
 		userName = jsonObject.userName;
-		
+
 		// if there is no username, we didn't get a row back from the db, so the user either doesn't exist
 		// or userName/Pwd combination is not correct
 		if( userName === "")
@@ -53,15 +53,15 @@ function doLogin()
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			return;
 		}
-		
+
 		// Extracting fields from returned object from backend
 		firstName = jsonObject.firstName;
 		lastName = jsonObject.lastName;
 		userEmail = jsonObject.userEmail;
 
 		saveCookie();
-	
-		window.location.href = "homepage_dom.html";
+
+		window.location.href = "homepagesidebar.html";
 	}
 	catch(err)
 	{
@@ -90,14 +90,14 @@ function doRegister()
 	lastName = document.getElementById("lastName").value;
 	var password = document.getElementById("password").value;
 	var hash = md5( password );
-	
+
 	document.getElementById("registerResult").innerHTML = "";
-	
+
 	// Combine form field variables into JSON string
 	var jsonPayload = '{"userEmail" : "' + userEmail + '", "userName":"' + userName + '", "password" : "' + hash + '", "firstName" : "' + firstName +'", "lastName" : "' + lastName + '"}';
 //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
 	var url = urlBase + '/Register.' + extension;
-	
+
 	// Connection
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
@@ -105,9 +105,9 @@ function doRegister()
 	try
 	{
 		xhr.send(jsonPayload);
-		
+
 		var jsonObject = JSON.parse( xhr.responseText );
-		
+
 		if( jsonObject.error)
 		{
 			document.getElementById("registerResult").innerHTML = jsonObject.error;
@@ -120,7 +120,7 @@ function doRegister()
 		lastName = jsonObject.lastName;
 
 		saveCookie();
-	
+
 		window.location.href = "output.html";
 	}
 	catch(err)
@@ -138,26 +138,26 @@ function doContactSearch()
 	// Grabs form fields
 	firstName = document.getElementById("search-bar").value;
 	lastName = "";//document.getElementById("lastName").value;
-	
+
 	document.getElementById("contactSearchResult").innerHTML = "";
-	
+
 	// Combine form field variables into JSON string
 	var jsonPayload = '{"userName":"' + userName + '", "firstName" : "' + firstName +'"}';
 	var url = urlBase + '/ContactSearch2.' + extension;
-	
+
 	// Connection
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
-		xhr.onreadystatechange = function() 
+		xhr.onreadystatechange = function()
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			if (this.readyState == 4 && this.status == 200)
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
-				
+
 				contactList = "";
 				for( var i=0; i<jsonObject.contacts.length; i++ )
 				{
@@ -172,7 +172,7 @@ function doContactSearch()
 						contactList += "<br />\r\n";
 					}
 				}
-				
+
 				document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
@@ -193,7 +193,7 @@ function saveCookie()
 {
 	var minutes = 20;
 	var date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
+	date.setTime(date.getTime()+(minutes*60*1000));
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userName=" + userName + ",userEmail=" + userEmail + ";expires=" + date.toGMTString();
 }
 
@@ -203,7 +203,7 @@ function readCookie()
 	userEmail = "";
 	var data = document.cookie;
 	var splits = data.split(",");
-	for(var i = 0; i < splits.length; i++) 
+	for(var i = 0; i < splits.length; i++)
 	{
 		var thisOne = splits[i].trim();
 		var tokens = thisOne.split("=");
@@ -224,7 +224,7 @@ function readCookie()
 			userEmail = tokens[1];
 		}
 	}
-	
+
 	if( userName === "")
 	{
 		window.location.href = "index.html";

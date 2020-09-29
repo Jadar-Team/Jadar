@@ -124,8 +124,25 @@ definitions:
         example: "123 Street Blvd"
       phone:
         type: string
-        example: "123-4567-3333"
+        example: "123-456-3333"
  
+  ContactSearch2:
+    type: object
+    required:
+    - userName
+    - firstName
+    - lastName
+    properties:
+      userName:
+        type: string
+        example: "val"
+      firstName:
+        type: string
+        example: "firstname"
+      lastName:
+        type: string
+        example: "lastname"
+        
  ############################################
  
 paths:
@@ -249,7 +266,7 @@ paths:
           description: Invalid input
           
   /ContactEdit.php:
-    put:
+    post:
       tags:
       - Contacts
       summary: Edits a new contact
@@ -286,6 +303,29 @@ paths:
         name: searchItem
         type: string
         description: Search query
+      responses:
+        200:
+          description: Success
+        405:
+          description: Invalid input
+
+  /ContactSearch2.php:
+    post:
+      tags:
+      - Contacts
+      summary: Searches contacts
+      operationId: doSearchContacts2
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: searchItem2
+        description: Search Contacts
+        required: true
+        schema:
+          $ref: '#/definitions/ContactSearch2'
       responses:
         200:
           description: Success

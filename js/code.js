@@ -61,7 +61,7 @@ function doLogin()
 
 		saveCookie();
 	
-		window.location.href = "homepage.html";
+		window.location.href = "homepage_dom.html";
 	}
 	catch(err)
 	{
@@ -132,6 +132,60 @@ function doRegister()
 
 /*-------------------------------------------------------------*/
 
+// show contacts list
+function doContactSearch()
+{
+	// Grabs form fields
+	firstName = document.getElementById("search-bar").value;
+	lastName = "";//document.getElementById("lastName").value;
+	
+	document.getElementById("contactSearchResult").innerHTML = "";
+	
+	// Combine form field variables into JSON string
+	var jsonPayload = '{"userName":"' + userName + '", "firstName" : "' + firstName +'"}';
+	var url = urlBase + '/ContactSearch2.' + extension;
+	
+	// Connection
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
+				var jsonObject = JSON.parse( xhr.responseText );
+				
+				contactList = "";
+				for( var i=0; i<jsonObject.contacts.length; i++ )
+				{
+					//contactList += JSON.stringify(jsonObject.contacts[i]);
+					contactList += jsonObject.contacts[i].contactEmail + ", ";
+					contactList += jsonObject.contacts[i].firstName + ", ";
+					contactList += jsonObject.contacts[i].lastName + ", ";
+					contactList += jsonObject.contacts[i].address + ", ";
+					contactList += jsonObject.contacts[i].phone;
+					if( i < jsonObject.contacts.length - 1 )
+					{
+						contactList += "<br />\r\n";
+					}
+				}
+				
+				document.getElementsByTagName("p")[0].innerHTML = contactList;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+}
+/*-------------------------------------------------------------*/
+
+
 
 /*----------------Cookie Functions------------------------------*/
 
@@ -171,15 +225,13 @@ function readCookie()
 		}
 	}
 	
-	if( userEmail === "")
+	if( userName === "")
 	{
 		window.location.href = "index.html";
 	}
 	else
 	{
-		document.getElementById("fullName").innerHTML = "Name: " + firstName + " " + lastName;
-		document.getElementById("userName").innerHTML = "userName: " + userName;
-		document.getElementById("userEmail").innerHTML = "userEmail: " + userEmail;
+		//document.getElementById("userName").innerHTML = "userName: " + userName;
 	}
 }
 /*------------------------------------------------------------*/

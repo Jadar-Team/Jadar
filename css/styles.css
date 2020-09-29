@@ -1,5 +1,6 @@
 /*
 CSS Structure
+0. General Body
 1. Title & Subtitle
 2. Login
 3. Register
@@ -9,16 +10,28 @@ CSS Structure
   c. Contact Book
     - Info view (hover)
     - edit view (hover)
-  d. Add/Delete sidebar
-5. Hyperlinks
+  d. Add/Delete
+5. Sidebar Menu
+6. Hyperlinks
 */
+
+/* General Body */
+.wrapper {
+    display: block;
+}
+
+/* Content */
+
+.content {
+    width: 100%;
+    transition: all 0.5s;
+}
 
 body
 {
     background-color: #86BBD8;
     overflow-x: hidden;
-
-    /*overflow-y: hidden;*/
+    overflow-y: scroll;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -238,7 +251,7 @@ h1 {
   padding-right: 10px;
   padding-left:10px;
 }
-h2 
+h2
 {
 	font-size: 8vmin;
 
@@ -247,7 +260,7 @@ h2
 	font-weight: 600;
 	justify-content: center;*/
 	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
-    
+
     font-style: italic;
     color: #FFFFFC;
 	padding-right: 10px;
@@ -263,9 +276,9 @@ h2
 }
 
 #logOut
-{	
+{
 	font-size: 2vmin;
-	font-weight: normal; 
+	font-weight: normal;
 	line-height: 0em;
 	padding-right: 10px;
 	padding-left: 10px;
@@ -366,6 +379,7 @@ h2
 {
   /* position: absolute; */
   /*padding-top: 140px;*/
+  float: right;
   padding-top: 35px;
   right: 5px;
   color: #215F81;
@@ -378,10 +392,10 @@ h2
    background-color: #01223770;
 }
 
-.modal-footer, .modal-title
+/* .sidebar-footer, .modal-title
 {
   align-content: center;
-}
+} */
 
 .modal-backdrop {
    background: none;
@@ -472,34 +486,72 @@ h2
     text-align: center;
 }
 
-#logoutButton{
-    width: 20%;
-    margin-left: 40%;
+
+
+
+/* Sidebar */
+
+.sidebar {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    width: 400px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -450px;
+    z-index: 999;
+    background-color: rgba(212, 232, 243);
+    color: #215F81;
+    transition: all .5s;
+    box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
 }
 
-select{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    font-size: 0.75em;
-    font-family: 'Ubuntu', sans-serif;
+.sidebar.active {
+    right: 0;
 }
 
-#colorSearchResult{
+.overlay {
     display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(51, 51, 51, 0.7);
+    z-index: 998;
+    opacity: 0;
+    transition: all .5s ease-in-out;
 }
 
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+.overlay.active {
+  transition: all .5s;
+  display: block;
+  opacity: 0.5;
+
 }
+
+.add-header
+{
+  text-align: center;
+}
+.add-info {
+  margin: 20px;
+  text-align: center;
+}
+
+.address-field
+{
+  border-radius: 25px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-color: #86BBD8;
+  border-width: medium;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2%;
+  padding-bottom: 15px;
+  font-family: 'Yantramanav', sans-serif;
+}
+
 
 /* Hyperlinks */
 

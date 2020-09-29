@@ -68,6 +68,9 @@ function buildTable(data)
     // Add icon set to each row but hide them
     for(let i = 0; i < data.length; i++)
     {
+
+        let fullAddress = `${data[i].street}
+        <p>${data[i].city + ", " + data[i].state + " " + data[i].zip}</p>`
         let row = `<tr>
                    <td>
                     <div class="accordion">
@@ -82,8 +85,7 @@ function buildTable(data)
                               <path d="M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z"/>
                               <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                             </svg>
-                              ${data[i].street}
-                              <p>${data[i].city + ", " + data[i].state + " " + data[i].zip}</p>
+                              ${fullAddress}
                             </div>
                             <div id = "phone-email-block">
                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +131,7 @@ function buildTable(data)
                 function()
                 {
                     $(this).find(".iconSet").css("visibility","visible");
-    
+
                 },
                 function()
                 {
@@ -141,9 +143,9 @@ function buildTable(data)
               $(".iconSet svg:nth-child(2)").click(function()
               {
                     global_row_index = $(this).closest("tr").index();
-    
+
                     let myModal = $("#edit-contact");
-    
+
                     let inputs = myModal.find("input");
 
                     // Store array element contents into input fields
@@ -156,14 +158,14 @@ function buildTable(data)
                     inputs[6].value = myArray[global_row_index].state;
                     inputs[7].value = myArray[global_row_index].zip;
                     inputs[8].value = myArray[global_row_index].country;
-    
+
                     console.log(inputs);
-    
+
                     myModal.modal('show');
-    
+
                     // var mymodal = $("#contact-edit");
                     // mymodal.attr("aria-hidden","false");
-    
+
               });
 
               // Trash icon
@@ -179,7 +181,7 @@ function buildTable(data)
                     myArray.splice(global_row_index,1);
 
                     // remove row
-                    current_row.remove();  
+                    current_row.remove();
               });
 
 
@@ -194,7 +196,7 @@ $("#confirm-edit").click(function()
     let myModal = $("#edit-contact");
 
     let inputs = myModal.find("input");
-    
+
     // Update array element with input fields
     myArray[global_row_index].fname = inputs[0].value;
     myArray[global_row_index].lname = inputs[1].value;
@@ -234,7 +236,7 @@ $("#firstLastName").click(function()
 $("#addContact").click(function()
 {
      // Grabs input from each form field
-     $(".modal-body .form-control").each(function(index)
+     $(" .form-control").each(function(index)
      {
          $(this).val('');
      })
@@ -255,6 +257,7 @@ $("#recentlyAdded").click(function()
 })
 
 // confirm button - modal button that adds user to database
+
 $("#confirm-add").click(function()
 {
 
@@ -265,7 +268,7 @@ $("#confirm-add").click(function()
             let flag = true;
 
             // Grabs input from each form field
-            $("#staticBackdrop .modal-body .form-control").each(function(index)
+            $(".add-info .form-control").each(function(index)
             {
                 // Captures empty fields
                 if(!$(this).val())
@@ -284,6 +287,10 @@ $("#confirm-add").click(function()
                 return;
             }
 
+            // closing sidebar menu
+            $('.sidebar').removeClass('active');
+            $('.overlay').removeClass('active');
+
             // Add date
             tempObject['date'] = new Date();
 
@@ -293,6 +300,12 @@ $("#confirm-add").click(function()
             console.log("adding to table");
 
             buildTable(myArray);
+});
+
+$('#confirm-cancel').click(function()
+{
+  $('.sidebar').removeClass('active');
+  $('.overlay').removeClass('active');
 });
 
 // show/hide button - This will Show and hide the table
@@ -349,3 +362,16 @@ function displayAmPm(users)
         console.log(formattedTime);
     }
 }
+
+
+// Sidebar menu
+
+$('#addContact').on('click', function() {
+    $('.sidebar').addClass('active');
+    $('.overlay').addClass('active');
+
+    $(".form-control").each(function(index)
+    {
+        $(this).val('');
+    })
+});

@@ -180,7 +180,9 @@ function buildTable(data)
 
                     console.log(inputs);
 
-                    myModal.modal('show');
+                    // myModal.modal('show');
+                    $('.edit-sidebar').addClass('active');
+                    $('.overlay').addClass('active');
 
                     // var mymodal = $("#contact-edit");
                     // mymodal.attr("aria-hidden","false");
@@ -203,13 +205,10 @@ function buildTable(data)
                     current_row.remove();
               });
 
-
-
 }
 
 $("#confirm-edit").click(function()
 {
-
 
     let myModal = $("#edit-contact");
 
@@ -225,6 +224,10 @@ $("#confirm-edit").click(function()
     myArray[global_row_index].state = inputs[6].value;
     myArray[global_row_index].zip = inputs[7].value;
     myArray[global_row_index].country = inputs[8].value;
+
+    // closing sidebar menu
+    $('.edit-sidebar').removeClass('active');
+    $('.overlay').removeClass('active');
 
     buildTable(myArray);
 
@@ -254,7 +257,7 @@ $("#firstLastName").click(function()
 $("#addContact").click(function()
 {
      // Grabs input from each form field
-     $(" .form-control").each(function(index)
+     $(".add-info .form-control").each(function(index)
      {
          $(this).val('');
      })
@@ -306,7 +309,7 @@ $("#confirm-add").click(function()
             }
 
             // closing sidebar menu
-            $('.sidebar').removeClass('active');
+            $('.add-sidebar').removeClass('active');
             $('.overlay').removeClass('active');
 
             // Add date
@@ -320,9 +323,15 @@ $("#confirm-add").click(function()
             buildTable(myArray);
 });
 
-$('#confirm-cancel').click(function()
+$('#confirm-cancel-add').click(function()
 {
-  $('.sidebar').removeClass('active');
+  $('.add-sidebar').removeClass('active');
+  $('.overlay').removeClass('active');
+});
+
+$('#confirm-cancel-edit').click(function()
+{
+  $('.edit-sidebar').removeClass('active');
   $('.overlay').removeClass('active');
 });
 
@@ -385,7 +394,7 @@ function displayAmPm(users)
 // Sidebar menu
 
 $('#addContact').on('click', function() {
-    $('.sidebar').addClass('active');
+    $('.add-sidebar').addClass('active');
     $('.overlay').addClass('active');
 
     $(".form-control").each(function(index)

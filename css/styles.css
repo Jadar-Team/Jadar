@@ -503,7 +503,7 @@ h2
 .sidebar {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
-    width: 400px;
+    width: 450px;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -537,12 +537,13 @@ h2
 
 }
 
-.add-header
+.add-header, .edit-header
 {
   text-align: center;
 }
-.add-info {
-  margin: 20px;
+.add-info, .edit-info
+{
+  margin: 5%;
   text-align: center;
 }
 

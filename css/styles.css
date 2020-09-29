@@ -231,13 +231,22 @@ input[type="search"]
 }
 
 h1 {
-    font-family: 'Titillium Web', sans-serif;
-  font-size: 8vmin;
-  color: #242325;
-  font-weight: 600;
-  padding-right: 10px;
-  padding-left:10px;
-}
+	font-size: 8vmin;
+	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
+    
+    font-style: italic;
+    color: #FFFFFC;
+	padding-right: 10px;
+	padding-left: 10px;
+
+    /* Inner shadow */
+    text-shadow:
+     3px  3px 0 #86BBD9,
+    -1px -1px 0 #86BBD9,
+     1px -1px 0 #86BBD9,
+    -1px  1px 0 #86BBD9,
+     1px  1px 0 #86BBD9;
+	 }
 h2 
 {
 	font-size: 8vmin;

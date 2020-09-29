@@ -10,23 +10,23 @@
 // ];
 
 
-//with updated address
-var myArray = [
-    {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
-  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
-  {'fname':"Richard",'lname':"Hernandez",'street':"673 Bayport Drive",'city':"Ridgewood",
-  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
-  {'fname':"Michael",'lname':"Scott",'street':"673 Bayport Drive",'city':"Ridgewood",
-  'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'}
-];
+// //with updated address
+// var myArray = [
+//     {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
+//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
+//   {'fname':"Richard",'lname':"Hernandez",'street':"673 Bayport Drive",'city':"Ridgewood",
+//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
+//   {'fname':"Michael",'lname':"Scott",'street':"673 Bayport Drive",'city':"Ridgewood",
+//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'}
+// ];
 
-var global_row_index = 0;
+// var global_row_index = 0;
 
-// Sort JSON data
-myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
+// // Sort JSON data
+// myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
 
-// Build Table
-buildTable(myArray);
+// // Build Table
+// buildTable(myArray);
 
 // On keyup, we run this function
 $('#search-bar').on('keyup',function(){
@@ -36,6 +36,47 @@ $('#search-bar').on('keyup',function(){
     var data = searchTable(value, myArray);
     buildTable(data);
 })
+
+
+function connect()
+{
+    // var urlBase = 'http://COP4331-29.com/LAMPAPI';
+    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
+    var extension = 'php';
+    var url = urlBase + '/ContactSearch2.' + extension;
+
+    var obj = `{
+        "userName": "val",
+        "firstName": "f",
+        "lastName": "lastname"
+      }`;
+
+
+    var request = new XMLHttpRequest();
+
+    request.open('POST', urlBase);
+
+    request.onreadystatechange = function()
+    {
+        if((request.readyState === 4) && (request.status === 200))
+        {
+            var jsonObject = JSON.parse(request.responseText);
+        
+            console.log(jsonObject);
+            console.log(jsonObject.userName);
+            console.log(jsonObject.contacts[0].address);
+            buildTable(jsonObject.contacts);
+        
+
+        }
+    }
+
+    request.send(obj);
+}
+
+connect();
+
+
 
 // Function that does search
 function searchTable(value, data )
@@ -68,15 +109,14 @@ function buildTable(data)
     // Add icon set to each row but hide them
     for(let i = 0; i < data.length; i++)
     {
-
-        let fullAddress = `${data[i].street}
-        <p>${data[i].city + ", " + data[i].state + " " + data[i].zip}</p>`
+       let fullAddress = `${data[i].street}
+       <p>${data[i].city + ", " + data[i].state + " " + data[i].zip}</p>`
         let row = `<tr>
                    <td>
                     <div class="accordion">
                       <div class = "card-transparent border-0">
                           <div class="card-header info-card" id="contactName">
-                            ${data[i].fname + " " + data[i].lname}
+                            ${data[i].firstName + " " + data[i].lastName}
                           </div>
                           <div id="collapseInfo" class="collapse hide" aria-labelledby="contactName" data-parent="#showHide">
                           <div class="card-body">
@@ -97,7 +137,7 @@ function buildTable(data)
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
                         </svg>
-                              ${data[i].email}
+                              ${data[i].contactEmail}
                               </br>
                               </div>
                             </div>
@@ -281,8 +321,78 @@ $("#recentlyAdded").click(function()
 
 $("#confirm-add").click(function()
 {
+        // Getting user's input from adding contact
+        let fname = $("#add-firstname").val();
+        let lname = $("#add-lastname").val();
+        let phone = $("#add-phone").val();
+        let email = $("#add-email").val();
 
-            const keys = ['fname','lname','address','phone','email','date','street','city','country','zip'];
+        let addressStreet = $("#inputStreet").val();
+        let addressCity = $("#inputCity").val();
+        let addressState = $("#inputState").val();
+        let addressZip = $("#inputZip").val();
+        let addressCountry = $("#inputCountry").val();
+
+       
+
+        // Create a template object string to pass to the backend
+        var jsonPayload = '{"firstName" : "' + fname + '", "lastName" : "' + lname + '", "phone" : "' + phone + '", "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '"}';
+        
+    
+        // This is how we are sending data to backend and vice versa
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try
+        {
+            // template object that we created is being sent to backend
+            xhr.send(jsonPayload);
+    
+            // Getting the object back from backend
+            var jsonObject = JSON.parse( xhr.responseText );
+    
+            // Grab the user name from the DB
+            userName = jsonObject.userName;
+    
+            // if there is no username, we didn't get a row back from the db, so the user either doesn't exist
+            // or userName/Pwd combination is not correct
+            if( userName === "")
+            {
+                document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+                return;
+            }
+    
+            // Extracting fields from returned object from backend
+            firstName = jsonObject.firstName;
+            lastName = jsonObject.lastName;
+            userEmail = jsonObject.userEmail;
+
+
+
+
+
+
+            var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
+
+            var request = new XMLHttpRequest();
+
+            request.open('POST', urlBase);
+
+            request.onreadystatechange = function()
+            {
+                if((request.readyState === 4) && (request.status === 200))
+                {
+                    var jsonObject = JSON.parse(request.responseText);
+                
+                    console.log(jsonObject);
+                    console.log(jsonObject.userName);
+                    console.log(jsonObject.contacts[0].address);
+                }
+            }
+
+            request.send(obj);
+
+            const keys = ['firstName','lastName','address','phone','contactEmail','date'];
 
             let tempObject = {};
 

@@ -38,46 +38,64 @@ $('#search-bar').on('keyup',function(){
 })
 
 
-// function connect()
-// {
-//     // var urlBase = 'http://COP4331-29.com/LAMPAPI';
-//     var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
-//     var extension = 'php';
-//     var url = urlBase + '/ContactSearch2.' + extension;
+// This function is a callback that gives us a database from table
+function getDatabaseTable()
+{
+    // var urlBase = 'http://COP4331-29.com/LAMPAPI';
+    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
+    var extension = 'php';
+    var url = urlBase + '/ContactSearch2.' + extension;
 
-//     var obj = `{
-//         "userName": "val",
-//         "firstName": "f",
-//         "lastName": "lastname"
-//       }`;
+    console.log("This is within getDatabaseTable" + userName);
 
+    // var obj = `{
+    //     "userName": "${userName}",
+    //     "firstName": "${firstName}",
+    //     "lastName": "${lastName}"
+    //   }`;
 
-//     var request = new XMLHttpRequest();
-//     request.open('POST', urlBase);
-//     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+      var obj = `{
+        "userName": "val",
+        "firstName": "firstname",
+        "lastName": "lastname"
+      }`;
 
-//     try
-//     {
-//     request.onreadystatechange = function()
-//     {
-//         if((request.readyState === 4) && (request.status === 200))
-//         {
-//             var jsonObject = JSON.parse(request.responseText);
-        
-//             console.log(jsonObject);
-//             console.log(jsonObject.userName);
-//             console.log(jsonObject.contacts[0].address);
-//             buildTable(jsonObject.contacts);
-        
+    
 
-//         }
-//     }
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', urlBase);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-//     request.send(obj);
-// }
-// }
+    try
+    {
+        xhr.onreadystatechange = function()
+        {
+            if((xhr.readyState === 4) && (xhr.status === 200))
+            {
+                var jsonObject = JSON.parse(xhr.responseText);
+                
+                console.log(jsonObject);
+                // console.log(jsonObject.userName);
+                // console.log(jsonObject.contacts[0].address);
+                buildTable(jsonObject.contacts);
+                console.log("inside async funciton" + userName);
 
-// connect();
+            }
+        }
+
+        xhr.send(obj);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+}
+
+// IMPORTANT functions have to load before we use cookie(username, etc)
+window.onload = function()
+{
+    getDatabaseTable();
+}
 
 
 
@@ -106,6 +124,8 @@ function searchTable(value, data )
 // Function that populates table with json data
 function buildTable(data)
 {
+    console.log("Inside build table");
+    console.log(data);
     var table = document.getElementById('myTable');
     table.innerHTML= "";
 
@@ -250,8 +270,53 @@ function buildTable(data)
 
 }
 
+/* Need to fix this */
+// Edit Confirm button - updates conact in database and table
 $("#confirm-edit").click(function()
 {
+     
+        // Create a template object string to pass to the backend
+        var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
+
+        // url
+        var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
+        
+        // request
+        var xhr = new XMLHttpRequest();
+        
+        // open async
+        xhr.open("POST", urlBase);
+
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try
+        {
+            // send the data to the backend
+            xhr.send(jsonPayload);
+            // Once we have the complete data, proceed with operations.
+            xhr.onreadystatechange = function()
+            {
+                if((xhr.readyState === 4) && (xhr.status === 200))
+                {
+                    var jsonObject = JSON.parse(xhr.responseText);
+                    
+                    console.log("Confirm add");
+                    console.log(jsonObject);
+                    console.log(jsonObject.userName);
+                    console.log(jsonObject.address);
+                    
+                    // Build table once we get request back 
+                    buildTable(jsonObject);
+                }
+            };
+            // send the data to the backend
+            xhr.send(jsonPayload);
+        }
+        catch(err)
+        {
+            console.log(userName);
+            console.log("Confirm add complete");
+            console.log(err.message);
+        }
 
     let myModal = $("#edit-contact");
 
@@ -342,8 +407,10 @@ $("#confirm-add").click(function()
         let addressZip = $("#inputZip").val();
         let addressCountry = $("#inputCountry").val();
 
-        // let currentUser = "val";
+        // Cookie test
+        console.log("In contactAdd" + userName);
 
+        // let currentUser = "val";
         // If problem has to do with cookie username
         // Create a template object string to pass to the backend
         var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
@@ -368,14 +435,11 @@ $("#confirm-add").click(function()
                 if((xhr.readyState === 4) && (xhr.status === 200))
                 {
                     var jsonObject = JSON.parse(xhr.responseText);
-                    
+                     
                     console.log("Confirm add");
                     console.log(jsonObject);
                     console.log(jsonObject.userName);
                     console.log(jsonObject.address);
-                    
-                    // Build table once we get request back 
-                    buildTable(jsonObject);
                 }
             };
             // send the data to the backend
@@ -388,31 +452,6 @@ $("#confirm-add").click(function()
             console.log(err.message);
         }
 
-        // const keys = ['firstName','lastName','address','phone','contactEmail','date'];
-
-        // let tempObject = {};
-
-        // let flag = true;
-
-        // // Grabs input from each form field
-        // $(".add-info .form-control").each(function(index)
-        // {
-        //     // Captures empty fields
-        //     if(!$(this).val())
-        //     {
-        //         flag = false;
-        //         return false;
-        //     }
-
-        //     tempObject[keys[index]] = $(this).val();
-        // })
-
-        // // Report any errors
-        // if(!flag)
-        // {
-        //     console.log("Empty field");
-        //     return;
-        // }
 
         // closing sidebar menu
         $('.add-sidebar').removeClass('active');

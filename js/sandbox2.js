@@ -350,34 +350,36 @@ $("#confirm-add").click(function()
 
         // url
         var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
-
+        
         // request
         var xhr = new XMLHttpRequest();
         
         // open async
-        xhr.open('POST', urlBase);
+        xhr.open("POST", urlBase);
 
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
         {
+            // send the data to the backend
+            xhr.send(jsonPayload);
             // Once we have the complete data, proceed with operations.
             xhr.onreadystatechange = function()
             {
-                if((request.readyState === 4) && (request.status === 200))
+                if((xhr.readyState === 4) && (xhr.status === 200))
                 {
-                    var jsonObject = JSON.parse(request.responseText);
+                    var jsonObject = JSON.parse(xhr.responseText);
                     
                     console.log("Confirm add");
                     console.log(jsonObject);
                     console.log(jsonObject.userName);
-                    console.log(jsonObject.contacts[0].address);
+                    console.log(jsonObject.address);
                     
                     // Build table once we get request back 
                     buildTable(jsonObject);
                 }
             };
             // send the data to the backend
-            request.send(jsonPayload);
+            xhr.send(jsonPayload);
         }
         catch(err)
         {

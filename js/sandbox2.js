@@ -38,43 +38,46 @@ $('#search-bar').on('keyup',function(){
 })
 
 
-function connect()
-{
-    // var urlBase = 'http://COP4331-29.com/LAMPAPI';
-    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
-    var extension = 'php';
-    var url = urlBase + '/ContactSearch2.' + extension;
+// function connect()
+// {
+//     // var urlBase = 'http://COP4331-29.com/LAMPAPI';
+//     var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
+//     var extension = 'php';
+//     var url = urlBase + '/ContactSearch2.' + extension;
 
-    var obj = `{
-        "userName": "val",
-        "firstName": "f",
-        "lastName": "lastname"
-      }`;
+//     var obj = `{
+//         "userName": "val",
+//         "firstName": "f",
+//         "lastName": "lastname"
+//       }`;
 
 
-    var request = new XMLHttpRequest();
+//     var request = new XMLHttpRequest();
+//     request.open('POST', urlBase);
+//     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    request.open('POST', urlBase);
-
-    request.onreadystatechange = function()
-    {
-        if((request.readyState === 4) && (request.status === 200))
-        {
-            var jsonObject = JSON.parse(request.responseText);
+//     try
+//     {
+//     request.onreadystatechange = function()
+//     {
+//         if((request.readyState === 4) && (request.status === 200))
+//         {
+//             var jsonObject = JSON.parse(request.responseText);
         
-            console.log(jsonObject);
-            console.log(jsonObject.userName);
-            console.log(jsonObject.contacts[0].address);
-            buildTable(jsonObject.contacts);
+//             console.log(jsonObject);
+//             console.log(jsonObject.userName);
+//             console.log(jsonObject.contacts[0].address);
+//             buildTable(jsonObject.contacts);
         
 
-        }
-    }
+//         }
+//     }
 
-    request.send(obj);
-}
+//     request.send(obj);
+// }
+// }
 
-connect();
+// connect();
 
 
 
@@ -321,6 +324,12 @@ $("#recentlyAdded").click(function()
 
 $("#confirm-add").click(function()
 {
+        // Issues
+        // 1. We need username of the account. So cookie.
+        // 2. We need to format jsonpayload
+        // 3. There is no way to add to the table row because global is gone
+        //    That is why we need to rebuild the table. The row we get back can be used as confirmation.
+
         // Getting user's input from adding contact
         let fname = $("#add-firstname").val();
         let lname = $("#add-lastname").val();
@@ -333,104 +342,81 @@ $("#confirm-add").click(function()
         let addressZip = $("#inputZip").val();
         let addressCountry = $("#inputCountry").val();
 
-       
+        // let currentUser = "val";
 
+        // If problem has to do with cookie username
         // Create a template object string to pass to the backend
-        var jsonPayload = '{"firstName" : "' + fname + '", "lastName" : "' + lname + '", "phone" : "' + phone + '", "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '"}';
-        
-    
-        // This is how we are sending data to backend and vice versa
+        var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
+
+        // url
+        var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
+
+        // request
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
+        
+        // open async
+        xhr.open('POST', urlBase);
+
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
         {
-            // template object that we created is being sent to backend
-            xhr.send(jsonPayload);
-    
-            // Getting the object back from backend
-            var jsonObject = JSON.parse( xhr.responseText );
-    
-            // Grab the user name from the DB
-            userName = jsonObject.userName;
-    
-            // if there is no username, we didn't get a row back from the db, so the user either doesn't exist
-            // or userName/Pwd combination is not correct
-            if( userName === "")
-            {
-                document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
-                return;
-            }
-    
-            // Extracting fields from returned object from backend
-            firstName = jsonObject.firstName;
-            lastName = jsonObject.lastName;
-            userEmail = jsonObject.userEmail;
-
-
-
-
-
-
-            var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
-
-            var request = new XMLHttpRequest();
-
-            request.open('POST', urlBase);
-
-            request.onreadystatechange = function()
+            // Once we have the complete data, proceed with operations.
+            xhr.onreadystatechange = function()
             {
                 if((request.readyState === 4) && (request.status === 200))
                 {
                     var jsonObject = JSON.parse(request.responseText);
-                
+                    
+                    console.log("Confirm add");
                     console.log(jsonObject);
                     console.log(jsonObject.userName);
                     console.log(jsonObject.contacts[0].address);
+                    
+                    // Build table once we get request back 
+                    buildTable(jsonObject);
                 }
-            }
+            };
+            // send the data to the backend
+            request.send(jsonPayload);
+        }
+        catch(err)
+        {
+            console.log("Confirm add complete");
+            console.log(err.message);
+        }
 
-            request.send(obj);
+        // const keys = ['firstName','lastName','address','phone','contactEmail','date'];
 
-            const keys = ['firstName','lastName','address','phone','contactEmail','date'];
+        // let tempObject = {};
 
-            let tempObject = {};
+        // let flag = true;
 
-            let flag = true;
+        // // Grabs input from each form field
+        // $(".add-info .form-control").each(function(index)
+        // {
+        //     // Captures empty fields
+        //     if(!$(this).val())
+        //     {
+        //         flag = false;
+        //         return false;
+        //     }
 
-            // Grabs input from each form field
-            $(".add-info .form-control").each(function(index)
-            {
-                // Captures empty fields
-                if(!$(this).val())
-                {
-                    flag = false;
-                    return false;
-                }
+        //     tempObject[keys[index]] = $(this).val();
+        // })
 
-                tempObject[keys[index]] = $(this).val();
-            })
+        // // Report any errors
+        // if(!flag)
+        // {
+        //     console.log("Empty field");
+        //     return;
+        // }
 
-            // Report any errors
-            if(!flag)
-            {
-                console.log("Empty field");
-                return;
-            }
+        // closing sidebar menu
+        $('.add-sidebar').removeClass('active');
+        $('.overlay').removeClass('active');
 
-            // closing sidebar menu
-            $('.add-sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
-
-            // Add date
-            tempObject['date'] = new Date();
-
-            // Will eventually be a server call here
-            myArray.push(tempObject);
-
-            console.log("adding to table");
-
-            buildTable(myArray);
+       
+       
 });
 
 $('#confirm-cancel-add').click(function()

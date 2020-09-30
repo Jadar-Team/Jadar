@@ -229,7 +229,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("fullName").innerHTML = "Name: " + firstName + " " + lastName;
+		// document.getElementById("fullName").innerHTML = "Name: " + firstName + " " + lastName;
 		document.getElementById("userName").innerHTML = "userName: " + userName;
 		document.getElementById("userEmail").innerHTML = "userEmail: " + userEmail;
 	}

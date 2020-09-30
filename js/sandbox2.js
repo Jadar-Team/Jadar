@@ -381,6 +381,7 @@ $("#confirm-add").click(function()
         }
         catch(err)
         {
+            console.log(userName);
             console.log("Confirm add complete");
             console.log(err.message);
         }

@@ -61,7 +61,7 @@ function doLogin()
 
 		saveCookie();
 	
-		window.location.href = "output.html";
+		window.location.href = "homepagesidebar.html";
 	}
 	catch(err)
 	{
@@ -121,7 +121,7 @@ function doRegister()
 
 		saveCookie();
 	
-		window.location.href = "output.html";
+		window.location.href = "homepagesidebar.html";
 	}
 	catch(err)
 	{
@@ -226,12 +226,6 @@ function readCookie()
 	if( userEmail === "")
 	{
 		window.location.href = "index.html";
-	}
-	else
-	{
-		// document.getElementById("fullName").innerHTML = "Name: " + firstName + " " + lastName;
-		document.getElementById("userName").innerHTML = "userName: " + userName;
-		document.getElementById("userEmail").innerHTML = "userEmail: " + userEmail;
 	}
 }
 /*------------------------------------------------------------*/

@@ -1,3 +1,6 @@
+//Globals
+var contactIdArray = [];
+
 
 // Mock JSON data
 // var myArray = [
@@ -89,6 +92,9 @@ function getDatabaseTable()
         console.log(err);
     }
 }
+
+
+
 
 // IMPORTANT functions have to load before we use cookie(username, etc)
 window.onload = function()
@@ -188,7 +194,7 @@ function buildTable(data)
                         </div>
                     </td>
                     </tr>`
-
+        contactIdArray[i] = data[i].contactId;
         table.innerHTML += row;
 
     }
@@ -224,49 +230,99 @@ function buildTable(data)
               // Edit icon
               $(".iconSet svg:nth-child(2)").click(function()
               {
-                    global_row_index = $(this).closest("tr").index();
+                     // selects the current row id
+                    let current_row = $(this).closest("tr");
 
-                    let myModal = $("#edit-contact");
+                    // global_row_index = $(this).closest("tr").index();
 
-                    let inputs = myModal.find("input");
+                    // let myModal = $("#edit-contact");
 
-                    // Store array element contents into input fields
-                    inputs[0].value = myArray[global_row_index].fname;
-                    inputs[1].value = myArray[global_row_index].lname;
-                    inputs[2].value = myArray[global_row_index].phone;
-                    inputs[3].value = myArray[global_row_index].email;
-                    inputs[4].value = myArray[global_row_index].street;
-                    inputs[5].value = myArray[global_row_index].city;
-                    inputs[6].value = myArray[global_row_index].state;
-                    inputs[7].value = myArray[global_row_index].zip;
-                    inputs[8].value = myArray[global_row_index].country;
+                    // let inputs = myModal.find("input");
 
-                    console.log(inputs);
+                    // // Store array element contents into input fields
+                    // inputs[0].value = myArray[global_row_index].fname;
+                    // inputs[1].value = myArray[global_row_index].lname;
+                    // inputs[2].value = myArray[global_row_index].phone;
+                    // inputs[3].value = myArray[global_row_index].email;
+                    // inputs[4].value = myArray[global_row_index].street;
+                    // inputs[5].value = myArray[global_row_index].city;
+                    // inputs[6].value = myArray[global_row_index].state;
+                    // inputs[7].value = myArray[global_row_index].zip;
+                    // inputs[8].value = myArray[global_row_index].country;
 
-                    // myModal.modal('show');
-                    $('.edit-sidebar').addClass('active');
-                    $('.overlay').addClass('active');
+                    // console.log(inputs);
 
-                    // var mymodal = $("#contact-edit");
-                    // mymodal.attr("aria-hidden","false");
+                    // // myModal.modal('show');
+                    // $('.edit-sidebar').addClass('active');
+                    // $('.overlay').addClass('active');
+
+                    // // var mymodal = $("#contact-edit");
+                    // // mymodal.attr("aria-hidden","false");
+
+                    alert(current_row.index());
 
               });
 
               // Trash icon
               $(".iconSet svg:nth-child(1)").click(function()
               {
-                    // selects the current row
+
+                    // selects the current row id
                     let current_row = $(this).closest("tr");
 
                     // stores the row index
                     global_row_index = current_row.index();
+                    
+                    deleteContact(contactIdArray[current_row.index()]);
 
                     // remove element from array
-                    myArray.splice(global_row_index,1);
+                    contactIdArray.splice(global_row_index,1);
 
-                    // remove row
-                    current_row.remove();
+                    // // remove row
+                    // current_row.remove();
               });
+
+}
+
+function deleteContact(contactId)
+{
+    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactDelete.php";
+
+    var obj = `{ "userName": "${userName}","contactId": "${contactId}"}`;
+
+    var testpayload = JSON.parse(obj);
+    console.log(testpayload.userName);
+    console.log(testpayload.contactId);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', urlBase);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    
+    try
+    {
+        xhr.onreadystatechange = function()
+        {
+            if((xhr.readyState === 4) && (xhr.status === 200))
+            {
+                var jsonObject = JSON.parse(xhr.responseText);
+                
+                console.log(jsonObject);
+                // console.log(jsonObject.userName);
+                // console.log(jsonObject.contacts[0].address);
+                console.log("inside delete contact function" + userName);
+                getDatabaseTable();
+                
+
+            }
+        }
+
+        xhr.send(obj);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
 
 }
 
@@ -275,48 +331,48 @@ function buildTable(data)
 $("#confirm-edit").click(function()
 {
      
-        // Create a template object string to pass to the backend
-        var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
+        // // Create a template object string to pass to the backend
+        // var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
 
-        // url
-        var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
+        // // url
+        // var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
         
-        // request
-        var xhr = new XMLHttpRequest();
+        // // request
+        // var xhr = new XMLHttpRequest();
         
-        // open async
-        xhr.open("POST", urlBase);
+        // // open async
+        // xhr.open("POST", urlBase);
 
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-        try
-        {
-            // send the data to the backend
-            xhr.send(jsonPayload);
-            // Once we have the complete data, proceed with operations.
-            xhr.onreadystatechange = function()
-            {
-                if((xhr.readyState === 4) && (xhr.status === 200))
-                {
-                    var jsonObject = JSON.parse(xhr.responseText);
+        // xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        // try
+        // {
+        //     // send the data to the backend
+        //     xhr.send(jsonPayload);
+        //     // Once we have the complete data, proceed with operations.
+        //     xhr.onreadystatechange = function()
+        //     {
+        //         if((xhr.readyState === 4) && (xhr.status === 200))
+        //         {
+        //             var jsonObject = JSON.parse(xhr.responseText);
                     
-                    console.log("Confirm add");
-                    console.log(jsonObject);
-                    console.log(jsonObject.userName);
-                    console.log(jsonObject.address);
+        //             console.log("Confirm add");
+        //             console.log(jsonObject);
+        //             console.log(jsonObject.userName);
+        //             console.log(jsonObject.address);
                     
-                    // Build table once we get request back 
-                    buildTable(jsonObject);
-                }
-            };
-            // send the data to the backend
-            xhr.send(jsonPayload);
-        }
-        catch(err)
-        {
-            console.log(userName);
-            console.log("Confirm add complete");
-            console.log(err.message);
-        }
+        //             // Build table once we get request back 
+        //             buildTable(jsonObject);
+        //         }
+        //     };
+        //     // send the data to the backend
+        //     xhr.send(jsonPayload);
+        // }
+        // catch(err)
+        // {
+        //     console.log(userName);
+        //     console.log("Confirm add complete");
+        //     console.log(err.message);
+        // }
 
     let myModal = $("#edit-contact");
 
@@ -337,7 +393,7 @@ $("#confirm-edit").click(function()
     $('.edit-sidebar').removeClass('active');
     $('.overlay').removeClass('active');
 
-    buildTable(myArray);
+    // buildTable(myArray);
 
 });
 

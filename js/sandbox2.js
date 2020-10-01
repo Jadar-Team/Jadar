@@ -41,6 +41,7 @@ $('#search-bar').on('keyup',function(){
 // This function is a callback that gives us a database from table
 function getDatabaseTable()
 {
+
     // var urlBase = 'http://COP4331-29.com/LAMPAPI';
     var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
     var extension = 'php';
@@ -48,19 +49,17 @@ function getDatabaseTable()
 
     console.log("This is within getDatabaseTable" + userName);
 
-    // var obj = `{
-    //     "userName": "${userName}",
-    //     "firstName": "${firstName}",
-    //     "lastName": "${lastName}"
-    //   }`;
-
-      var obj = `{
-        "userName": "val",
-        "firstName": "firstname",
-        "lastName": "lastname"
+    var obj = `{
+        "userName": "${userName}",
+        "firstName": "",
+        "lastName": ""
       }`;
 
-    
+    //   var obj = `{
+    //     "userName": "val",
+    //     "firstName": "",
+    //     "lastName": ""
+    //   }`;
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', urlBase);
@@ -74,7 +73,7 @@ function getDatabaseTable()
             {
                 var jsonObject = JSON.parse(xhr.responseText);
                 
-                console.log(jsonObject);
+                console.log(jsonObject.contacts);
                 // console.log(jsonObject.userName);
                 // console.log(jsonObject.contacts[0].address);
                 buildTable(jsonObject.contacts);
@@ -427,8 +426,6 @@ $("#confirm-add").click(function()
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
         {
-            // send the data to the backend
-            xhr.send(jsonPayload);
             // Once we have the complete data, proceed with operations.
             xhr.onreadystatechange = function()
             {
@@ -440,6 +437,7 @@ $("#confirm-add").click(function()
                     console.log(jsonObject);
                     console.log(jsonObject.userName);
                     console.log(jsonObject.address);
+                    getDatabaseTable();
                 }
             };
             // send the data to the backend

@@ -93,7 +93,8 @@ function getDatabaseTable()
 // IMPORTANT functions have to load before we use cookie(username, etc)
 window.onload = function()
 {
-    getDatabaseTable();
+    if(userName != "")
+        getDatabaseTable();
 }
 
 

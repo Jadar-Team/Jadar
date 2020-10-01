@@ -235,31 +235,31 @@ function buildTable(data)
 
                     // global_row_index = $(this).closest("tr").index();
 
-                    // let myModal = $("#edit-contact");
+                    let myModal = $("#edit-contact");
 
-                    // let inputs = myModal.find("input");
+                    let inputs = myModal.find("input");
 
-                    // // Store array element contents into input fields
-                    // inputs[0].value = myArray[global_row_index].fname;
-                    // inputs[1].value = myArray[global_row_index].lname;
-                    // inputs[2].value = myArray[global_row_index].phone;
-                    // inputs[3].value = myArray[global_row_index].email;
-                    // inputs[4].value = myArray[global_row_index].street;
-                    // inputs[5].value = myArray[global_row_index].city;
-                    // inputs[6].value = myArray[global_row_index].state;
-                    // inputs[7].value = myArray[global_row_index].zip;
-                    // inputs[8].value = myArray[global_row_index].country;
+                    // Store array element contents into input fields
+                    inputs[0].value = myArray[global_row_index].fname;
+                    inputs[1].value = myArray[global_row_index].lname;
+                    inputs[2].value = myArray[global_row_index].phone;
+                    inputs[3].value = myArray[global_row_index].email;
+                    inputs[4].value = myArray[global_row_index].street;
+                    inputs[5].value = myArray[global_row_index].city;
+                    inputs[6].value = myArray[global_row_index].state;
+                    inputs[7].value = myArray[global_row_index].zip;
+                    inputs[8].value = myArray[global_row_index].country;
 
                     // console.log(inputs);
 
                     // // myModal.modal('show');
-                    // $('.edit-sidebar').addClass('active');
-                    // $('.overlay').addClass('active');
+                    $('.edit-sidebar').addClass('active');
+                    $('.overlay').addClass('active');
 
                     // // var mymodal = $("#contact-edit");
                     // // mymodal.attr("aria-hidden","false");
 
-                    alert(current_row.index());
+                    // alert(current_row.index());
 
               });
 

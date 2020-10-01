@@ -54,7 +54,7 @@
       </div>
       <div class="form-group address-group address">
         <label for="add-address" class="col-form-label">Address</label>
-        <input type="street" class="form-control address-field" id="autocomplete inputStreet" placeholder="Street">
+        <input type="street" class="form-control address-field" id="inputStreet" placeholder="Street">
 
         <input type="city" class="form-control address-field" id="inputCity" placeholder="City">
 
@@ -149,7 +149,7 @@
 	 Jadar
 	</div>
     <div style = "" class = "homePageLogo">
-		<h2>
+		<h2 id = "usernameDisplay">
 			Hi, Name.
 		</h2>
 	  <p  type="button" id = "logOut" class="btn btn-link filters-button" style ="" onclick="doLogout()">
@@ -190,6 +190,7 @@
               <!-- Hover Buttons -->
               <!-- Info -->
             </tbody>
+            <div id = "loading"></div>
         </table>
         </div>
       </div>

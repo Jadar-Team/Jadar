@@ -1,29 +1,13 @@
-//Globals
+// Globals - do not modify these variables
+// You are only allowed to grab data from these. Do not actually point to it.
 var contactIdArray = [];
 
+var global_row_index = 0;
 
-// Mock JSON data
-// var myArray = [
-//     {'fname':"Michael",'lname':"Oswald",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date': new Date()},
-//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"James",'lname':"Scott",'address':"123 street",'phone':"352-87-9780", 'email': 'knights.edu', 'date' : new Date()},
-//     {'fname':"Mila",'lname':"Potter",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()},
-//     {'fname':"Paul",'lname':"Stark",'address':"123 street",'phone':"352-87-9780",'email':'knights.edu', 'date' : new Date()}
-// ];
+var globalTableArray = [];
 
+var globalFilter = [];
 
-// //with updated address
-// var myArray = [
-//     {'fname':"Anton",'lname':"Fuentas",'street':"673 Bayport Drive",'city':"Ridgewood",
-//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
-//   {'fname':"Richard",'lname':"Hernandez",'street':"673 Bayport Drive",'city':"Ridgewood",
-//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'},
-//   {'fname':"Michael",'lname':"Scott",'street':"673 Bayport Drive",'city':"Ridgewood",
-//   'state':"NJ",'zip':"07450",'phone':"414-481-8030",'email':"anton.fuentes34@hotmail.com",'country':'USA'}
-// ];
-
-// var global_row_index = 0;
 
 // // Sort JSON data
 // myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
@@ -36,8 +20,8 @@ $('#search-bar').on('keyup',function(){
     var value = $(this).val();
     console.log('Value:', value);
 
-    var data = searchTable(value, myArray);
-    buildTable(data);
+    globalFilter = searchTable(value, globalTableArray);
+    buildTable(globalFilter);
 })
 
 
@@ -72,18 +56,24 @@ function getDatabaseTable()
     {
         xhr.onreadystatechange = function()
         {
+            
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
-                
+                globalTableArray = jsonObject.contacts;
                 console.log(jsonObject.contacts);
                 // console.log(jsonObject.userName);
                 // console.log(jsonObject.contacts[0].address);
+                
+                globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
                 buildTable(jsonObject.contacts);
                 console.log("inside async funciton" + userName);
-
             }
+            
+            
         }
+
+        $("#myTable").html("<h1>Loading...</h1>");
 
         xhr.send(obj);
     }
@@ -95,12 +85,14 @@ function getDatabaseTable()
 
 
 
-
 // IMPORTANT functions have to load before we use cookie(username, etc)
 window.onload = function()
 {
-    if(userName != "")
         getDatabaseTable();
+        console.log(globalTableArray);
+
+       $("#usernameDisplay").text(userName);
+        
 }
 
 
@@ -108,13 +100,13 @@ window.onload = function()
 // Function that does search
 function searchTable(value, data )
 {
-    var filteredData = [];
+    var filteredData = []
 
     for(var i = 0; i < data.length; i++)
     {
         value = value.toLowerCase();
-        var fname = data[i].fname.toLowerCase();
-        var lname = data[i].lname.toLowerCase();
+        var fname = data[i].firstName.toLowerCase();
+        var lname = data[i].lastName.toLowerCase();
 
         if(fname.includes(value) || lname.includes(value))
         {
@@ -138,8 +130,15 @@ function buildTable(data)
     // Add icon set to each row but hide them
     for(let i = 0; i < data.length; i++)
     {
-       let fullAddress = `${data[i].street}
-       <p>${data[i].city + ", " + data[i].state + " " + data[i].zip}</p>`
+        // street, city state, zip country
+        let addressSet1 = globalTableArray[i].address.split(",");
+        // city state
+        let addressSet2 = addressSet1[1].split(" ");
+
+        let zip = addressSet1[2].substring(0,addressSet1[2].indexOf(" "));
+
+       let fullAddress = `${addressSet1[0]}
+       <p>${addressSet2[0]+ ", " + addressSet2[1] + " " + zip}</p>`
         let row = `<tr>
                    <td>
                     <div class="accordion">
@@ -221,9 +220,8 @@ function buildTable(data)
                     // stores the row index
                     row_index = clickedRow.index();
 
-					//if (myArray)
-
-					alert(row_index);
+                    clickedRow.find(".collapse").toggle();
+        
               });
 
 
@@ -233,22 +231,37 @@ function buildTable(data)
                      // selects the current row id
                     let current_row = $(this).closest("tr");
 
-                    // global_row_index = $(this).closest("tr").index();
+                    global_row_index = $(this).closest("tr").index();
 
                     let myModal = $("#edit-contact");
 
                     let inputs = myModal.find("input");
 
                     // Store array element contents into input fields
-                    inputs[0].value = myArray[global_row_index].fname;
-                    inputs[1].value = myArray[global_row_index].lname;
-                    inputs[2].value = myArray[global_row_index].phone;
-                    inputs[3].value = myArray[global_row_index].email;
-                    inputs[4].value = myArray[global_row_index].street;
-                    inputs[5].value = myArray[global_row_index].city;
-                    inputs[6].value = myArray[global_row_index].state;
-                    inputs[7].value = myArray[global_row_index].zip;
-                    inputs[8].value = myArray[global_row_index].country;
+                    inputs[0].value = globalTableArray[global_row_index].firstName; // firstname
+                    inputs[1].value = globalTableArray[global_row_index].lastName; // lastname
+                    inputs[2].value = globalTableArray[global_row_index].phone; // phone
+                    inputs[3].value = globalTableArray[global_row_index].contactEmail; // email
+                    
+                    // street, city state, zip country
+                    let addressSet1 = globalTableArray[global_row_index].address.split(",");
+                    // city state
+                    let addressSet2 = addressSet1[1].split(" ");
+
+                    let zip = addressSet1[2].substring(0,addressSet1[2].indexOf(" "));
+                    let country = addressSet1[2].substring(addressSet1[2].indexOf(" ")+1);
+
+                    console.log(addressSet1);
+                    console.log(addressSet2);
+                
+
+                    inputs[4].value = addressSet1[0]; // street
+                    inputs[5].value = addressSet2[0]; // city
+                    inputs[6].value = addressSet2[1]; // state
+                    inputs[7].value = zip; // zip
+                    
+                    
+                    inputs[8].value = country;
 
                     // console.log(inputs);
 
@@ -273,7 +286,7 @@ function buildTable(data)
                     // stores the row index
                     global_row_index = current_row.index();
                     
-                    deleteContact(contactIdArray[current_row.index()]);
+                    deleteContact(globalTableArray[global_row_index].contactId);
 
                     // remove element from array
                     contactIdArray.splice(global_row_index,1);
@@ -287,8 +300,13 @@ function buildTable(data)
 function deleteContact(contactId)
 {
     var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactDelete.php";
+    var obj;
 
-    var obj = `{ "userName": "${userName}","contactId": "${contactId}"}`;
+    if($('#search-bar').val() == "")
+        obj = `{ "userName": "${userName}","contactId": "${globalTableArray[global_row_index].contactId}"}`;
+    else
+    obj = `{ "userName": "${userName}","contactId": "${globalFilter[global_row_index].contactId}"}`;
+
 
     var testpayload = JSON.parse(obj);
     console.log(testpayload.userName);
@@ -312,8 +330,7 @@ function deleteContact(contactId)
                 // console.log(jsonObject.contacts[0].address);
                 console.log("inside delete contact function" + userName);
                 getDatabaseTable();
-                
-
+                $('#search-bar').val("");
             }
         }
 
@@ -330,64 +347,48 @@ function deleteContact(contactId)
 // Edit Confirm button - updates conact in database and table
 $("#confirm-edit").click(function()
 {
-     
-        // // Create a template object string to pass to the backend
-        // var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
-
-        // // url
-        // var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
-        
-        // // request
-        // var xhr = new XMLHttpRequest();
-        
-        // // open async
-        // xhr.open("POST", urlBase);
-
-        // xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-        // try
-        // {
-        //     // send the data to the backend
-        //     xhr.send(jsonPayload);
-        //     // Once we have the complete data, proceed with operations.
-        //     xhr.onreadystatechange = function()
-        //     {
-        //         if((xhr.readyState === 4) && (xhr.status === 200))
-        //         {
-        //             var jsonObject = JSON.parse(xhr.responseText);
-                    
-        //             console.log("Confirm add");
-        //             console.log(jsonObject);
-        //             console.log(jsonObject.userName);
-        //             console.log(jsonObject.address);
-                    
-        //             // Build table once we get request back 
-        //             buildTable(jsonObject);
-        //         }
-        //     };
-        //     // send the data to the backend
-        //     xhr.send(jsonPayload);
-        // }
-        // catch(err)
-        // {
-        //     console.log(userName);
-        //     console.log("Confirm add complete");
-        //     console.log(err.message);
-        // }
-
     let myModal = $("#edit-contact");
 
     let inputs = myModal.find("input");
 
-    // Update array element with input fields
-    myArray[global_row_index].fname = inputs[0].value;
-    myArray[global_row_index].lname = inputs[1].value;
-    myArray[global_row_index].phone = inputs[2].value;
-    myArray[global_row_index].email = inputs[3].value;
-    myArray[global_row_index].street = inputs[4].value;
-    myArray[global_row_index].city = inputs[5].value;
-    myArray[global_row_index].state = inputs[6].value;
-    myArray[global_row_index].zip = inputs[7].value;
-    myArray[global_row_index].country = inputs[8].value;
+
+    var jsonPayload2 =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
+
+    console.log(jsonPayload2);
+    // url
+    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactEdit.php";
+    
+    // request
+    var xhr = new XMLHttpRequest();
+    
+    // open async
+    xhr.open("POST", urlBase);
+
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        // Once we have the complete data, proceed with operations.
+        xhr.onreadystatechange = function()
+        {
+            if((xhr.readyState === 4) && (xhr.status === 200))
+            {
+                var jsonObject = JSON.parse(xhr.responseText);
+                 
+                console.log("Confirm Edit");
+                console.log(jsonObject);
+                console.log(jsonObject.userName);
+                getDatabaseTable();
+            }
+        };
+        // send the data to the backend
+        xhr.send(jsonPayload2);
+    }
+    catch(err)
+    {
+        console.log(userName);
+        console.log("Confirm add Error");
+        console.log(err.message);
+    }
 
     // closing sidebar menu
     $('.edit-sidebar').removeClass('active');
@@ -406,15 +407,15 @@ $("#firstLastName").click(function()
     if(order == 'first')
     {
         $(this).data('order','last')
-        myArray = myArray.sort((a,b) => a.lname.toLowerCase() > b.lname.toLowerCase() ? 1 : -1);
+        globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
     }
     else
     {
         $(this).data('order','first')
-        myArray = myArray.sort((a,b) => a.fname.toLowerCase() > b.fname.toLowerCase() ? 1 : -1);
+        globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
     }
 
-    buildTable(myArray);
+    buildTable(globalTableArray);
 })
 
 // addContact button- clears out form fields
@@ -466,10 +467,15 @@ $("#confirm-add").click(function()
         // Cookie test
         console.log("In contactAdd" + userName);
 
+        console.log(addressStreet);
+
         // let currentUser = "val";
         // If problem has to do with cookie username
         // Create a template object string to pass to the backend
         var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
+
+        var jsonPayload2 =  `{"userName": "${userName}", "firstName": "${fname}", "lastName":"${lname}" , "contactEmail":"${email}" ,"address":"${addressStreet},${addressCity} ${addressState},${addressZip} ${addressCountry}", "phone": "${phone}"}`;
+
 
         // url
         var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
@@ -498,7 +504,7 @@ $("#confirm-add").click(function()
                 }
             };
             // send the data to the backend
-            xhr.send(jsonPayload);
+            xhr.send(jsonPayload2);
         }
         catch(err)
         {
@@ -531,18 +537,20 @@ $('#confirm-cancel-edit').click(function()
 // show/hide button - This will Show and hide the table
 $("#showHide").click(function()
 {
-    let order = $(this).data('order');
+    // let order = $(this).data('order');
 
-    if(order == 'hide')
-    {
-        $(".collapse").show();
-        $(this).data('order','show');
-    }
-    else
-    {
-        $(".collapse").hide();
-        $(this).data('order','hide');
-    }
+    // if(order == 'hide')
+    // {
+    //     $(".collapse").show();
+    //     $(this).data('order','show');
+    // }
+    // else
+    // {
+    //     $(".collapse").hide();
+    //     $(this).data('order','hide');
+    // }
+
+    $(".collapse").toggle();
 
 })
 

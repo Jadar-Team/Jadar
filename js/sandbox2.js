@@ -262,23 +262,10 @@ function buildTable(data)
                 $('.delete-sidebar').addClass('active');
                 $('.overlay').addClass('active');
 
-                // stores the row index
-                global_row_index = $(this).closest("tr").index();
+                  // stores the row index
+                  global_row_index = $(this).closest("tr").index();
 
-                deleteContact(globalTableArray[global_row_index].contactId);
-
-                // if ('#confirm-delete').click(function()
-                // {
-                //   // stores the row index
-                //   global_row_index = $(this).closest("tr").index();
-
-                //   deleteContact(globalTableArray[global_row_index].contactId);
-
-                //   // closing the delete sidebar
-                //     $('.delete-sidebar').removeClass('active');
-                //     $('.overlay').removeClass('active');
-                // });
-
+ 
 
 
                     // // remove row
@@ -383,6 +370,8 @@ $("#confirm-edit").click(function()
     $('.overlay').removeClass('active');
 
 });
+
+
 
 
 // Toggle between sorting in ascending order first name and last name
@@ -544,11 +533,24 @@ $('#confirm-cancel-edit').click(function()
   $('.overlay').removeClass('active');
 });
 
+
+$("#confirm-delete").click(function()
+{
+
+    deleteContact(globalTableArray[global_row_index].contactId);
+
+    // closing the delete sidebar
+    $('.delete-sidebar').removeClass('active');
+    $('.overlay').removeClass('active');
+});
+
 $('#confirm-cancel-delete').click(function()
 {
   $('.delete-sidebar').removeClass('active');
   $('.overlay').removeClass('active');
 });
+
+
 
 // show/hide button - This will Show and hide the table
 $("#showHide").click(function()

@@ -56,7 +56,7 @@ function getDatabaseTable()
     {
         xhr.onreadystatechange = function()
         {
-            
+
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
@@ -64,13 +64,13 @@ function getDatabaseTable()
                 console.log(jsonObject.contacts);
                 // console.log(jsonObject.userName);
                 // console.log(jsonObject.contacts[0].address);
-                
+
                 globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
                 buildTable(jsonObject.contacts);
                 console.log("inside async funciton" + userName);
             }
-            
-            
+
+
         }
 
         $("#myTable").html("<h1>Loading...</h1>");
@@ -92,7 +92,7 @@ window.onload = function()
         console.log(globalTableArray);
 
        $("#usernameDisplay").text(userName);
-        
+
 }
 
 
@@ -221,7 +221,7 @@ function buildTable(data)
                     row_index = clickedRow.index();
 
                     clickedRow.find(".collapse").toggle();
-        
+
               });
 
 
@@ -242,7 +242,7 @@ function buildTable(data)
                     inputs[1].value = globalTableArray[global_row_index].lastName; // lastname
                     inputs[2].value = globalTableArray[global_row_index].phone; // phone
                     inputs[3].value = globalTableArray[global_row_index].contactEmail; // email
-                    
+
                     // street, city state, zip country
                     let addressSet1 = globalTableArray[global_row_index].address.split(",");
                     // city state
@@ -253,14 +253,14 @@ function buildTable(data)
 
                     console.log(addressSet1);
                     console.log(addressSet2);
-                
+
 
                     inputs[4].value = addressSet1[0]; // street
                     inputs[5].value = addressSet2[0]; // city
                     inputs[6].value = addressSet2[1]; // state
                     inputs[7].value = zip; // zip
-                    
-                    
+
+
                     inputs[8].value = country;
 
                     // console.log(inputs);
@@ -280,19 +280,29 @@ function buildTable(data)
               $(".iconSet svg:nth-child(1)").click(function()
               {
 
-                    // selects the current row id
-                    let current_row = $(this).closest("tr");
+                    // opening the sidebar
+                    $('.delete-sidebar').addClass('active');
+                    $('.overlay').addClass('active');
 
-                    // stores the row index
-                    global_row_index = current_row.index();
-                    
-                    deleteContact(globalTableArray[global_row_index].contactId);
+                    // if the confirm button is clicked
+                    if ('#confirm-delete').click(function()
+                    {
+                      // selects the current row id
+                      let current_row = $(this).closest("tr");
 
-                    // remove element from array
-                    contactIdArray.splice(global_row_index,1);
+                      // stores the row index
+                      global_row_index = current_row.index();
 
-                    // // remove row
-                    // current_row.remove();
+                      deleteContact(globalTableArray[global_row_index].contactId);
+
+                      // remove element from array
+                      contactIdArray.splice(global_row_index,1);
+                    });
+
+                    // closing the delete sidebar
+                    $('.delete-sidebar').removeClass('active');
+                    $('.overlay').removeClass('active');
+
               });
 
 }
@@ -316,7 +326,7 @@ function deleteContact(contactId)
     xhr.open('POST', urlBase);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    
+
     try
     {
         xhr.onreadystatechange = function()
@@ -324,7 +334,7 @@ function deleteContact(contactId)
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
-                
+
                 console.log(jsonObject);
                 // console.log(jsonObject.userName);
                 // console.log(jsonObject.contacts[0].address);
@@ -357,10 +367,10 @@ $("#confirm-edit").click(function()
     console.log(jsonPayload2);
     // url
     var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactEdit.php";
-    
+
     // request
     var xhr = new XMLHttpRequest();
-    
+
     // open async
     xhr.open("POST", urlBase);
 
@@ -373,7 +383,7 @@ $("#confirm-edit").click(function()
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
-                 
+
                 console.log("Confirm Edit");
                 console.log(jsonObject);
                 console.log(jsonObject.userName);
@@ -479,10 +489,10 @@ $("#confirm-add").click(function()
 
         // url
         var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
-        
+
         // request
         var xhr = new XMLHttpRequest();
-        
+
         // open async
         xhr.open("POST", urlBase);
 
@@ -495,7 +505,7 @@ $("#confirm-add").click(function()
                 if((xhr.readyState === 4) && (xhr.status === 200))
                 {
                     var jsonObject = JSON.parse(xhr.responseText);
-                     
+
                     console.log("Confirm add");
                     console.log(jsonObject);
                     console.log(jsonObject.userName);
@@ -518,8 +528,8 @@ $("#confirm-add").click(function()
         $('.add-sidebar').removeClass('active');
         $('.overlay').removeClass('active');
 
-       
-       
+
+
 });
 
 $('#confirm-cancel-add').click(function()
@@ -531,6 +541,12 @@ $('#confirm-cancel-add').click(function()
 $('#confirm-cancel-edit').click(function()
 {
   $('.edit-sidebar').removeClass('active');
+  $('.overlay').removeClass('active');
+});
+
+$('#confirm-cancel-delete').click(function()
+{
+  $('.delete-sidebar').removeClass('active');
   $('.overlay').removeClass('active');
 });
 
@@ -592,7 +608,7 @@ function displayAmPm(users)
 }
 
 
-// Sidebar menu
+// Add Contact sidebar menu
 
 $('#addContact').on('click', function() {
     $('.add-sidebar').addClass('active');

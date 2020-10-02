@@ -617,11 +617,11 @@ h2
 
 }
 
-.add-header, .edit-header
+.add-header, .edit-header, .delete-header
 {
   text-align: center;
 }
-.add-info, .edit-info
+.add-info, .edit-info, .delete-info
 {
   margin: 5%;
   text-align: center;

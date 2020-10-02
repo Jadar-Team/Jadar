@@ -10,7 +10,7 @@ var globalFilter = [];
 
 // On keyup inside search bar, we run this function
 $('#search-bar').on('keyup',function(){
-   
+
     var value = $(this).val();
     console.log('Value:', value);
 
@@ -23,7 +23,7 @@ $('#search-bar').on('keyup',function(){
 function getDatabaseTable()
 {
     var url =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
-  
+
     var obj = `{
         "userName": "${userName}",
         "firstName": "",
@@ -38,13 +38,13 @@ function getDatabaseTable()
     {
         xhr.onreadystatechange = function()
         {
-            
+
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
                 globalTableArray = jsonObject.contacts;
                 console.log(jsonObject.contacts);
-     
+
                 if(globalTableArray == undefined || globalTableArray.length < 1)
                 {
                     $("#myTable").html("<h1> No Contacts </h1>");
@@ -58,8 +58,8 @@ function getDatabaseTable()
 
                 console.log("inside async funciton" + userName);
             }
-            
-            
+
+
         }
 
         $("#myTable").html("<h1>Loading...</h1>");
@@ -83,7 +83,7 @@ window.onload = function()
         getDatabaseTable();
 
        console.log(globalTableArray);
-        
+
 }
 
 
@@ -209,7 +209,7 @@ function buildTable(data)
                     row_index = clickedRow.index();
 
                     clickedRow.find(".collapse").toggle();
-        
+
               });
 
 
@@ -228,7 +228,7 @@ function buildTable(data)
                     inputs[1].value = globalTableArray[global_row_index].lastName; // lastname
                     inputs[2].value = globalTableArray[global_row_index].phone; // phone
                     inputs[3].value = globalTableArray[global_row_index].contactEmail; // email
-                    
+
                     // street, city state, zip country
                     let addressSet1 = globalTableArray[global_row_index].address.split(",");
                     // city state
@@ -257,10 +257,29 @@ function buildTable(data)
               // Trash icon
               $(".iconSet svg:nth-child(1)").click(function()
               {
-                    // stores the row index
-                    global_row_index = $(this).closest("tr").index();
-                    
-                    deleteContact(globalTableArray[global_row_index].contactId);
+
+                // opening the sidebar
+                $('.delete-sidebar').addClass('active');
+                $('.overlay').addClass('active');
+
+                // stores the row index
+                global_row_index = $(this).closest("tr").index();
+
+                deleteContact(globalTableArray[global_row_index].contactId);
+
+                // if ('#confirm-delete').click(function()
+                // {
+                //   // stores the row index
+                //   global_row_index = $(this).closest("tr").index();
+
+                //   deleteContact(globalTableArray[global_row_index].contactId);
+
+                //   // closing the delete sidebar
+                //     $('.delete-sidebar').removeClass('active');
+                //     $('.overlay').removeClass('active');
+                // });
+
+
 
                     // // remove row
                     // current_row.remove();
@@ -288,7 +307,7 @@ function deleteContact(contactId)
     xhr.open('POST', url);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    
+
     try
     {
         xhr.onreadystatechange = function()
@@ -296,7 +315,7 @@ function deleteContact(contactId)
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
-                
+
                 console.log(jsonObject);
                 console.log("inside delete contact function" + userName);
                 getDatabaseTable();
@@ -326,10 +345,10 @@ $("#confirm-edit").click(function()
     var jsonPayload =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
     console.log(jsonPayload);
-    
+
     // request
     var xhr = new XMLHttpRequest();
-    
+
     // open async
     xhr.open("POST", url);
 
@@ -342,7 +361,7 @@ $("#confirm-edit").click(function()
             if((xhr.readyState === 4) && (xhr.status === 200))
             {
                 var jsonObject = JSON.parse(xhr.responseText);
-                 
+
                 console.log("Confirm Edit");
                 console.log(jsonObject);
                 console.log(jsonObject.userName);
@@ -376,7 +395,7 @@ $("#firstLastName").click(function()
 
     // Search bar empty or has content?
     var flag = ($("#search-bar").val() == "") ? 1 : 0;
-    
+
     console.log(flag);
 
     if(order == 'first')
@@ -391,7 +410,7 @@ $("#firstLastName").click(function()
     else
     {
         $(this).data('order','first')
-        
+
         if(flag)
             globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
         else
@@ -400,10 +419,10 @@ $("#firstLastName").click(function()
         console.log(globalTableArray);
     }
 
-    // If search is empty use global array else use global filter 
+    // If search is empty use global array else use global filter
     if (flag)
         buildTable(globalTableArray);
-    else 
+    else
         buildTable(globalFilter);
 })
 
@@ -473,7 +492,7 @@ $("#confirm-add").click(function()
 
         // request
         var xhr = new XMLHttpRequest();
-        
+
         // open async
         xhr.open("POST", url);
 
@@ -486,7 +505,7 @@ $("#confirm-add").click(function()
                 if((xhr.readyState === 4) && (xhr.status === 200))
                 {
                     var jsonObject = JSON.parse(xhr.responseText);
-                     
+
                     console.log("Confirm add");
                     console.log(jsonObject);
                     console.log(jsonObject.userName);
@@ -509,8 +528,8 @@ $("#confirm-add").click(function()
         $('.add-sidebar').removeClass('active');
         $('.overlay').removeClass('active');
 
-       
-       
+
+
 });
 
 $('#confirm-cancel-add').click(function()
@@ -522,6 +541,12 @@ $('#confirm-cancel-add').click(function()
 $('#confirm-cancel-edit').click(function()
 {
   $('.edit-sidebar').removeClass('active');
+  $('.overlay').removeClass('active');
+});
+
+$('#confirm-cancel-delete').click(function()
+{
+  $('.delete-sidebar').removeClass('active');
   $('.overlay').removeClass('active');
 });
 
@@ -578,7 +603,7 @@ function displayPhone(str)
 
     if(str.length < 10 || str.length > 10)
         return str;
-    
+
     for(let i = 0; i < str.length; i++)
     {
         temp += str[i];

@@ -21,12 +21,8 @@ $('#search-bar').on('keyup',function(){
 // This function is a callback that gives us the table from database
 function getDatabaseTable()
 {
-
-    // var urlBase = 'http://COP4331-29.com/LAMPAPI';
-    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
-    var extension = 'php';
-    var url = urlBase + '/ContactSearch2.' + extension;
-
+    var url =  "http://COP4331-29.com/LAMPAPI/ContactSearch2.php";
+  
     var obj = `{
         "userName": "${userName}",
         "firstName": "",
@@ -34,7 +30,7 @@ function getDatabaseTable()
       }`;
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', urlBase);
+    xhr.open('POST', url);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try
@@ -276,7 +272,8 @@ function buildTable(data)
 
 function deleteContact(contactId)
 {
-    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactDelete.php";
+
+    var url =  "http://COP4331-29.com/LAMPAPI/ContactDelete.php";
     var obj;
 
     if($('#search-bar').val() == "")
@@ -290,7 +287,7 @@ function deleteContact(contactId)
     console.log(testpayload.contactId);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', urlBase);
+    xhr.open('POST', url);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     
@@ -321,6 +318,8 @@ function deleteContact(contactId)
 // Edit Confirm button - updates conact in database and table
 $("#confirm-edit").click(function()
 {
+    var url =  "http://COP4331-29.com/LAMPAPI/ContactEdit.php";
+
     let myModal = $("#edit-contact");
 
     let inputs = myModal.find("input");
@@ -329,14 +328,12 @@ $("#confirm-edit").click(function()
     var jsonPayload2 =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
     console.log(jsonPayload2);
-    // url
-    var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactEdit.php";
     
     // request
     var xhr = new XMLHttpRequest();
     
     // open async
-    xhr.open("POST", urlBase);
+    xhr.open("POST", url);
 
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try
@@ -452,11 +449,7 @@ $("#recentlyAdded").click(function()
 
 $("#confirm-add").click(function()
 {
-        // Issues
-        // 1. We need username of the account. So cookie.
-        // 2. We need to format jsonpayload
-        // 3. There is no way to add to the table row because global is gone
-        //    That is why we need to rebuild the table. The row we get back can be used as confirmation.
+        var url =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
 
         // Getting user's input from adding contact
         let fname = $("#add-firstname").val();
@@ -470,27 +463,13 @@ $("#confirm-add").click(function()
         let addressZip = $("#inputZip").val();
         let addressCountry = $("#inputCountry").val();
 
-        // Cookie test
-        console.log("In contactAdd" + userName);
+        var jsonPayload =  `{"userName": "${userName}", "firstName": "${fname}", "lastName":"${lname}" , "contactEmail":"${email}" ,"address":"${addressStreet},${addressCity} ${addressState},${addressZip} ${addressCountry}", "phone": "${phone}"}`;
 
-        console.log(addressStreet);
-
-        // let currentUser = "val";
-        // If problem has to do with cookie username
-        // Create a template object string to pass to the backend
-        var jsonPayload = '{"userName" : "' + userName + '", "firstName" : "' + fname + '", "lastName" : "' + lname + '",  "contactEmail" : "' + email + '", "address" : "' + addressStreet + addressCity + addressState + addressZip + addressCountry + '", "phone" : "' + phone + '"}';
-
-        var jsonPayload2 =  `{"userName": "${userName}", "firstName": "${fname}", "lastName":"${lname}" , "contactEmail":"${email}" ,"address":"${addressStreet},${addressCity} ${addressState},${addressZip} ${addressCountry}", "phone": "${phone}"}`;
-
-
-        // url
-        var urlBase =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
-        
         // request
         var xhr = new XMLHttpRequest();
         
         // open async
-        xhr.open("POST", urlBase);
+        xhr.open("POST", url);
 
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
@@ -510,7 +489,7 @@ $("#confirm-add").click(function()
                 }
             };
             // send the data to the backend
-            xhr.send(jsonPayload2);
+            xhr.send(jsonPayload);
         }
         catch(err)
         {
@@ -543,19 +522,6 @@ $('#confirm-cancel-edit').click(function()
 // show/hide button - This will Show and hide the table
 $("#showHide").click(function()
 {
-    // let order = $(this).data('order');
-
-    // if(order == 'hide')
-    // {
-    //     $(".collapse").show();
-    //     $(this).data('order','show');
-    // }
-    // else
-    // {
-    //     $(".collapse").hide();
-    //     $(this).data('order','hide');
-    // }
-
     $(".collapse").toggle();
 
 })

@@ -76,6 +76,7 @@
                         <span id = "registerResult"></span>
                       </div>
                 </div>
+				<p id="signupCond" ><p>
             </form>
 			</span>
           </div>
@@ -124,10 +125,15 @@
 	
     //makes sure user doesn't leave anything blank
     if (useEmail === ''||useName === ''||pw === '' || fn === '' || ln =='') {
-      window.confirm("Please fill in all blanks!");
+      document.getElementById("signupCond").style.visibility = "visible";
+	  document.getElementById("signupCond").style.color = "red";
+	  document.getElementById("signupCond").innerHTML = "Please fill in all blanks!";
     }
     else
     {
+      document.getElementById("signupCond").style.visibility = "visible";
+	  document.getElementById("signupCond").style.color = "#215F81";
+	  document.getElementById("signupCond").innerHTML = "Thank you for signing up!";
       doRegister();
     }
     

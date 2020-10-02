@@ -183,7 +183,7 @@ input[type="text"],input[type="password"], input[type="email"]{
     box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
 }
 
-#loginName, #loginPassword, #signup-label
+#loginName, #loginPassword, #signup-label #signupCond
 {
   color: #215F81;
   font-family: 'Yantramanav', sans-serif;

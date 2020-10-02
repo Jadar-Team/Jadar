@@ -303,8 +303,6 @@ function deleteContact(contactId)
                 var jsonObject = JSON.parse(xhr.responseText);
                 
                 console.log(jsonObject);
-                // console.log(jsonObject.userName);
-                // console.log(jsonObject.contacts[0].address);
                 console.log("inside delete contact function" + userName);
                 getDatabaseTable();
                 $('#search-bar').val("");
@@ -320,7 +318,6 @@ function deleteContact(contactId)
 
 }
 
-/* Need to fix this */
 // Edit Confirm button - updates conact in database and table
 $("#confirm-edit").click(function()
 {
@@ -381,18 +378,33 @@ $("#firstLastName").click(function()
 {
     var order = $(this).data('order');
 
+    // Search bar empty or has content?
+    var flag = ($("#search-bar").val() == "") ? 1 : 0;
+
     if(order == 'first')
     {
         $(this).data('order','last')
-        globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
+
+        if(flag)
+            globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+        else
+            globalFilter = globalFilter.sort((a,b) => a.lastName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
     }
     else
     {
         $(this).data('order','first')
-        globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+        
+        if(flag)
+            globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+        else
+            globalFilter = globalFilter.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
     }
 
-    buildTable(globalTableArray);
+    // If search is empty use global array else use global filter 
+    if (flag)
+        buildTable(globalTableArray);
+    else 
+        buildTable(globalFilter);
 })
 
 // addContact button- clears out form fields
@@ -408,15 +420,32 @@ $("#addContact").click(function()
 // recentlyAdded button - sorts users by recently added
 $("#recentlyAdded").click(function()
 {
-    console.log("This is firing at least");
-    myArray = myArray.sort((a,b) => {
-                                let dateA = new Date(a.date);
-                                let dateB = new Date(b.date);
-                                return dateB - dateA;
-                        });
+    var flag = ($("#search-bar").val() == "") ? 1 : 0;
 
-    buildTable(myArray);
-    console.log(myArray);
+    if(flag)
+    {
+        globalTableArray = globalTableArray.sort((a,b) => {
+            let dateA = new Date(a.dateCreated);
+            let dateB = new Date(b.dateCreated);
+            return dateB - dateA;
+         });
+    }
+    else
+    {
+        globalFilter = globalFilter.sort((a,b) => {
+            let dateA = new Date(a.dateCreated);
+            let dateB = new Date(b.dateCreated);
+            return dateB - dateA;
+         });
+    }
+
+    console.log(globalTableArray);
+    console.log(globalFilter);
+
+    if(flag)
+        buildTable(globalTableArray);
+    else
+        buildTable(globalFilter);
 })
 
 // confirm button - modal button that adds user to database

@@ -10,6 +10,7 @@ var globalFilter = [];
 
 // On keyup inside search bar, we run this function
 $('#search-bar').on('keyup',function(){
+   
     var value = $(this).val();
     console.log('Value:', value);
 
@@ -46,7 +47,7 @@ function getDatabaseTable()
      
                 
                 globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
-                
+
                 buildTable(jsonObject.contacts);
                 console.log("inside async funciton" + userName);
             }
@@ -69,9 +70,12 @@ function getDatabaseTable()
 // IMPORTANT functions have to load before we use cookie(username, etc)
 window.onload = function()
 {
+        if(userName != "")
+            $("#usernameDisplay").text(userName);
+
         getDatabaseTable();
 
-       $("#usernameDisplay").text(userName);
+       console.log(globalTableArray);
         
 }
 

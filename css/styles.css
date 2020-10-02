@@ -51,9 +51,10 @@ body
 #homePageLogo
 {
     font-size: 15vmin;
+
     margin: 20px;
     /*text-align: center;*/
-	  font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
+	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     font-style: italic;
     color: #FFFFFC;

@@ -130,10 +130,11 @@ function buildTable(data)
     // Add icon set to each row but hide them
     for(let i = 0; i < data.length; i++)
     {
+        console.log(typeof(globalTableArray[i].address));
         // street, city state, zip country
-        let addressSet1 = globalTableArray[i].address.split(",").toString();
+        let addressSet1 = globalTableArray[i].address.split(",");
         // city state
-        let addressSet2 = addressSet1.split(" ");
+        let addressSet2 = addressSet1[1].split(" ");
 
         let zip = addressSet1[2].substring(0,addressSet1[2].indexOf(" "));
 

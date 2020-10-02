@@ -46,6 +46,7 @@ function getDatabaseTable()
      
                 
                 globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+                
                 buildTable(jsonObject.contacts);
                 console.log("inside async funciton" + userName);
             }
@@ -361,15 +362,17 @@ $("#firstLastName").click(function()
 
     // Search bar empty or has content?
     var flag = ($("#search-bar").val() == "") ? 1 : 0;
+    
+    console.log(flag);
 
     if(order == 'first')
     {
         $(this).data('order','last')
 
         if(flag)
-            globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+            globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
         else
-            globalFilter = globalFilter.sort((a,b) => a.lastName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+            globalFilter = globalFilter.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
     }
     else
     {
@@ -379,6 +382,8 @@ $("#firstLastName").click(function()
             globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
         else
             globalFilter = globalFilter.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+
+        console.log(globalTableArray);
     }
 
     // If search is empty use global array else use global filter 

@@ -148,7 +148,7 @@ function buildTable(data)
                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
                         </svg>
-                              ${data[i].phone}
+                              ${displayPhone(data[i].phone)}
 
                           <br>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -369,6 +369,9 @@ $("#confirm-edit").click(function()
 // Toggle between sorting in ascending order first name and last name
 $("#firstLastName").click(function()
 {
+    if(globalTableArray == undefined || globalTableArray.length < 1)
+        return;
+
     var order = $(this).data('order');
 
     // Search bar empty or has content?
@@ -417,6 +420,9 @@ $("#addContact").click(function()
 // recentlyAdded button - sorts users by recently added
 $("#recentlyAdded").click(function()
 {
+    if(globalTableArray == undefined || globalTableArray.length < 1)
+        return;
+
     var flag = ($("#search-bar").val() == "") ? 1 : 0;
 
     if(flag)
@@ -522,6 +528,9 @@ $('#confirm-cancel-edit').click(function()
 // show/hide button - This will Show and hide the table
 $("#showHide").click(function()
 {
+    if(globalTableArray == undefined || globalTableArray.length < 0)
+        return;
+
     $(".collapse").toggle();
 
 })
@@ -561,6 +570,24 @@ function displayAmPm(users)
 
         console.log(formattedTime);
     }
+}
+
+function displayPhone(str)
+{
+    var temp = "";
+
+    if(str.length < 10 || str.length > 10)
+        return str;
+    
+    for(let i = 0; i < str.length; i++)
+    {
+        temp += str[i];
+
+        if(i == 2 || i == 5)
+            temp += '-';
+    }
+
+    return temp;
 }
 
 

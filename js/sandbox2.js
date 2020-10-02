@@ -204,9 +204,7 @@ function buildTable(data)
               // Edit icon
               $(".iconSet svg:nth-child(2)").click(function()
               {
-                     // selects the current row id
-                    let current_row = $(this).closest("tr");
-
+                    // Grabs current row index
                     global_row_index = $(this).closest("tr").index();
 
                     let myModal = $("#edit-contact");
@@ -227,19 +225,11 @@ function buildTable(data)
                     let zip = addressSet1[2].substring(0,addressSet1[2].indexOf(" "));
                     let country = addressSet1[2].substring(addressSet1[2].indexOf(" ")+1);
 
-                    console.log(addressSet1);
-                    console.log(addressSet2);
-                
-
                     inputs[4].value = addressSet1[0]; // street
                     inputs[5].value = addressSet2[0]; // city
                     inputs[6].value = addressSet2[1]; // state
                     inputs[7].value = zip; // zip
-                    
-                    
-                    inputs[8].value = country;
-
-                    // console.log(inputs);
+                    inputs[8].value = country; // country
 
                     // // myModal.modal('show');
                     $('.edit-sidebar').addClass('active');
@@ -255,12 +245,8 @@ function buildTable(data)
               // Trash icon
               $(".iconSet svg:nth-child(1)").click(function()
               {
-
-                    // selects the current row id
-                    let current_row = $(this).closest("tr");
-
                     // stores the row index
-                    global_row_index = current_row.index();
+                    global_row_index = $(this).closest("tr").index();
                     
                     deleteContact(globalTableArray[global_row_index].contactId);
 
@@ -325,9 +311,9 @@ $("#confirm-edit").click(function()
     let inputs = myModal.find("input");
 
 
-    var jsonPayload2 =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
+    var jsonPayload =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
-    console.log(jsonPayload2);
+    console.log(jsonPayload);
     
     // request
     var xhr = new XMLHttpRequest();
@@ -352,7 +338,7 @@ $("#confirm-edit").click(function()
             }
         };
         // send the data to the backend
-        xhr.send(jsonPayload2);
+        xhr.send(jsonPayload);
     }
     catch(err)
     {
@@ -364,8 +350,6 @@ $("#confirm-edit").click(function()
     // closing sidebar menu
     $('.edit-sidebar').removeClass('active');
     $('.overlay').removeClass('active');
-
-    // buildTable(myArray);
 
 });
 

@@ -45,10 +45,17 @@ function getDatabaseTable()
                 globalTableArray = jsonObject.contacts;
                 console.log(jsonObject.contacts);
      
-                
-                globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+                if(globalTableArray == undefined || globalTableArray.length < 1)
+                {
+                    $("#myTable").html("<h1> No Contacts </h1>");
+                }
+                else
+                {
+                    globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
 
-                buildTable(jsonObject.contacts);
+                    buildTable(jsonObject.contacts);
+                }
+
                 console.log("inside async funciton" + userName);
             }
             

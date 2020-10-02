@@ -1,6 +1,5 @@
 // Globals - do not modify these variables
 // You are only allowed to grab data from these. Do not actually point to it.
-var contactIdArray = [];
 
 var global_row_index = 0;
 
@@ -9,13 +8,7 @@ var globalTableArray = [];
 var globalFilter = [];
 
 
-// // Sort JSON data
-// myArray = myArray.sort((a,b) => a.fname > b.fname ? 1 : -1);
-
-// // Build Table
-// buildTable(myArray);
-
-// On keyup, we run this function
+// On keyup inside search bar, we run this function
 $('#search-bar').on('keyup',function(){
     var value = $(this).val();
     console.log('Value:', value);
@@ -25,7 +18,7 @@ $('#search-bar').on('keyup',function(){
 })
 
 
-// This function is a callback that gives us a database from table
+// This function is a callback that gives us the table from database
 function getDatabaseTable()
 {
 
@@ -34,19 +27,11 @@ function getDatabaseTable()
     var extension = 'php';
     var url = urlBase + '/ContactSearch2.' + extension;
 
-    console.log("This is within getDatabaseTable" + userName);
-
     var obj = `{
         "userName": "${userName}",
         "firstName": "",
         "lastName": ""
       }`;
-
-    //   var obj = `{
-    //     "userName": "val",
-    //     "firstName": "",
-    //     "lastName": ""
-    //   }`;
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', urlBase);
@@ -62,8 +47,7 @@ function getDatabaseTable()
                 var jsonObject = JSON.parse(xhr.responseText);
                 globalTableArray = jsonObject.contacts;
                 console.log(jsonObject.contacts);
-                // console.log(jsonObject.userName);
-                // console.log(jsonObject.contacts[0].address);
+     
                 
                 globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
                 buildTable(jsonObject.contacts);
@@ -89,7 +73,6 @@ function getDatabaseTable()
 window.onload = function()
 {
         getDatabaseTable();
-        console.log(globalTableArray);
 
        $("#usernameDisplay").text(userName);
         
@@ -122,15 +105,12 @@ function searchTable(value, data )
 // Function that populates table with json data
 function buildTable(data)
 {
-    console.log("Inside build table");
-    console.log(data);
     var table = document.getElementById('myTable');
     table.innerHTML= "";
 
     // Add icon set to each row but hide them
     for(let i = 0; i < data.length; i++)
     {
-        console.log(typeof(globalTableArray[i].address));
         // street, city state, zip country
         let addressSet1 = globalTableArray[i].address.split(",");
         // city state
@@ -194,7 +174,6 @@ function buildTable(data)
                         </div>
                     </td>
                     </tr>`
-        contactIdArray[i] = data[i].contactId;
         table.innerHTML += row;
 
     }
@@ -288,9 +267,6 @@ function buildTable(data)
                     global_row_index = current_row.index();
                     
                     deleteContact(globalTableArray[global_row_index].contactId);
-
-                    // remove element from array
-                    contactIdArray.splice(global_row_index,1);
 
                     // // remove row
                     // current_row.remove();

@@ -23,31 +23,30 @@
 	
 	if ($searchCount > 0 )
 	{
-    	    $retValue = '{"userName":"' . $userName . '","contacts":';
-    	    $retValue .= '[';
-    	    while ($searchCount > 0)
-    	    {
+    	$retValue = '{"userName":"' . $userName . '","contacts":';
+    	$retValue .= '[';
+    	while ($searchCount > 0)
+    	{
     		$row = mysqli_fetch_array($result);
     		//echo ($row['ContactID'] . " " . $row['FirstName'] . " " . $row['LastName']);
             	//echo "<br>";
-    		$retValue .= '{"contactId":' . $row['ContactID'] . ',"contactEmail":"' . $row['ContactEmail'] . '","firstName":"' . $row['FirstName'] . '","lastName":"' . $row['LastName'] . '","address":"' . $row['Address'] . '","phone":"' . $row['Phone'] . '"';
+    		$retValue .= '{"contactId":' . $row['ContactID'] . ',"contactEmail":"' . $row['ContactEmail'] . '","firstName":"' . $row['FirstName'] . '","lastName":"' . $row['LastName'] . '","address":"' . $row['Address'] . '","phone":"' . $row['Phone'] . '","dateCreated":"' .$row['DateCreated']. '","dateEdited":"' .$row['DateEdited']. '"';
     		if ($searchCount != 1)
     		{
     			$retValue .= ' },';
-    			//$searchResults .= ",";
     		}
     		else
     		{
     			$retValue .= ' }';
     		}
     		$searchCount--;
-    	    }
-    	    $retValue .= ']';
-    	    $retValue .= '}';
+    	}
+    	$retValue .= ']';
+    	$retValue .= '}';
     	
-    	    $result->free_result();
-    	    mysqli_close($conn);
-    	    sendResultInfoAsJson( $retValue );
+    	$result->free_result();
+    	mysqli_close($conn);
+    	sendResultInfoAsJson( $retValue );
 	}
 	else
 	{

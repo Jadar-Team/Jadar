@@ -602,3 +602,20 @@ $('#addContact').on('click', function() {
         $(this).val('');
     })
 });
+
+
+/* Form Validation */
+
+// $("#confirm-edit").click(function()
+// {
+//     let messages = [];
+
+//     let inputs = $("#editInfo input");
+
+//     // Name
+//     if(inputs[0] == null || inputs[0].val() == "")
+//         messages.push("First name is required");
+
+
+// });
+

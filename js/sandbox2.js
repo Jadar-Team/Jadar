@@ -255,6 +255,19 @@ function buildTable(data)
                   // stores the row index
                 global_row_index = $(this).closest("tr").index();
 
+                let inputs = $("#deleteContactInfo div");
+
+                console.log(inputs);
+
+                $(inputs[0]).text(globalTableArray[global_row_index].firstName + " " +  globalTableArray[global_row_index].lastName);
+
+                $(inputs[1]).text(globalTableArray[global_row_index].address);
+
+                $(inputs[2]).text(globalTableArray[global_row_index].phone);
+
+                $(inputs[3]).text(globalTableArray[global_row_index].email);
+                
+                console.log(inputs);
                 // opening the sidebar
                 $('.delete-sidebar').addClass('active');
                 $('.overlay').addClass('active');
@@ -509,6 +522,8 @@ $("#confirm-add").click(function()
 
 
 });
+
+
 
 $('#confirm-cancel-add').click(function()
 {

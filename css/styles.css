@@ -50,7 +50,7 @@ body
 {
   font-size: 15vmin;
 	height: 120px;
-	width: 400px;
+	width: 300px;
   margin: 20px;
 	position: relative;
 	line-height: 125px;
@@ -62,8 +62,8 @@ body
   color: #86BBD8;
 
 	/*Text border*/
-	-webkit-text-stroke: 4px;
-  -webkit-text-stroke-color: #86BBD8;
+	-webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #FFFFFC;
 
 	/* Shine effect */
 	background-color: #86BBD8;
@@ -71,8 +71,8 @@ body
 		-75deg,
 		transparent 0,
 		transparent 5%,
-		rgba(255, 255, 255, 0.5) 5%,
-		rgba(255, 255, 255, 0.5) 10%,
+		rgba(255, 255, 255, 0.2) 5%,
+		rgba(255, 255, 255) 10%,
 		transparent 10%,
 		transparent 100%
 	);
@@ -234,7 +234,7 @@ input[type="deleteInput"]
   color: #215F81;
   font-family: 'Yantramanav', sans-serif;
   border-radius: 40px;
-  margin: 120px auto 120px;
+  margin: 120px auto 30px;
   height: 550px;
   line-height: 20px;
   text-align: center;
@@ -246,7 +246,7 @@ input[type="deleteInput"]
 
 .signup-redirect
 {
-  padding-top: 30px;
+  /* padding-top: 30px; */
   font-family: 'Open Sans', sans-serif;
   color: #242325;
 }
@@ -567,19 +567,10 @@ h1, #usernameDisplay
   outline: 0 none !important;
 
 }
-
-.modal-backdrop{
-   background-color: #01223770;
-}
-
 .sidebar-footer
 {
   font-size: 1vmin;
   color: #215F81
-}
-
-.modal-backdrop {
-   background: none;
 }
 
 #inner-regTitle{
@@ -687,9 +678,6 @@ div.fixedTopButt {
   /* text-shadow: none; */
   font-style: normal;
 }
-
-
-
 
 /* Sidebar */
 

@@ -265,9 +265,8 @@ function buildTable(data)
 
                 $(inputs[2]).text(globalTableArray[global_row_index].phone);
 
-                $(inputs[3]).text(globalTableArray[global_row_index].email);
+                $(inputs[3]).text(globalTableArray[global_row_index].contactEmail);
                 
-                console.log(inputs);
                 // opening the sidebar
                 $('.delete-sidebar').addClass('active');
                 $('.overlay').addClass('active');

@@ -252,7 +252,7 @@ function buildTable(data)
               $(".iconSet svg:nth-child(1)").click(function()
               {
 
-                  // stores the row index
+                // stores the row index
                 global_row_index = $(this).closest("tr").index();
 
                 let inputs = $("#deleteContactInfo div");

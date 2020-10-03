@@ -48,30 +48,22 @@ body
 
 #homePageLogo
 {
-    font-size: 15vmin;
+  font-size: 15vmin;
 	height: 150px;
 	width: 400px;
-    margin: 20px;
+  margin: 20px;
 	position: relative;
 	line-height: 125px;
 	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
-    font-weight: 600;
-    font-style: italic;
+  font-weight: 600;
+  font-style: italic;
 	text-align: center;
 	justify-content: center;
-    color: #86BBD8;
-
-    /* Inner shadow */
-    /*text-shadow:
-    3px  3px 0 #86BBD8,
-    -1px -1px 0 #86BBD8,
-     1px -1px 0 #86BBD8,
-    -1px  1px 0 #86BBD8,
-     1px  1px 0 #86BBD8;*/
+  color: #86BBD8;
 
 	/*Text border*/
-	-webkit-text-stroke-width: 4px;
-	/* -webkit-text-stroke-color: #FFFFFC; */
+	-webkit-text-stroke: 4px;
+  -webkit-text-stroke-color: #86BBD8;
 
 	/* Shine effect */
 	background-color: #86BBD8;
@@ -87,7 +79,15 @@ body
 	background-size: 200% 100%;
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
-	transition: 1.2s;
+  transition: 1.2s;
+  
+  /*Inner shadow*/
+  /* text-shadow:
+    3px  3px 0 #86BBD8,
+    -1px -1px 0 #86BBD8,
+     1px -1px 0 #86BBD8,
+    -1px  1px 0 #86BBD8,
+     1px  1px 0 #86BBD8; */
 }
 
 #homePageLogo:hover
@@ -475,6 +475,35 @@ h2
 
 /* Homepage */
 /* Add/Delete sidebar */
+
+
+#deleteContactInfo
+{
+  color: #242325;
+  text-align: center;
+}
+
+#deleteName
+{
+  color: #242325;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 5vmin;
+}
+
+#deleteAddress 
+{
+  color: #242325;
+  font-size: 3vmin;
+
+}
+
+#deletePhoneNumber
+{
+  color: #242325;
+  font-size: 3vmin;
+}
+
 
 
 .add-contact

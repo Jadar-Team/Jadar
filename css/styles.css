@@ -382,7 +382,8 @@ h2
 	font-size: 2vmin;
 	font-weight: normal;
 	line-height: 0em;
-	padding-right: 10px;
+  padding-right: 10px;
+  border: #FFFFFC;
 	padding-left: 10px;
 }
 
@@ -404,9 +405,14 @@ h2
 
 .filters-button
 {
-
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-color: #86BBD8;
+  border-width: 3px;
   color: #215F81;
   font-size: 8px;
+  margin-right: 5px;
   vertical-align: middle;
 }
 
@@ -416,14 +422,15 @@ h2
   border-top: none;
   border-right: none;
   border-left: none;
-  border-width: 4px;
   color: #86BBD8;
-  border-color: #D4E8F3;
+  
 }
 
 .filters-button:active, .filters-button:focus
 {
-  border-color: #D4E8F3;
+  border-top: none;
+  border-right: none;
+  border-left: none;
   outline: none;
   color: #86BBD8;
   text-decoration: none;
@@ -636,7 +643,7 @@ div.fixedTopButt {
   color: #242325; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
   padding: 10px; /* Some padding */
-  border-radius: 10px;  Rounded corners */
+  border-radius: 10px;  /* Rounded corners */
 }
 
 /* .buttons
@@ -657,11 +664,7 @@ div.fixedTopButt {
     opacity: 50%;
 } */
 
-#searchText
-{
-	font-size: 30px;
-}
-#colorText
+#colorText, #searchText
 {
 	font-size: 30px;
 }

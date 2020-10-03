@@ -49,7 +49,7 @@ body
 #homePageLogo
 {
   font-size: 15vmin;
-	height: 150px;
+	height: 120px;
 	width: 400px;
   margin: 20px;
 	position: relative;
@@ -59,14 +59,14 @@ body
   font-style: italic;
 	text-align: center;
 	justify-content: center;
-  color: #86BBD8;
+  color: #FFFFFC;
 
 	/*Text border*/
 	-webkit-text-stroke: 4px;
-  -webkit-text-stroke-color: #86BBD8;
+  -webkit-text-stroke-color: #FFFFFC;
 
 	/* Shine effect */
-	background-color: #86BBD8;
+	background-color: #FFFFFC;
 	background-image: linear-gradient(
 		-75deg,
 		transparent 0,
@@ -404,11 +404,30 @@ h2
 
 .filters-button
 {
-  color: #242325;
+
+  color: #215F81;
   font-size: 8px;
   vertical-align: middle;
 }
 
+.filters-button:hover
+{
+  text-decoration: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-width: 4px;
+  color: #86BBD8;
+  border-color: #D4E8F3;
+}
+
+.filters-button:active, .filters-button:focus
+{
+  border-color: #D4E8F3;
+  outline: none;
+  color: #86BBD8;
+  text-decoration: none;
+}
 
 /* Homepage */
 /* Contact Book */
@@ -469,7 +488,6 @@ h2
 #phone-email-block
 {
   float: right;
-  padding-right: 300px;
   line-height: 2;
 }
 
@@ -480,42 +498,66 @@ h2
 #deleteContactInfo
 {
   color: #242325;
+  padding-top: 50px;
   text-align: center;
 }
 
 #deleteName
 {
   color: #242325;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  font-size: 5vmin;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  font-size: 6vmin;
 }
 
-#deleteAddress 
+#deleteAddress, #deletePhoneNumber, #deleteEmail
 {
+  display: inline;
   color: #242325;
-  font-size: 3vmin;
-
+  font-size: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
-#deletePhoneNumber
+/* .add-contact
 {
-  color: #242325;
-  font-size: 3vmin;
-}
-
-
-
-.add-contact
-{
-  /* position: absolute; */
-  /*padding-top: 140px;*/
   float: right;
   padding-top: 35px;
   right: 5px;
   color: #215F81;
   font-size: 20px;
   height: 0px;
+} */
+
+#addContact,.add-contact
+{
+  float: right;
+  font-size: 20px;
+  width: 20%;
+  position: relative;
+  top: 30px;
+  left: 100px;
+  height: 40px;
+  bottom: 0;
+  color: #215F81;
+  border-color: #86BBD8;
+  border-top: #D4E8F3;
+  border-right: #D4E8F3;
+  border-left: #D4E8F3;
+  border-width: 4px;
+}
+
+#addContact:hover, .add-contact:hover
+{
+  text-decoration: none;
+  color: #86BBD8;
+  border-color: #86BBD8;
+}
+
+#addContact:active, #addContact:focus .add-contact:focus, .add-contact:active{
+  text-decoration: none;
+  outline: 0 none !important;
 
 }
 
@@ -523,10 +565,11 @@ h2
    background-color: #01223770;
 }
 
-/* .sidebar-footer, .modal-title
+.sidebar-footer
 {
-  align-content: center;
-} */
+  font-size: 1vmin;
+  color: #215F81
+}
 
 .modal-backdrop {
    background: none;
@@ -641,6 +684,14 @@ div.fixedTopButt {
     text-align: center;
 }
 
+#usernameDisplay
+{
+  /* color: #242325; */
+  border: none;
+  /* text-shadow: none; */
+  font-style: normal;
+}
+
 
 
 
@@ -712,19 +763,31 @@ div.fixedTopButt {
 /* Hyperlinks */
 
 a {
-  color: white;
-}
-a:link {
-  color: white;
-}
-
-a:active {
+  color:#215F81;
   text-decoration: none;
-  outline: none;
-  border: none;
 }
 
-a:hover {
-  color: white;
-  font-weight: bold;
+.sidebar-button
+{
+  color: #215F81;
+  border-color: #86BBD8;
+  border-top: #D4E8F3;
+  border-right: #D4E8F3;
+  border-left: #D4E8F3;
+  border-width: 4px;
+  margin-right: 15px;
+  font-size: 2.5vmin;
+}
+
+.sidebar-button:hover
+{
+  text-decoration: none;
+  color: #86BBD8;
+  border-color: #86BBD8;
+}
+
+.btn,.btn:hover, .btn:focus
+{
+  outline: none !important;
+  text-decoration: none;
 }

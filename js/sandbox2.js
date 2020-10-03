@@ -243,14 +243,8 @@ function buildTable(data)
                     inputs[7].value = zip; // zip
                     inputs[8].value = country; // country
 
-                    // // myModal.modal('show');
                     $('.edit-sidebar').addClass('active');
                     $('.overlay').addClass('active');
-
-                    // // var mymodal = $("#contact-edit");
-                    // // mymodal.attr("aria-hidden","false");
-
-                    // alert(current_row.index());
 
               });
 
@@ -258,18 +252,13 @@ function buildTable(data)
               $(".iconSet svg:nth-child(1)").click(function()
               {
 
+                  // stores the row index
+                global_row_index = $(this).closest("tr").index();
+
                 // opening the sidebar
                 $('.delete-sidebar').addClass('active');
                 $('.overlay').addClass('active');
 
-                  // stores the row index
-                  global_row_index = $(this).closest("tr").index();
-
- 
-
-
-                    // // remove row
-                    // current_row.remove();
               });
 
 }

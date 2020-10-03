@@ -633,7 +633,6 @@ $('#addContact').on('click', function() {
     })
 });
 
-
 /* Form Validation */
 
 // $("#confirm-edit").click(function()

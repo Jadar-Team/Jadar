@@ -59,14 +59,14 @@ body
   font-style: italic;
 	text-align: center;
 	justify-content: center;
-  color: #FFFFFC;
+  color: #86BBD8;
 
 	/*Text border*/
 	-webkit-text-stroke: 4px;
-  -webkit-text-stroke-color: #FFFFFC;
+  -webkit-text-stroke-color: #86BBD8;
 
 	/* Shine effect */
-	background-color: #FFFFFC;
+	background-color: #86BBD8;
 	background-image: linear-gradient(
 		-75deg,
 		transparent 0,
@@ -183,12 +183,14 @@ input[type="deleteInput"]
 
 #loginDiv
 {
+    font-family: 'Yantramanav', sans-serif;
     border-radius: 40px;
     margin: 40px auto 60px;
-    width: 80%;
-    height: 350px;
+    width: 90%;
+    height: 80%;
     text-align: center;
     padding: 5px;
+    color: #215F81;
     background-color: #D4E8F3;
     background-color: rgba(212, 232, 243, 0.6);
     -webkit-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
@@ -229,6 +231,8 @@ input[type="deleteInput"]
 
 #registerDiv
 {
+  color: #215F81;
+  font-family: 'Yantramanav', sans-serif;
   border-radius: 40px;
   margin: 120px auto 120px;
   height: 550px;
@@ -238,6 +242,19 @@ input[type="deleteInput"]
   -webkit-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
   -moz-box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
   box-shadow: -2px 22px 32px -24px rgba(0,0,0,0.75);
+}
+
+.signup-redirect
+{
+  padding-top: 30px;
+  font-family: 'Open Sans', sans-serif;
+  color: #242325;
+}
+
+#login-click:hover
+{
+  text-decoration: none;
+  color: #FFFFFC;
 }
 
 #ignoreDiv
@@ -336,24 +353,7 @@ input[type="search"]
   padding-left:10px;
 }
 
-h1 {
-	font-size: 8vmin;
-	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
-
-    font-style: italic;
-    color: #FFFFFC;
-	padding-right: 10px;
-	padding-left: 10px;
-
-    /* Inner shadow */
-    text-shadow:
-     3px  3px 0 #86BBD9,
-    -1px -1px 0 #86BBD9,
-     1px -1px 0 #86BBD9,
-    -1px  1px 0 #86BBD9,
-     1px  1px 0 #86BBD9;
-	 }
-h2
+h1, #usernameDisplay
 {
 	font-size: 8vmin;
 
@@ -363,18 +363,18 @@ h2
 	justify-content: center;*/
 	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
 
-    font-style: italic;
-    color: #FFFFFC;
+    font-style: normal;
+    color: #242325;
 	padding-right: 10px;
 	padding-left: 10px;
 
     /* Inner shadow */
-    text-shadow:
+    /* text-shadow:
      3px  3px 0 #86BBD8,
     -1px -1px 0 #86BBD8,
      1px -1px 0 #86BBD8,
     -1px  1px 0 #86BBD8,
-     1px  1px 0 #86BBD8;
+     1px  1px 0 #86BBD8; */
 }
 
 #logOut
@@ -446,7 +446,7 @@ h2
   padding-left: 25px;
   padding-bottom: 20px;
   color: #215F81;
-  font-family: 'Yantramanav', sans-serif;
+  font-family: 'Yantramanav', 'Open Sans', sans-serif;
 }
 .contact-table
 {
@@ -678,13 +678,6 @@ div.fixedTopButt {
     margin-bottom: 2%;
     font-family: 'Yantramanav', sans-serif;
     color: #215F81;
-}
-
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
 }
 
 #usernameDisplay

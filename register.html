@@ -23,7 +23,7 @@
       <div class = "col">
         <div class = "card text-center" id = "introDiv">
           <div class = "card-body">
-            <h1> Jadar </h1>
+            <h1 id = "homePageLogo" class = "mx-auto"> Jadar </h1>
             <h5 id = "introHeader">Your new favorite contact manager.</h5>
             <p id = "introBody">Create your book today, all within one simple screen.</p>
           </div>
@@ -33,12 +33,11 @@
     <!-- Register: right -->
       <div class = "col">
         <div class = "card text-center" id = "registerDiv">
-          <div style="padding-top: 20%;">
-            <h2> Sign Up </h2>
+          <h2 style = "padding-top: 10%"><strong> Sign Up </strong></h2>
+          <div style="padding-top: 10%;">
 			<span>
             <form role = "form">
-
-              <div  class="form-row justify-content-center">
+              <div class="form-row justify-content-center">
                   <div class="col-auto">
                     <label id="signup-label" for="first">first name</label>
                     <input type="text" class="form-control mb-2" id="firstName">
@@ -76,9 +75,20 @@
                         <span id = "registerResult"></span>
                       </div>
                 </div>
+
+                
 				<p id="signupCond" ><p>
             </form>
 			</span>
+          </div>
+        </div>
+        <!-- Signup Redirect -->
+        <div class = "container">
+          <div class = "row justify-content-center signup-redirect">
+          <h6 id = "register-link">
+            Already have an account?
+            <a href="index.html" id = "login-click"><strong>Log In.</strong></a>
+          </h6>
           </div>
         </div>
       </div>

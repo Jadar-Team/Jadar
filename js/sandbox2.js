@@ -849,6 +849,7 @@ function formAddErrorChecking()
         $(phone).val(phoneFormat(phone,"#error-add-phone"));
     })();
 
+
     if($("#add-phone").val() == 0 || $("#add-phone").val().length < 16)
     {
         $("#error-add-phone").text("Invalid phone number").show();
@@ -858,6 +859,9 @@ function formAddErrorChecking()
     // Email
     if(result & inputValidation("#add-email","#error-add-email",[1,0,0,0]) == 0)
         return 0;
+
+/* Form Validation */
+
 
     if(result & emailValidation("#add-email","#error-add-email") == 0)
         return 0;

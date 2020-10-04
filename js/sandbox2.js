@@ -255,12 +255,18 @@ function buildTable(data)
                 global_row_index = $(this).closest("tr").index();
 
                 let inputs = $("#deleteContactInfo div");
-
+                let address = globalTableArray[global_row_index].address.split(",");
+                let street = address[0];
+                let cityState = address[1];
+                let zipCountry = address[2];
+                
+                console.log(address);
+                console.log(street);
                 console.log(inputs);
 
                 $(inputs[0]).text(globalTableArray[global_row_index].firstName + " " +  globalTableArray[global_row_index].lastName);
 
-                $(inputs[1]).text(globalTableArray[global_row_index].address);
+                $(inputs[1]).text(street + ", " + cityState +", " + zipCountry);
 
                 $(inputs[2]).text(globalTableArray[global_row_index].phone);
 

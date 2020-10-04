@@ -80,7 +80,7 @@ function getDatabaseTable()
             }
         }
 
-        $("#myTable").html("<h1>Loading...</h1>");
+        $("#myTable").html("<h1> Loading...</h1>");
 
         xhr.send(obj);
     }

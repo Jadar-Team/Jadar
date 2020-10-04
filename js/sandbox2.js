@@ -326,6 +326,12 @@ $("#confirm-edit").click(function()
 
     let inputs = myModal.find("input");
 
+    // Remove white space from both sides of input
+    $(inputs).each(function(index,element)
+    {
+        $(this).val($.trim($(this).val()));
+    });
+
     var jsonPayload =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
     let result = formEditErrorChecking();
@@ -382,8 +388,6 @@ $("#confirm-edit").click(function()
     $('.overlay').removeClass('active');
 
 });
-
-
 
 
 // Toggle between sorting in ascending order first name and last name
@@ -472,19 +476,18 @@ $("#confirm-add").click(function()
 {
         var url =  "http://COP4331-29.com/LAMPAPI/ContactAdd.php";
 
-        // Getting user's input from adding contact
-        let fname = $("#add-firstname").val();
-        let lname = $("#add-lastname").val();
-        let phone = $("#add-phone").val();
-        let email = $("#add-email").val();
+        let myModal = $("#add-contact");
 
-        let addressStreet = $("#inputStreet").val();
-        let addressCity = $("#inputCity").val();
-        let addressState = $("#inputState").val();
-        let addressZip = $("#inputZip").val();
-        let addressCountry = $("#inputCountry").val();
+        let inputs = myModal.find("input");
 
-        var jsonPayload =  `{"userName": "${userName}", "firstName": "${fname}", "lastName":"${lname}" , "contactEmail":"${email}" ,"address":"${addressStreet},${addressCity} ${addressState},${addressZip} ${addressCountry}", "phone": "${phone}"}`;
+        $(inputs).each(function(index,element)
+        {
+            $(this).val($.trim($(this).val()));
+        });
+
+        console.log(inputs);
+
+        var jsonPayload =  `{"userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
         // request
         var xhr = new XMLHttpRequest();
@@ -695,6 +698,10 @@ function inputValidation(sel,id,settings)
     // toggle 1 if you want your input to have that feature(s)
     // e.g You want numbers and spaces only [1,0,1,0]
 
+   
+    $(sel).val($(sel).val().replace(/^\s+/,""));
+    $(sel).val($(sel).val().replace(/\s+/g," "));
+    
     let name = $(sel).val();
     let $error = $(id);
     let alphaExp = new RegExp(/^[a-zA-Z\s]+$/);
@@ -747,6 +754,10 @@ function emailValidation(sel,id)
     let input = $(sel).val();
     let $error = $(id);
     let testExp = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+
+    console.log("after trim:"+$(sel).val());
+    $(sel).val($(sel).val().replace(/^\s+/,""));
+    console.log("before trim:"+$(sel).val());
 
     if(!testExp.test(input))
     {

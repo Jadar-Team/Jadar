@@ -245,7 +245,7 @@ function readCookie()
 		}
 	}
 	
-	if( userEmail === "")
+	if( userName === "")
 	{
 		window.location.href = "index.html";
 	}

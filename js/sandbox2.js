@@ -72,7 +72,7 @@ function getDatabaseTable()
 window.onload = function()
 {
         if(userName != "")
-            $("#usernameDisplay").text(userName);
+            $("#usernameDisplay").text(firstName);
 
         getDatabaseTable();
 

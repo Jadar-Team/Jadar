@@ -593,7 +593,7 @@ div.fixedTopButt {
   color: #242325; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
   padding: 10px; /* Some padding */
-  border-radius: 10px;  Rounded corners */
+  border-radius: 10px;  /*Rounded corners */
 }
 
 /* .buttons
@@ -707,6 +707,21 @@ div.fixedTopButt {
   padding-bottom: 15px;
   font-family: 'Yantramanav', sans-serif;
 }
+
+
+#edit-contact div p
+{
+    color: red;
+    display:none;
+}
+
+
+#add-contact div p
+{
+    color: red;
+    display:none;
+}
+
 
 
 /* Hyperlinks */

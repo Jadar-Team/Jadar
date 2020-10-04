@@ -7,12 +7,10 @@ var globalTableArray = [];
 
 var globalFilter = [];
 
-
 // On keyup inside search bar, we run this function
 $('#search-bar').on('keyup',function(){
 
     var value = $(this).val();
-    console.log('Value:', value);
 
     globalFilter = searchTable(value, globalTableArray);
     buildTable(globalFilter);
@@ -55,8 +53,6 @@ function getDatabaseTable()
 
                     buildTable(jsonObject.contacts);
                 }
-
-                console.log("inside async funciton" + userName);
             }
 
 
@@ -148,7 +144,7 @@ function buildTable(data)
                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
                         </svg>
-                              ${displayPhone(data[i].phone)}
+                              ${data[i].phone}
 
                           <br>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -216,6 +212,7 @@ function buildTable(data)
               // Edit icon
               $(".iconSet svg:nth-child(2)").click(function()
               {
+                   
                     // Grabs current row index
                     global_row_index = $(this).closest("tr").index();
 
@@ -242,6 +239,10 @@ function buildTable(data)
                     inputs[6].value = addressSet2[1]; // state
                     inputs[7].value = zip; // zip
                     inputs[8].value = country; // country
+
+                    formEditErrorChecking();
+
+                    console.log("inside edit icon");
 
                     $('.edit-sidebar').addClass('active');
                     $('.overlay').addClass('active');
@@ -284,12 +285,8 @@ function deleteContact(contactId)
     if($('#search-bar').val() == "")
         obj = `{ "userName": "${userName}","contactId": "${globalTableArray[global_row_index].contactId}"}`;
     else
-    obj = `{ "userName": "${userName}","contactId": "${globalFilter[global_row_index].contactId}"}`;
+        obj = `{ "userName": "${userName}","contactId": "${globalFilter[global_row_index].contactId}"}`;
 
-
-    var testpayload = JSON.parse(obj);
-    console.log(testpayload.userName);
-    console.log(testpayload.contactId);
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
@@ -329,10 +326,24 @@ $("#confirm-edit").click(function()
 
     let inputs = myModal.find("input");
 
-
     var jsonPayload =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
-    console.log(jsonPayload);
+    let result = formEditErrorChecking();
+
+    if(result == 0)
+        return;
+    
+    //let errors = $("#edit-contact p");
+
+
+    // for(let i = 0; i < errors.length; i++)
+    // {
+    //     if($(errors[i]).css('display') != 'none')
+    //     {
+    //         console.log("Error in confirm edit!");
+    //         return;
+    //     }
+    // }
 
     // request
     var xhr = new XMLHttpRequest();
@@ -386,8 +397,6 @@ $("#firstLastName").click(function()
     // Search bar empty or has content?
     var flag = ($("#search-bar").val() == "") ? 1 : 0;
 
-    console.log(flag);
-
     if(order == 'first')
     {
         $(this).data('order','last')
@@ -424,7 +433,7 @@ $("#addContact").click(function()
      {
          $(this).val('');
      })
-})
+});
 
 // recentlyAdded button - sorts users by recently added
 $("#recentlyAdded").click(function()
@@ -450,9 +459,6 @@ $("#recentlyAdded").click(function()
             return dateB - dateA;
          });
     }
-
-    console.log(globalTableArray);
-    console.log(globalFilter);
 
     if(flag)
         buildTable(globalTableArray);
@@ -486,6 +492,22 @@ $("#confirm-add").click(function()
         // open async
         xhr.open("POST", url);
 
+        let result = formAddErrorChecking();
+
+        if(result == 0)
+            return;
+                
+        //let errors = $("#edit-contact p");
+    
+        // for(let i = 0; i < errors.length; i++)
+        // {
+        //     if($(errors[i]).css('display') != 'none')
+        //     {
+        //         console.log("Error in confirm add!");
+        //         return;
+        //     }
+        // }
+    
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
         {
@@ -518,14 +540,15 @@ $("#confirm-add").click(function()
         $('.add-sidebar').removeClass('active');
         $('.overlay').removeClass('active');
 
-
-
 });
 
 
 
 $('#confirm-cancel-add').click(function()
 {
+    
+    $("#add-contact p").css("display","none");
+
   $('.add-sidebar').removeClass('active');
   $('.overlay').removeClass('active');
 });
@@ -602,27 +625,7 @@ function displayAmPm(users)
     }
 }
 
-function displayPhone(str)
-{
-    var temp = "";
-
-    if(str.length < 10 || str.length > 10)
-        return str;
-
-    for(let i = 0; i < str.length; i++)
-    {
-        temp += str[i];
-
-        if(i == 2 || i == 5)
-            temp += '-';
-    }
-
-    return temp;
-}
-
-
 // Sidebar menu
-
 $('#addContact').on('click', function() {
     $('.add-sidebar').addClass('active');
     $('.overlay').addClass('active');
@@ -634,18 +637,249 @@ $('#addContact').on('click', function() {
 });
 
 
-/* Form Validation */
+/* ---Edit Validation events--*/
+// first and last name
+$("#edit-firstname").on('input', function(){inputValidation(this,"#error-edit-firstname",[1,1,0,0])});
+$("#edit-lastname").on('input', function(){inputValidation(this,"#error-edit-lastname",[1,1,0,0])});
 
-// $("#confirm-edit").click(function()
-// {
-//     let messages = [];
+// Email
+$("#edit-email").on('input', function(){inputValidation(this,"#error-edit-email",[1,0,0,0])});
+$("#edit-email").focusout(function(){emailValidation(this,"#error-edit-email");});
 
-//     let inputs = $("#editInfo input");
+// Phone
+$("#edit-phone").on('input',function(evt){
+    let phone = this;
+    console.log(this);
+    $(phone).val(phoneFormat(phone, "#error-edit-phone"));
+});
 
-//     // Name
-//     if(inputs[0] == null || inputs[0].val() == "")
-//         messages.push("First name is required");
+/* Address Edit */
+// zip
+
+$("#editStreet").on('input', function(){inputValidation(this,"#error-edit-address",[0,0,0,0])});
+$("#editZip").on('input', function(){inputValidation(this,"#error-edit-address",[1,0,1,0])});
+$("#editState").on('input', function(){inputValidation(this,"#error-edit-address",[1,1,0,0])});
+$("#editCity").on('input', function(){inputValidation(this,"#error-edit-address",[1,1,0,0])});
+$("#editCountry").on('input', function(){inputValidation(this,"#error-edit-address",[0,1,0,0])});
+
+/*---Add Validation Events--- */
+// First and Last name
+$("#add-firstname").on('input', function(){inputValidation(this,"#error-add-firstname",[1,1,0,0])});
+$("#add-lastname").on('input', function(){inputValidation(this,"#error-add-lastname",[1,1,0,0])});
+
+// Email
+$("#add-email").on('input', function(){inputValidation(this,"#error-add-email",[1,0,0,0])});
+$("#add-email").focusout(function(){emailValidation(this,"#error-add-email");});
+
+// Phone
+$("#add-phone").on('input',function(evt){
+    let phone = this;
+    console.log(this);
+    $(phone).val(phoneFormat(phone,"#error-add-phone"));
+});
+
+/* Address Add */
+// zip
+$("#inputStreet").on('input', function(){inputValidation(this,"#error-add-address",[0,0,0,0])});
+$("#inputZip").on('input', function(){inputValidation(this,"#error-add-address",[1,0,1,0])});
+$("#inputState").on('input', function(){inputValidation(this,"#error-add-address",[1,1,0,0])});
+$("#inputCity").on('input', function(){inputValidation(this,"#error-add-address",[1,1,0,0])});
+$("#inputCountry").on('input', function(){inputValidation(this,"#error-add-address",[0,1,0,0])});
 
 
-// });
+
+function inputValidation(sel,id,settings)
+{
+    // settings [0,0,0,0]
+    // spaces, alpha, numeric, alphanumeric
+    // toggle 1 if you want your input to have that feature(s)
+    // e.g You want numbers and spaces only [1,0,1,0]
+
+    let name = $(sel).val();
+    let $error = $(id);
+    let alphaExp = new RegExp(/^[a-zA-Z\s]+$/);
+    let numExp = new RegExp(/^[0-9]+$/);
+    let alphaNumeric = new RegExp(/^[a-zA-Z0-9]+$/);
+    
+    // No inputs
+    if(name.length < 1)
+    {
+        $error.show();
+        $error.text("Field is required");
+        return 0;
+    }
+    // Spaces
+    else if(settings[0] && name.split(" ").length != 1)
+    {
+        $error.show();
+        $error.text("No spaces");
+        return 0;
+    }
+    // Alpha character test
+    else if(settings[1] && !alphaExp.test(name))
+    {
+        $error.show();
+        $error.text("Only alpha characters");
+        return 0;
+    }
+    // Numeric test
+    else if(settings[2] && !numExp.test(name))
+    {
+        $error.show();
+        $error.text("Only numbers");
+        return 0;
+    }
+    // Alphanumeric test
+    else if(settings[3] && !alphaNumeric.test(name))
+    {
+        $error.show();
+        $error.text("Only alpha numeric characters");
+        return 0;
+    }
+    else
+    {
+        $error.hide();
+    }
+}
+
+function emailValidation(sel,id)
+{
+    let input = $(sel).val();
+    let $error = $(id);
+    let testExp = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+
+    if(!testExp.test(input))
+    {
+        $error.show();
+        $error.text("Invalid email");
+    }
+    else
+        $error.hide();
+}
+
+function phoneFormat(phone,error){
+
+    let input = $(phone).val();
+    
+    input = input.replace(/\D/g,'');
+    
+    input = input.substring(0,10);
+
+    if(input.length == 0){
+            input = input;
+            $(error).show();
+            $(error).text("Field is required");
+    }else if(input.length < 4){
+            input = '('+input;
+            $(error).hide();
+    }else if(input.length < 7){
+            input = '('+input.substring(0,3)+') '+input.substring(3,6);
+            $(error).hide();
+    }else{
+            input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+            $(error).hide();
+    }
+    return input; 
+}
+
+function formEditErrorChecking()
+{
+    let result = 1; 
+
+    // first and last name
+    if(result & inputValidation("#edit-firstname","#error-edit-firstname",[1,1,0,0]) == 0)
+        return 0;
+
+    if(result & inputValidation("#edit-lastname","#error-edit-lastname",[1,1,0,0]) == 0)
+        return 0;
+
+
+    // Phone
+    (function()
+    {
+        let phone = $("#edit-phone");
+        $(phone).val(phoneFormat(phone,"#error-edit-phone"));
+    })();
+
+    if($("#edit-phone").val() == 0 || $("#edit-phone").val().length < 16)
+    {
+        $("#error-edit-phone").text("Invalid phone number").show();
+        return 0;
+    }
+
+    // Email
+    if(result & inputValidation("#edit-email","#error-edit-email",[1,0,0,0]) == 0)
+        return 0;
+
+    if(result & emailValidation("#edit-email","#error-edit-email") == 0)
+        return 0;
+
+    /* Address */
+    // zip
+    if(result & inputValidation("#editStreet","#error-edit-address",[0,0,0,0]) == 0)
+        return 0;
+    if(result & inputValidation("#editZip","#error-edit-address",[1,0,1,0]) == 0)
+        return 0;
+
+    if(result & inputValidation("#editState","#error-edit-address",[1,1,0,0]) == 0)
+        return 0;
+
+    if(result & inputValidation("#editCity","#error-edit-address",[1,1,0,0]) == 0)
+        return 0;
+        
+    if(result & inputValidation("#editCountry","#error-edit-address",[0,1,0,0]) == 0)
+        return 0;
+}
+
+function formAddErrorChecking()
+{
+    let result = 1;
+
+    // first and last name
+    if(result & inputValidation("#add-firstname","#error-add-firstname",[1,1,0,0]) == 0)
+            return 0;
+
+    if(result & inputValidation("#add-lastname","#error-add-lastname",[1,1,0,0]) == 0)
+        return 0;
+
+    // Phone
+    (function()
+    {
+        let phone = $("#add-phone");
+        $(phone).val(phoneFormat(phone,"#error-add-phone"));
+    })();
+
+    if($("#add-phone").val() == 0 || $("#add-phone").val().length < 16)
+    {
+        $("#error-add-phone").text("Invalid phone number").show();
+        return 0;
+    }
+
+    // Email
+    if(result & inputValidation("#add-email","#error-add-email",[1,0,0,0]) == 0)
+        return 0;
+
+    if(result & emailValidation("#add-email","#error-add-email") == 0)
+        return 0;
+
+
+    /* Address */
+    // zip
+    if(result & inputValidation("#inputStreet","#error-add-address",[0,0,0,0]) == 0)
+        return 0;
+    if(result & inputValidation("#inputZip","#error-add-address",[1,0,1,0]) == 0)
+        return 0;
+
+    if(result & inputValidation("#inputState","#error-add-address",[1,1,0,0]) == 0)
+        return 0;
+
+    if(result & inputValidation("#inputCity","#error-add-address",[1,1,0,0]) == 0)
+        return 0;
+
+    if(result & inputValidation("#inputCountry","#error-add-address",[0,1,0,0]) == 0)
+        return 0;
+}
+
+
+
 

@@ -13,8 +13,33 @@ $('#search-bar').on('keyup',function(){
     var value = $(this).val();
 
     globalFilter = searchTable(value, globalTableArray);
+
     buildTable(globalFilter);
-})
+});
+
+// Function that does search
+function searchTable(value, data )
+{
+    var filteredData = []
+    console.log(value);
+    console.log(data);
+    let str = value.toLowerCase().replace(/\s+/g,'');
+    
+    for(var i = 0; i < data.length; i++)
+    {
+        var fname = data[i].firstName.toLowerCase();
+        var lname = data[i].lastName.toLowerCase();
+        var name = fname+lname;
+
+        if(name.includes(str))
+        {
+            filteredData.push(data[i]);
+            console.log(filteredData);
+        }
+    }
+
+    return filteredData;
+}
 
 
 // This function is a callback that gives us the table from database
@@ -66,8 +91,6 @@ function getDatabaseTable()
     }
 }
 
-
-
 // IMPORTANT functions have to load before we use cookie(username, etc)
 window.onload = function()
 {
@@ -78,29 +101,6 @@ window.onload = function()
 
        console.log(globalTableArray);
 
-}
-
-
-
-// Function that does search
-function searchTable(value, data )
-{
-    var filteredData = []
-
-    for(var i = 0; i < data.length; i++)
-    {
-        value = value.toLowerCase();
-        var fname = data[i].firstName.toLowerCase();
-        var lname = data[i].lastName.toLowerCase();
-
-        if(fname.includes(value) || lname.includes(value))
-        {
-            filteredData.push(data[i]);
-
-        }
-    }
-
-    return filteredData;
 }
 
 
@@ -280,6 +280,7 @@ function buildTable(data)
 
 }
 
+
 function deleteContact(contactId)
 {
 
@@ -440,6 +441,7 @@ $("#addContact").click(function()
      $(".add-info .form-control").each(function(index)
      {
          $(this).val('');
+         $(this).css("background-color","");
      })
 });
 
@@ -886,7 +888,6 @@ function formAddErrorChecking()
         return 0;
 
 /* Form Validation */
-
 
     if(result & emailValidation("#add-email","#error-add-email") == 0)
         return 0;

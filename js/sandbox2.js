@@ -54,8 +54,6 @@ function getDatabaseTable()
                     buildTable(jsonObject.contacts);
                 }
             }
-
-
         }
 
         $("#myTable").html("<h1>Loading...</h1>");
@@ -713,6 +711,7 @@ function inputValidation(sel,id,settings)
     {
         $error.show();
         $error.text("Field is required");
+        $(sel).css("background-color","pink");
         return 0;
     }
     // Spaces
@@ -720,6 +719,7 @@ function inputValidation(sel,id,settings)
     {
         $error.show();
         $error.text("No spaces");
+        $(sel).css("background-color","pink");
         return 0;
     }
     // Alpha character test
@@ -727,6 +727,7 @@ function inputValidation(sel,id,settings)
     {
         $error.show();
         $error.text("Only alpha characters");
+        $(sel).css("background-color","pink");
         return 0;
     }
     // Numeric test
@@ -734,6 +735,7 @@ function inputValidation(sel,id,settings)
     {
         $error.show();
         $error.text("Only numbers");
+        $(sel).css("background-color","pink");
         return 0;
     }
     // Alphanumeric test
@@ -741,11 +743,13 @@ function inputValidation(sel,id,settings)
     {
         $error.show();
         $error.text("Only alpha numeric characters");
+        $(sel).css("background-color","pink");
         return 0;
     }
     else
     {
         $error.hide();
+        $(sel).css("background-color","");
     }
 }
 
@@ -763,9 +767,13 @@ function emailValidation(sel,id)
     {
         $error.show();
         $error.text("Invalid email");
+        $(sel).css("background-color","pink");
     }
     else
+    {
         $error.hide();
+        $(sel).css("background-color","");
+    }
 }
 
 function phoneFormat(phone,error){

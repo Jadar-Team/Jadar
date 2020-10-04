@@ -21,8 +21,7 @@ $('#search-bar').on('keyup',function(){
 function searchTable(value, data )
 {
     var filteredData = []
-    console.log(value);
-    console.log(data);
+
     let str = value.toLowerCase().replace(/\s+/g,'');
     
     for(var i = 0; i < data.length; i++)
@@ -339,22 +338,23 @@ $("#confirm-edit").click(function()
 
     var jsonPayload =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
+    let errors = $("#edit-contact p");
+
+    for(let i = 0; i < errors.length; i++)
+    {
+        if($(errors[i]).css('display') != 'none')
+        {
+            console.log("Error in confirm edit!");
+            return;
+        }
+    }
+
     let result = formEditErrorChecking();
 
     if(result == 0)
         return;
     
-    //let errors = $("#edit-contact p");
 
-
-    // for(let i = 0; i < errors.length; i++)
-    // {
-    //     if($(errors[i]).css('display') != 'none')
-    //     {
-    //         console.log("Error in confirm edit!");
-    //         return;
-    //     }
-    // }
 
     // request
     var xhr = new XMLHttpRequest();
@@ -486,12 +486,28 @@ $("#confirm-add").click(function()
 
         let inputs = myModal.find("input");
 
+        let errors = $("#add-contact p");
+    
+        for(let i = 0; i < errors.length; i++)
+        {
+            if($(errors[i]).css('display') != 'none')
+            {
+                console.log("Error in confirm add!");
+                return;
+            }
+        }
+    
         $(inputs).each(function(index,element)
         {
             $(this).val($.trim($(this).val()));
         });
 
         console.log(inputs);
+
+        let result = formAddErrorChecking();
+
+        if(result == 0)
+            return;
 
         var jsonPayload =  `{"userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
@@ -500,23 +516,8 @@ $("#confirm-add").click(function()
 
         // open async
         xhr.open("POST", url);
-
-        let result = formAddErrorChecking();
-
-        if(result == 0)
-            return;
                 
-        //let errors = $("#edit-contact p");
-    
-        // for(let i = 0; i < errors.length; i++)
-        // {
-        //     if($(errors[i]).css('display') != 'none')
-        //     {
-        //         console.log("Error in confirm add!");
-        //         return;
-        //     }
-        // }
-    
+
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
         {

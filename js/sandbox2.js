@@ -13,8 +13,32 @@ $('#search-bar').on('keyup',function(){
     var value = $(this).val();
 
     globalFilter = searchTable(value, globalTableArray);
+
     buildTable(globalFilter);
-})
+});
+
+// Function that does search
+function searchTable(value, data )
+{
+    var filteredData = []
+
+    let str = value.toLowerCase().replace(/\s+/g,'');
+    
+    for(var i = 0; i < data.length; i++)
+    {
+        var fname = data[i].firstName.toLowerCase();
+        var lname = data[i].lastName.toLowerCase();
+        var name = fname+lname;
+
+        if(name.includes(str))
+        {
+            filteredData.push(data[i]);
+            console.log(filteredData);
+        }
+    }
+
+    return filteredData;
+}
 
 
 // This function is a callback that gives us the table from database
@@ -66,8 +90,6 @@ function getDatabaseTable()
     }
 }
 
-
-
 // IMPORTANT functions have to load before we use cookie(username, etc)
 window.onload = function()
 {
@@ -78,29 +100,6 @@ window.onload = function()
 
        console.log(globalTableArray);
 
-}
-
-
-
-// Function that does search
-function searchTable(value, data )
-{
-    var filteredData = []
-
-    for(var i = 0; i < data.length; i++)
-    {
-        value = value.toLowerCase();
-        var fname = data[i].firstName.toLowerCase();
-        var lname = data[i].lastName.toLowerCase();
-
-        if(fname.includes(value) || lname.includes(value))
-        {
-            filteredData.push(data[i]);
-
-        }
-    }
-
-    return filteredData;
 }
 
 
@@ -280,6 +279,7 @@ function buildTable(data)
 
 }
 
+
 function deleteContact(contactId)
 {
 
@@ -338,22 +338,23 @@ $("#confirm-edit").click(function()
 
     var jsonPayload =  `{"contactId":"${globalTableArray[global_row_index].contactId}","userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
+    let errors = $("#edit-contact p");
+
+    for(let i = 0; i < errors.length; i++)
+    {
+        if($(errors[i]).css('display') != 'none')
+        {
+            console.log("Error in confirm edit!");
+            return;
+        }
+    }
+
     let result = formEditErrorChecking();
 
     if(result == 0)
         return;
     
-    //let errors = $("#edit-contact p");
 
-
-    // for(let i = 0; i < errors.length; i++)
-    // {
-    //     if($(errors[i]).css('display') != 'none')
-    //     {
-    //         console.log("Error in confirm edit!");
-    //         return;
-    //     }
-    // }
 
     // request
     var xhr = new XMLHttpRequest();
@@ -440,6 +441,7 @@ $("#addContact").click(function()
      $(".add-info .form-control").each(function(index)
      {
          $(this).val('');
+         $(this).css("background-color","");
      })
 });
 
@@ -484,12 +486,28 @@ $("#confirm-add").click(function()
 
         let inputs = myModal.find("input");
 
+        let errors = $("#add-contact p");
+    
+        for(let i = 0; i < errors.length; i++)
+        {
+            if($(errors[i]).css('display') != 'none')
+            {
+                console.log("Error in confirm add!");
+                return;
+            }
+        }
+    
         $(inputs).each(function(index,element)
         {
             $(this).val($.trim($(this).val()));
         });
 
         console.log(inputs);
+
+        let result = formAddErrorChecking();
+
+        if(result == 0)
+            return;
 
         var jsonPayload =  `{"userName": "${userName}", "firstName": "${inputs[0].value}", "lastName":"${inputs[1].value}" , "contactEmail":"${inputs[3].value}" ,"address":"${inputs[4].value},${inputs[5].value} ${inputs[6].value},${inputs[7].value} ${inputs[8].value}", "phone": "${inputs[2].value}"}`;
 
@@ -498,23 +516,8 @@ $("#confirm-add").click(function()
 
         // open async
         xhr.open("POST", url);
-
-        let result = formAddErrorChecking();
-
-        if(result == 0)
-            return;
                 
-        //let errors = $("#edit-contact p");
-    
-        // for(let i = 0; i < errors.length; i++)
-        // {
-        //     if($(errors[i]).css('display') != 'none')
-        //     {
-        //         console.log("Error in confirm add!");
-        //         return;
-        //     }
-        // }
-    
+
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         try
         {
@@ -886,7 +889,6 @@ function formAddErrorChecking()
         return 0;
 
 /* Form Validation */
-
 
     if(result & emailValidation("#add-email","#error-add-email") == 0)
         return 0;

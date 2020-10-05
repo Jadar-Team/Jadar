@@ -16,11 +16,13 @@ CSS Structure
 */
 
 /* General Body */
-.wrapper {
+.wrapper 
+{
     display: block;
 }
 
-.content {
+.content 
+{
     width: 100%;
     transition: all 0.5s;
 }
@@ -96,38 +98,6 @@ body
   cursor: pointer;
 }
 
-/*#homePageLogo:after
-{
-	animation: shine 5s ease-in-out  infinite;
-	animation-fill-mode: forwards;
-	content: "";
-	position: absolute;
-	top: -110%;
-	left: -210%;
-	width: 200%;
-	height: 200%;
-	opacity: 0;
-	transform: rotate(30deg);
-
-	-webkit-text-fill-color: transparent;
-	-webkit-background-clip: text;
-
-	background-color: rgba(212, 232, 243, 0.6);
-
-	background-image: linear-gradient(
-		to right,
-		rgba(212, 232, 243, 0.13) 0%,
-		rgba(212, 232, 243, 0.13) 77%,
-		rgba(212, 232, 243, 0.5) 92%,
-		rgba(212, 232, 243, 0.0) 100%
-	);
-}
-
-#homePageLogo:active:after
-{
-  opacity: 0;
-}*/
-
 @keyframes shine
 {
   10%
@@ -163,6 +133,7 @@ input[type="deleteInput"]:disabled
   border-radius: 25px;
   border-color: #FFFFFC;
 }
+
 input[type="deleteInput"]
 {
   color: #FFFFFC;
@@ -174,7 +145,8 @@ input[type="deleteInput"]
   font-family: 'Yantramanav', sans-serif;
 }
 
-.inner-title {
+.inner-title 
+{
   margin-bottom: 30px;
   font-family: 'Yantramanav', sans-serif;
   color: #215F81;
@@ -207,7 +179,8 @@ input[type="deleteInput"]
   opacity: 1;
 }
 
-#loginResult{
+#loginResult
+{
     display: inline-block;
     font-size: 1em;
     width: 90%;
@@ -301,7 +274,8 @@ input[type="deleteInput"]
   color: #FFFFFC;
 }
 
-#register-link {
+#register-link 
+{
   margin-bottom: 50px;
 }
 
@@ -354,25 +328,7 @@ input[type="search"]
   padding-left:10px;
 }
 
-h1
-{
-  font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
-
-  font-style: normal;
-  color: #FFFFFC;
-padding-right: 10px;
-padding-left: 10px;
-
-  /* Inner shadow */
-  text-shadow:
-   3px  3px 0 #86BBD8,
-  -1px -1px 0 #86BBD8,
-   1px -1px 0 #86BBD8,
-  -1px  1px 0 #86BBD8,
-   1px  1px 0 #86BBD8;
-}
-
-#usernameDisplay
+h1, #usernameDisplay
 {
 	font-size: 8vmin;
 
@@ -381,7 +337,7 @@ padding-left: 10px;
 	font-weight: 600;
 	justify-content: center;*/
 	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
-
+  border: none;
     font-style: normal;
     color: #242325;
 	padding-right: 10px;
@@ -519,7 +475,6 @@ padding-left: 10px;
 /* Homepage */
 /* Add/Delete sidebar */
 
-
 #deleteContactInfo
 {
   color: #242325;
@@ -617,10 +572,6 @@ padding-left: 10px;
 
 }
 
-.btn:focus {
-  outline: none !important;
-}
-
 div.fixedTopButt {
   position: fixed;
   bottom: 20px;
@@ -652,24 +603,6 @@ div.fixedTopButt {
   color: #86BBD8;
 }
 
-/* .buttons
-{
-    font-size: 30px;
-    outline-style: none;
-    border: none;
-    width: 100%;
-    margin-top: 30px;
-    font-family: 'Ubuntu', sans-serif;
-    background-color: transparent;
-    align-self: center;
-} */
-
-/* .buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
-} */
-
 #colorText, #searchText
 {
 	font-size: 30px;
@@ -686,17 +619,10 @@ div.fixedTopButt {
     color: #215F81;
 }
 
-#usernameDisplay
-{
-  /* color: #242325; */
-  border: none;
-  /* text-shadow: none; */
-  font-style: normal;
-}
-
 /* Sidebar */
 
-.sidebar {
+.sidebar 
+{
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     width: 450px;
@@ -711,11 +637,13 @@ div.fixedTopButt {
     box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
 }
 
-.sidebar.active {
+.sidebar.active 
+{
     right: 0;
 }
 
-.overlay {
+.overlay 
+{
     display: none;
     position: fixed;
     width: 100vw;
@@ -726,7 +654,8 @@ div.fixedTopButt {
     transition: all .5s ease-in-out;
 }
 
-.overlay.active {
+.overlay.active 
+{
   transition: all .5s;
   display: block;
   opacity: 0.5;
@@ -758,13 +687,11 @@ div.fixedTopButt {
   font-family: 'Yantramanav', sans-serif;
 }
 
-
 #edit-contact div p
 {
     color: red;
     display:none;
 }
-
 
 #add-contact div p
 {
@@ -772,11 +699,10 @@ div.fixedTopButt {
     display:none;
 }
 
-
-
 /* Hyperlinks */
 
-a {
+a 
+{
   color:#215F81;
   text-decoration: none;
 }

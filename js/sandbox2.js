@@ -411,18 +411,30 @@ $("#firstLastName").click(function()
         $(this).data('order','last')
 
         if(flag)
-            globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
+        {
+            //globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
+            globalTableArray = globalTableArray.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : (a.lastName.toLowerCase() == b.lastName.toLowerCase() ? (a.firstName.toLowerCase() >= b.firstName.toLowerCase() ? 1 : -1) : -1));
+        }
         else
-            globalFilter = globalFilter.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
+        {
+            //globalFilter = globalFilter.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1);
+            globalFilter = globalFilter.sort((a,b) => a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : (a.lastName.toLowerCase() == b.lastName.toLowerCase() ? (a.firstName.toLowerCase() >= b.firstName.toLowerCase() ? 1 : -1) : -1));
+        }
     }
     else
     {
         $(this).data('order','first')
 
         if(flag)
-            globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+        {
+            //globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+            globalTableArray = globalTableArray.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : (a.firstName.toLowerCase() == b.firstName.toLowerCase() ? (a.lastName.toLowerCase() >= b.lastName.toLowerCase() ? 1 : -1) : -1));
+        }
         else
-            globalFilter = globalFilter.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+        {
+            //globalFilter = globalFilter.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1);
+            globalFilter = globalFilter.sort((a,b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : (a.firstName.toLowerCase() == b.firstName.toLowerCase() ? (a.lastName.toLowerCase() >= b.lastName.toLowerCase() ? 1 : -1) : -1));
+        }
 
         console.log(globalTableArray);
     }

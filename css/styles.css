@@ -16,12 +16,12 @@ CSS Structure
 */
 
 /* General Body */
-.wrapper 
+.wrapper
 {
     display: block;
 }
 
-.content 
+.content
 {
     width: 100%;
     transition: all 0.5s;
@@ -82,14 +82,6 @@ body
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
   transition: 1.2s;
-  
-  /*Inner shadow*/
-  /* text-shadow:
-    3px  3px 0 #86BBD8,
-    -1px -1px 0 #86BBD8,
-     1px -1px 0 #86BBD8,
-    -1px  1px 0 #86BBD8,
-     1px  1px 0 #86BBD8; */
 }
 
 #homePageLogo:hover
@@ -145,7 +137,7 @@ input[type="deleteInput"]
   font-family: 'Yantramanav', sans-serif;
 }
 
-.inner-title 
+.inner-title
 {
   margin-bottom: 30px;
   font-family: 'Yantramanav', sans-serif;
@@ -274,7 +266,7 @@ input[type="deleteInput"]
   color: #FFFFFC;
 }
 
-#register-link 
+#register-link
 {
   margin-bottom: 50px;
 }
@@ -397,7 +389,7 @@ h1, #usernameDisplay
   border-right: none;
   border-left: none;
   color: #86BBD8;
-  
+
 }
 
 .filters-button:active, .filters-button:focus
@@ -579,7 +571,7 @@ div.fixedTopButt {
   bottom: 10px;
   font-size: 18px; /* Increase font size */
   font-family: 'Open Sans', sans-serif;
-} 
+}
 
 #topBtn {
   display: none; /*Hidden by default */
@@ -621,7 +613,7 @@ div.fixedTopButt {
 
 /* Sidebar */
 
-.sidebar 
+.sidebar
 {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -637,12 +629,12 @@ div.fixedTopButt {
     box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
 }
 
-.sidebar.active 
+.sidebar.active
 {
     right: 0;
 }
 
-.overlay 
+.overlay
 {
     display: none;
     position: fixed;
@@ -654,7 +646,7 @@ div.fixedTopButt {
     transition: all .5s ease-in-out;
 }
 
-.overlay.active 
+.overlay.active
 {
   transition: all .5s;
   display: block;
@@ -701,7 +693,7 @@ div.fixedTopButt {
 
 /* Hyperlinks */
 
-a 
+a
 {
   color:#215F81;
   text-decoration: none;

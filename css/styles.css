@@ -48,6 +48,41 @@ body
     color: #FFFFFC;
 }
 
+.ogLogo
+{
+  /*Text border*/
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #FFFFFC;
+  font-size: 15vmin;
+	height: 150px;
+	width: 500px;
+  margin: 20px;
+	position: relative;
+	line-height: 125px;
+	font-family: 'Titillium Web', 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-style: italic;
+	text-align: center;
+	justify-content: center;
+  color: #86BBD8;
+
+	/* Shine effect */
+	background-color: #86BBD8;
+	background-image: linear-gradient(
+		-75deg,
+		transparent 0,
+		transparent 5%,
+		rgba(255, 255, 255, 0.2) 5%,
+		rgba(255, 255, 255) 10%,
+		transparent 10%,
+		transparent 100%
+	);
+	background-size: 200% 100%;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+  transition: 1.2s;
+}
+
 #homePageLogo
 {
   /*Text border*/
@@ -83,7 +118,7 @@ body
   transition: 1.2s;
 }
 
-#homePageLogo:hover
+#homePageLogo:hover, .ogLogo:hover
 {
   background-position: -120% 0;
   cursor: pointer;

@@ -23,7 +23,7 @@
       <div class = "col">
         <div class = "card text-center" id = "introDiv">
           <div class = "card-body">
-            <h1 id = "homePageLogo" class = "mx-auto"> Jadar </h1>
+            <h1 class = "ogLogo mx-auto"> Jadar </h1>
             <h5 id = "introHeader">Your new favorite contact manager.</h5>
             <p id = "introBody">Create your book today, all within one simple screen.</p>
           </div>
@@ -76,7 +76,7 @@
                       </div>
                 </div>
 
-                
+
 				<p id="signupCond" ><p>
             </form>
 			</span>
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-  <!-- Bootstrap 
+  <!-- Bootstrap
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -130,9 +130,9 @@
     var pw = document.getElementById("password").value;
     var fn = document.getElementById("firstName").value;
     var ln = document.getElementById("lastName").value;
-	
-	
-	
+
+
+
     //makes sure user doesn't leave anything blank
     if (useEmail === ''||useName === ''||pw === '' || fn === '' || ln =='') {
       document.getElementById("signupCond").style.visibility = "visible";
@@ -146,16 +146,16 @@
 	  document.getElementById("signupCond").innerHTML = "Thank you for signing up!";
       doRegister();
     }
-    
+
                     let myModal = $("#edit-contact");
-    
+
                     let inputs = myModal.find("input");
 
-    
+
                     console.log(inputs);
-    
+
                     myModal.modal('show');
-	
+
   }
   </script>
 </html>

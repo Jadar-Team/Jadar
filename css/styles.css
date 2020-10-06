@@ -439,10 +439,12 @@ h1, #usernameDisplay
 /* Homepage */
 /* Contact Book */
 
+
 .contact-table-head
 {
   font-size: 60px;
   /*padding-top: 100px;*/
+  width: 60%;
   padding-left: 25px;
   padding-bottom: 20px;
   color: #215F81;

@@ -16,12 +16,12 @@ function doLogin()
 	userEmail = "";
 	firstName = "";
 	lastName = "";
-	
+
 	// Gets values from form fields(username, password, etc)
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
 	var hash = md5( password );
-	
+
 	// Reset feedback/error field to empty string
 	// We will write to this field if the user needs to know something.
 	document.getElementById("loginResult").innerHTML = "";
@@ -39,13 +39,13 @@ function doLogin()
 	{
 		// template object that we created is being sent to backend
 		xhr.send(jsonPayload);
-		
+
 		// Getting the object back from backend
 		var jsonObject = JSON.parse( xhr.responseText );
-		
+
 		// Grab the user name from the DB
 		userName = jsonObject.userName;
-		
+
 		// if there is no username, we didn't get a row back from the db, so the user either doesn't exist
 		// or userName/Pwd combination is not correct
 		if( userName === "")
@@ -53,15 +53,15 @@ function doLogin()
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			return;
 		}
-		
+
 		// Extracting fields from returned object from backend
 		firstName = jsonObject.firstName;
 		lastName = jsonObject.lastName;
 		userEmail = jsonObject.userEmail;
 
 		saveCookie();
-	
-		window.location.href = "homepagesidebar.html";
+
+		window.location.href = "homepage.html";
 	}
 	catch(err)
 	{
@@ -90,14 +90,14 @@ function doRegister()
 	lastName = document.getElementById("lastName").value;
 	var password = document.getElementById("password").value;
 	var hash = md5( password );
-	
+
 	document.getElementById("registerResult").innerHTML = "";
-	
+
 	// Combine form field variables into JSON string
 	var jsonPayload = '{"userEmail" : "' + userEmail + '", "userName":"' + userName + '", "password" : "' + hash + '", "firstName" : "' + firstName +'", "lastName" : "' + lastName + '"}';
 //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
 	var url = urlBase + '/Register.' + extension;
-	
+
 	// Connection
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
@@ -105,9 +105,9 @@ function doRegister()
 	try
 	{
 		xhr.send(jsonPayload);
-		
+
 		var jsonObject = JSON.parse( xhr.responseText );
-		
+
 		if( jsonObject.error)
 		{
 			document.getElementById("registerResult").innerHTML = jsonObject.error;
@@ -120,8 +120,8 @@ function doRegister()
 		lastName = jsonObject.lastName;
 
 		saveCookie();
-	
-		window.location.href = "homepagesidebar.html";
+
+		window.location.href = "homepage.html";
 	}
 	catch(err)
 	{
@@ -187,7 +187,7 @@ window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
   var mybutton = document.getElementById("topBtn");
-  
+
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     mybutton.style.display = "block";
   } else {
@@ -197,7 +197,7 @@ function scrollFunction() {
 
 function topOfPage() {
   var mybutton = document.getElementById("topBtn");
-    
+
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
@@ -212,7 +212,7 @@ function saveCookie()
 {
 	var minutes = 20;
 	var date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
+	date.setTime(date.getTime()+(minutes*60*1000));
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userName=" + userName + ",userEmail=" + userEmail + ";expires=" + date.toGMTString();
 }
 
@@ -222,7 +222,7 @@ function readCookie()
 	userEmail = "";
 	var data = document.cookie;
 	var splits = data.split(",");
-	for(var i = 0; i < splits.length; i++) 
+	for(var i = 0; i < splits.length; i++)
 	{
 		var thisOne = splits[i].trim();
 		var tokens = thisOne.split("=");
@@ -243,7 +243,7 @@ function readCookie()
 			userEmail = tokens[1];
 		}
 	}
-	
+
 	if( userName === "")
 	{
 		window.location.href = "index.html";

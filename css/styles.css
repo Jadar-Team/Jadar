@@ -496,7 +496,9 @@ h1, #usernameDisplay
 
 #phone-email-block
 {
-  float: right;
+  /* float: right; */
+  float: inline-end;
+  padding-left: 60%;
   line-height: 2;
 }
 

@@ -8,8 +8,11 @@ var globalTableArray = [];
 var globalFilter = [];
 
 // On keyup inside search bar, we run this function
-$('#search-bar').on('keyup',function(){
-
+$('#search-bar').on('keyup',function()
+{
+    if(globalTableArray == undefined || globalTableArray.length < 1)
+        return;
+        
     var value = $(this).val();
 
     globalFilter = searchTable(value, globalTableArray);

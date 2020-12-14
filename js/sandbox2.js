@@ -1,6 +1,8 @@
 // Globals - do not modify these variables
 // You are only allowed to grab data from these. Do not actually point to it.
 
+// Test comment
+
 var global_row_index = 0;
 
 var globalTableArray = [];
